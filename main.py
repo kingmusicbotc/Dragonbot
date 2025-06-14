@@ -1060,20 +1060,25 @@ bot_app.add_handler(CallbackQueryHandler(accept_clanwar, pattern=r"^accept_clanw
 bot_app.add_handler(CommandHandler("sendusks", sendduskar))
 bot_app.add_handler(ChatMemberHandler(bot_added_or_promoted, ChatMemberHandler.MY_CHAT_MEMBER))
 
-# === Webhook endpoint ===
-@app.route("/webhook", methods=["POST"])
-def webhook():
-    update = Update.de_json(request.get_json(force=True), bot_app.bot)  # ✅ fixed
-    asyncio.create_task(bot_app.process_update(update))  # ✅ fixed
+# === Webhook Endpoint ===
+@flask_app.route("/webhook", methods=["POST"])
+async def webhook():
+    """Receives updates from Telegram via webhook and sends them to bot_app."""
+    update = Update.de_json(request.get_json(force=True), bot_app.bot)
+    await bot_app.process_update(update)
     return "ok"
 
-# === Set webhook on startup ===
-@app.before_first_request
-def setup_webhook():
-    asyncio.create_task(bot_app.bot.set_webhook(WEBHOOK_URL))  # ✅ fixed
+# === Webhook Setup ===
+async def set_webhook():
+    await bot_app.bot.set_webhook(WEBHOOK_URL)
     print(f"✅ Webhook set to {WEBHOOK_URL}")
 
-# === Run Flask server ===
+# === Start Everything ===
 if __name__ == "__main__":
     print("🐉 DragonDusk Bot is launching...")
-    app.run(host="0.0.0.0", port=PORT)
+
+    # Start webhook setup before Flask runs
+    asyncio.get_event_loop().run_until_complete(set_webhook())
+
+    # Start Flask app
+    flask_app.run(host="0.0.0.0", port=PORT)
