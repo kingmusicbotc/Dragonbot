@@ -1,0 +1,147 @@
+{
+    "battle_6020886539_7793966371": {
+        "challenger_id": "7793966371",
+        "opponent_id": "6020886539",
+        "status": "active",
+        "dragons": {
+            "7793966371": "Aetherwing",
+            "6020886539": "frostclaw"
+        },
+        "group_id": -1002273742602,
+        "turn": "6020886539",
+        "hp": {
+            "7793966371": 90,
+            "6020886539": 84
+        },
+        "message_id": 621602
+    },
+    "battle_6998981970_7436236645": {
+        "challenger_id": "6998981970",
+        "opponent_id": "7436236645",
+        "status": "active",
+        "dragons": {
+            "7436236645": "Frostclaw",
+            "6998981970": "Frostclaw"
+        },
+        "group_id": -1002273742602,
+        "turn": "7436236645",
+        "hp": {
+            "6998981970": 18,
+            "7436236645": 7
+        },
+        "message_id": 621141
+    },
+    "battle_5845254367_6020886539": {
+        "challenger_id": "6020886539",
+        "opponent_id": "5845254367",
+        "status": "active",
+        "dragons": {
+            "6020886539": "frostclaw",
+            "5845254367": "Venomscale"
+        },
+        "group_id": -1002273742602,
+        "turn": "6020886539",
+        "hp": {
+            "6020886539": 52,
+            "5845254367": 58
+        },
+        "message_id": 621166
+    },
+    "battle_5053815620_7297151119": {
+        "challenger_id": "7297151119",
+        "opponent_id": "5053815620",
+        "status": "active",
+        "dragons": {
+            "7297151119": "Frostclaw",
+            "5053815620": "Pyron"
+        },
+        "group_id": -1002762747533,
+        "turn": "5053815620",
+        "hp": {
+            "7297151119": 24,
+            "5053815620": 15
+        },
+        "message_id": 1682
+    },
+    "battle_6020886539_7245856317": {
+        "challenger_id": "6020886539",
+        "opponent_id": "7245856317",
+        "status": "active",
+        "dragons": {
+            "6020886539": "frostclaw",
+            "7245856317": "Blazetail"
+        },
+        "group_id": -1002273742602,
+        "turn": "6020886539",
+        "hp": {
+            "6020886539": 15,
+            "7245856317": 11
+        },
+        "message_id": 621289
+    },
+    "battle_6020886539_6998981970": {
+        "challenger_id": "6998981970",
+        "opponent_id": "6020886539",
+        "status": "active",
+        "dragons": {
+            "6998981970": "Frostclaw",
+            "6020886539": "Aqualing"
+        },
+        "group_id": -1002273742602,
+        "turn": "6998981970",
+        "hp": {
+            "6998981970": 11,
+            "6020886539": 30
+        },
+        "message_id": 625831
+    },
+    "battle_5091615616_6020886539": {
+        "challenger_id": "6020886539",
+        "opponent_id": "5091615616",
+        "status": "pending",
+        "dragons": {
+            "6020886539": "frostclaw"
+        },
+        "group_id": -1002273742602
+    },
+    "battle_1199385746_6020886539": {
+        "challenger_id": "1199385746",
+        "opponent_id": "6020886539",
+        "status": "active",
+        "dragons": {},
+        "group_id": -1002273742602
+    },
+    "battle_6020886539_7350242895": {
+        "challenger_id": "7350242895",
+        "opponent_id": "6020886539",
+        "status": "active",
+        "dragons": {
+            "6020886539": "frostclaw",
+            "7350242895": "Frostclaw"
+        },
+        "group_id": -1002273742602,
+        "turn": "6020886539",
+        "hp": {
+            "7350242895": 20,
+            "6020886539": 13
+        },
+        "message_id": 621785
+    },
+    "clan_wars": [
+        {
+            "challenger": "Duskars",
+            "target": "Echooez",
+            "status": "active",
+            "rounds": []
+        }
+    ],
+    "battle_6020886539_7436236645": {
+        "challenger_id": "6020886539",
+        "opponent_id": "7436236645",
+        "status": "pending",
+        "dragons": {
+            "6020886539": "Aqualing"
+        },
+        "group_id": -1002588381035
+    }
+}
