@@ -1007,73 +1007,72 @@ async def sendduskar(update: Update, context: ContextTypes.DEFAULT_TYPE):
         f"🎉 To: {mention}",
         parse_mode="Markdown"
     )
-
+PORT = int(os.environ.get("PORT", 8080))
 # === Run Bot ===
+WEBHOOK_URL = f"https://your-koyeb-app-name.koyeb.app/webhook"
+
+app = Flask(__name__)
+bot_app = ApplicationBuilder().token(TOKEN).build()
+
+# === Register all your handlers ===
+bot_app.add_handler(CommandHandler("start", start))
+bot_app.add_handler(CommandHandler("status", status))
+bot_app.add_handler(CommandHandler("profile", profile))
+bot_app.add_handler(CommandHandler("inventory", inventory))
+bot_app.add_handler(CommandHandler("balance", balance))
+bot_app.add_handler(CommandHandler("hatch", hatch))
+bot_app.add_handler(CommandHandler("id", myid))
+bot_app.add_handler(CommandHandler("cooldowns", cooldowns))
+bot_app.add_handler(CommandHandler("fortune", fortune))
+bot_app.add_handler(CommandHandler("dailyegg", dailyegg))
+bot_app.add_handler(CommandHandler("userstats", userstats))
+bot_app.add_handler(CommandHandler("broadcast", broadcast))
+bot_app.add_handler(CommandHandler("challenge", challenge))
+bot_app.add_handler(CommandHandler("work", work))
+bot_app.add_handler(CommandHandler("mine", mine))
+bot_app.add_handler(CommandHandler("daily", daily))
+bot_app.add_handler(CommandHandler("leaderboard", leaderboard))
+bot_app.add_handler(CommandHandler("dragons", dragons))
+bot_app.add_handler(CommandHandler("feed", feed))
+bot_app.add_handler(CommandHandler("train", train))
+bot_app.add_handler(CommandHandler("release", release))
+bot_app.add_handler(CommandHandler("market", market))
+bot_app.add_handler(CommandHandler("getegg", getegg))
+bot_app.add_handler(CommandHandler("eggs", eggs))
+bot_app.add_handler(CommandHandler("eghatch", eghatch))
+bot_app.add_handler(CallbackQueryHandler(select_dragon_callback, pattern="^selectdragon_"))
+bot_app.add_handler(CallbackQueryHandler(handle_move, pattern="^move_"))
+bot_app.add_handler(CallbackQueryHandler(lambda u, c: u.callback_query.answer(), pattern="^ignore$"))
+bot_app.add_handler(MessageHandler(filters.Sticker.ALL, get_sticker_id))
+bot_app.add_handler(CommandHandler("rgroup", registergroup))
+bot_app.add_handler(CommandHandler("addmod", addmod))
+bot_app.add_handler(CommandHandler("mods", mods))
+bot_app.add_handler(CommandHandler("rmmod", rmmod))
+bot_app.add_handler(CommandHandler("cancel", cancel_battle))
+bot_app.add_handler(CommandHandler("createclan", createclan))
+bot_app.add_handler(CommandHandler("joinclan", joinclan))
+bot_app.add_handler(CommandHandler("myclan", myclan))
+bot_app.add_handler(CommandHandler("leaveclan", leaveclan))
+bot_app.add_handler(CommandHandler("disband", disbandclan))
+bot_app.add_handler(CommandHandler("clanchallenge", clanchallenge))
+bot_app.add_handler(CallbackQueryHandler(accept_clanwar, pattern=r"^accept_clanwar\|"))
+bot_app.add_handler(CommandHandler("sendusks", sendduskar))
+bot_app.add_handler(ChatMemberHandler(bot_added_or_promoted, ChatMemberHandler.MY_CHAT_MEMBER))
+
+# === Webhook endpoint ===
+@app.route("/webhook", methods=["POST"])
+def webhook():
+    update = Update.de_json(request.get_json(force=True), bot_app.bot)  # ✅ fixed
+    asyncio.create_task(bot_app.process_update(update))  # ✅ fixed
+    return "ok"
+
+# === Set webhook on startup ===
+@app.before_first_request
+def setup_webhook():
+    asyncio.create_task(bot_app.bot.set_webhook(WEBHOOK_URL))  # ✅ fixed
+    print(f"✅ Webhook set to {WEBHOOK_URL}")
+
+# === Run Flask server ===
 if __name__ == "__main__":
-    keep_alive()  # 👈 Keep your Replit or host alive
-    app = ApplicationBuilder().token(TOKEN).build()
-
-    # 🌟 Main Commands
-    app.add_handler(CommandHandler("start", start))
-
-    app.add_handler(CommandHandler("status", status))
-    app.add_handler(CommandHandler("profile", profile))
-    app.add_handler(CommandHandler("inventory", inventory))
-    app.add_handler(CommandHandler("balance", balance))
-    app.add_handler(CommandHandler("hatch", hatch))
-    app.add_handler(CommandHandler("id", myid))
-    app.add_handler(CommandHandler("cooldowns", cooldowns))
-    app.add_handler(CommandHandler("fortune", fortune))
-    app.add_handler(CommandHandler("dailyegg", dailyegg))
-    app.add_handler(CommandHandler("userstats", userstats))
-    app.add_handler(CommandHandler("broadcast", broadcast))
-    app.add_handler(CommandHandler("challenge", challenge))
-    app.add_handler(CommandHandler("work", work))
-    app.add_handler(CommandHandler("mine", mine))
-    app.add_handler(CommandHandler("daily", daily))
-    app.add_handler(CommandHandler("leaderboard", leaderboard))
-
-    # 🐉 Dragon Commands
-    app.add_handler(CommandHandler("dragons", dragons))
-    app.add_handler(CommandHandler("feed", feed))
-    app.add_handler(CommandHandler("train", train))
-    app.add_handler(CommandHandler("release", release))
-    app.add_handler(CommandHandler("market", market))
-
-    # 🥚 Egg Commands
-    app.add_handler(CommandHandler("getegg", getegg))
-    app.add_handler(CommandHandler("eggs", eggs))
-    app.add_handler(CommandHandler("eghatch", eghatch))
-
-    # 🧠 Inline Button Handlers
-    app.add_handler(CallbackQueryHandler(select_dragon_callback, pattern="^selectdragon_"))
-    app.add_handler(CallbackQueryHandler(handle_move, pattern="^move_"))
-    app.add_handler(CallbackQueryHandler(lambda u, c: u.callback_query.answer(), pattern="^ignore$"))
-    app.add_handler(MessageHandler(filters.Sticker.ALL, get_sticker_id))
-
-    # 📖 Help Menu Callback
-
-
-    # 📌 Group registration
-    app.add_handler(CommandHandler("rgroup", registergroup))
-    app.add_handler(CommandHandler("addmod", addmod))
-    app.add_handler(CommandHandler("mods", mods))
-    app.add_handler(CommandHandler("rmmod", rmmod))
-    app.add_handler(CommandHandler("cancel", cancel_battle))
-
-    # 🛡️ Clan Commands
-    app.add_handler(CommandHandler("createclan", createclan))
-    app.add_handler(CommandHandler("joinclan", joinclan))
-    app.add_handler(CommandHandler("myclan", myclan))
-    app.add_handler(CommandHandler("leaveclan", leaveclan))
-    app.add_handler(CommandHandler("disband", disbandclan))
-    app.add_handler(CommandHandler("clanchallenge", clanchallenge))
-    app.add_handler(CallbackQueryHandler(accept_clanwar, pattern=r"^accept_clanwar\|"))
-    app.add_handler(CommandHandler("sendusks", sendduskar))
-
-
-    # 🤖 Bot Management
-    app.add_handler(ChatMemberHandler(bot_added_or_promoted, ChatMemberHandler.MY_CHAT_MEMBER))
-
-    print("🐉 Dragon is Cominggg...")
-    app.run_polling()
+    print("🐉 DragonDusk Bot is launching...")
+    app.run(host="0.0.0.0", port=PORT)
