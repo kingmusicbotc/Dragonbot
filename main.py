@@ -1009,7 +1009,8 @@ async def sendduskar(update: Update, context: ContextTypes.DEFAULT_TYPE):
     )
 PORT = int(os.environ.get("PORT", 8080))
 # === Run Bot ===
-WEBHOOK_URL = f"https://your-koyeb-app-name.koyeb.app/webhook"
+WEBHOOK_URL = "https://zeroth-zelma-tsrovee-4a3e90ef.koyeb.app/webhook"
+
 
 app = Flask(__name__)
 bot_app = ApplicationBuilder().token(TOKEN).build()
