@@ -1,0 +1,1095 @@
+{
+  "7297151119": {
+    "name": "(\u2060\u25e0\u2060\u203f\u2060\u25d5\u2060) Cherry \ud83c\udf38\u2014\u2060",
+    "dragons": [
+      {
+        "name": "Frostclaw",
+        "element": "Fire",
+        "power": 93,
+        "level": 1
+      }
+    ],
+    "level": 1,
+    "hatched": true,
+    "last_feed": "2025-06-11",
+    "last_earn": "2025-06-12",
+    "last_explore": "2025-06-11T14:10:27.105913",
+    "last_egg": "2025-06-12T04:44:49.273250",
+    "losses": 1
+  },
+  "1094541277": {
+    "name": "\u1d20\u0365\u026a\u0363\u1d18\u036b R\u1d00\u0274\u0262\u1d07\u1d07\u029f\u1d00 \ud834\udd1f\u20dd",
+    "dragons": [],
+    "level": 1,
+    "hatched": false
+  },
+  "7047506465": {
+    "name": "\u269a SPIRIT Y \u23e4\u035f\u035e\u035f\u035e\ud835\udc40\u26a1\ufe0f\ud835\ude4f \ud83d\udf32",
+    "dragons": [
+      {
+        "name": "Pyron",
+        "element": "Water",
+        "power": 43,
+        "level": 1
+      }
+    ],
+    "level": 1,
+    "hatched": true,
+    "last_earn": "2025-06-11"
+  },
+  "7036162419": {
+    "name": "D E N J I \u03a8",
+    "dragons": [
+      {
+        "name": "Pyron",
+        "element": "Fire",
+        "power": 45,
+        "level": 1
+      }
+    ],
+    "level": 1,
+    "hatched": true,
+    "last_earn": "2025-06-11"
+  },
+  "6265981509": {
+    "name": "\ud835\ude75\ud835\ude7b\ud835\ude78\ud835\ude81\ud835\ude83\ud835\ude74\ud835\ude81 [ #\ud835\ude8f\ud835\ude92\ud835\ude97\ud835\ude8a\ud835\ude95_\ud835\ude8a\ud835\ude9b\ud835\ude8c ] \u03b1",
+    "dragons": [
+      {
+        "name": "Venomscale",
+        "element": "Air",
+        "power": 26,
+        "level": 1
+      }
+    ],
+    "level": 1,
+    "hatched": true
+  },
+  "6020886539": {
+    "name": "\ud835\ude4d\ud835\ude5a\ud835\ude59\ud835\ude5a\ud835\ude6d \ud83e\udd85",
+    "dragons": [
+      {
+        "name": "frostclaw",
+        "element": "shadow",
+        "power": 34,
+        "level": 1
+      },
+      {
+        "name": "Aqualing",
+        "element": "Unknown",
+        "power": 56,
+        "level": 1
+      }
+    ],
+    "level": 1,
+    "hatched": true,
+    "last_feed": "2025-06-12",
+    "last_earn": "2025-06-13",
+    "last_explore": "2025-06-13T02:55:37.628185",
+    "last_egg": "2025-06-13T03:46:37.904630",
+    "gems": 30,
+    "wins": 6,
+    "last_work": "2025-06-14T01:52:54.035704",
+    "last_mine": "2025-06-14T01:52:50.826154",
+    "last_daily": "2025-06-14T01:52:58.468204",
+    "eggs": [
+      {
+        "rarity": "Rare",
+        "emoji": "\ud83d\udd37",
+        "timestamp": "2025-06-13T03:46:37.904626",
+        "status": "hatched",
+        "will_hatch": true
+      }
+    ],
+    "losses": 1,
+    "duskar": 333
+  },
+  "1778618019": {
+    "name": "Yaseen I\u1d50\u30e1 \u1d58\u1dbb\u1d58\u1d50\u1d43\u1d4f\u2071\u30e1\u6e26\u5dfb",
+    "dragons": [
+      {
+        "name": "Venomscale",
+        "element": "Earth",
+        "power": 41,
+        "level": 1
+      }
+    ],
+    "level": 1,
+    "hatched": true,
+    "last_earn": "2025-06-11"
+  },
+  "5139078444": {
+    "name": "\ud835\udc07\ud835\udc00\ud835\udc11\ud835\udc03\ud835\udc08\ud835\udc0d\ud808\udd9c\u27a4\ud835\udc09\ud835\udc08\ud835\udc0d\ud808\udd9c",
+    "dragons": [
+      {
+        "name": "Venomscale",
+        "element": "Earth",
+        "power": 29,
+        "level": 1
+      }
+    ],
+    "level": 1,
+    "hatched": true,
+    "eggs": [
+      {
+        "rarity": "Normal",
+        "emoji": "\ud83e\udd5a",
+        "timestamp": "2025-06-13T12:32:31.770686",
+        "status": "pending",
+        "will_hatch": false
+      }
+    ],
+    "last_egg": "2025-06-13T12:32:31.770692"
+  },
+  "7530121612": {
+    "name": "\u79c1\u0489\u306f\u0489\u3046\u0489\u3061\u0489\u306f\u0489\u30de\u0489\u30c0\u0489\u30e9\u0489\u306e\u0489\u5e7d\u0489\u970a\u0489\u3067\u0489\u3059\u0489",
+    "dragons": [
+      {
+        "name": "Dragon",
+        "element": "Air",
+        "power": 64,
+        "level": 1
+      }
+    ],
+    "level": 1,
+    "hatched": true,
+    "last_explore": "2025-06-11T15:35:13.179202",
+    "last_egg": "2025-06-12T06:56:33.787301",
+    "last_feed": "2025-06-12",
+    "last_earn": "2025-06-12"
+  },
+  "7692323259": {
+    "name": "\ud835\udc0b\ud835\udc1e\ud835\udc28 \ud80c\udcf6",
+    "dragons": [
+      {
+        "name": "Frostclaw",
+        "element": "Air",
+        "power": 29,
+        "level": 1
+      }
+    ],
+    "level": 1,
+    "hatched": true
+  },
+  "1199385746": {
+    "name": "Kabira\u2666\ufe0f",
+    "dragons": [],
+    "level": 1,
+    "hatched": false
+  },
+  "7120825935": {
+    "name": "\u13b7\u026a\u1d0b\u1d07\u028f",
+    "dragons": [
+      {
+        "name": "Frostclaw",
+        "element": "Shadow",
+        "power": 28,
+        "level": 1
+      }
+    ],
+    "level": 1,
+    "hatched": true
+  },
+  "1778529530": {
+    "name": "Naman Samar",
+    "dragons": [
+      {
+        "name": "Frostclaw",
+        "element": "Water",
+        "power": 44,
+        "level": 1
+      }
+    ],
+    "level": 1,
+    "hatched": true
+  },
+  "5845254367": {
+    "name": "Alien \ud83d\udc7e",
+    "dragons": [
+      {
+        "name": "Venomscale",
+        "element": "Fire",
+        "power": 32,
+        "level": 1
+      }
+    ],
+    "level": 1,
+    "hatched": true,
+    "last_egg": "2025-06-14T01:44:01.464593",
+    "eggs": [
+      {
+        "rarity": "Normal",
+        "emoji": "\ud83e\udd5a",
+        "timestamp": "2025-06-14T01:44:01.464587",
+        "status": "pending",
+        "will_hatch": false
+      }
+    ]
+  },
+  "7430877788": {
+    "name": "Bobby Bobby",
+    "dragons": [],
+    "level": 1,
+    "hatched": false
+  },
+  "8038066196": {
+    "name": "\ud835\udc00\ud835\udc11\ud835\udc0d\ud835\udc00\ud835\udc01",
+    "dragons": [],
+    "level": 1,
+    "hatched": false
+  },
+  "7353699058": {
+    "name": "SHREY",
+    "dragons": [],
+    "level": 1,
+    "hatched": false
+  },
+  "6061178519": {
+    "name": "\ud835\udde3\ud835\udde5\ud835\udde2\ud835\uddd9\ud835\uddd8\ud835\udde6\ud835\udde6\ud835\udde2\ud835\udde5",
+    "dragons": [],
+    "level": 1,
+    "hatched": false
+  },
+  "5053815620": {
+    "name": "Aryan",
+    "dragons": [
+      {
+        "name": "Pyron",
+        "element": "Air",
+        "power": 42,
+        "level": 1
+      }
+    ],
+    "level": 1,
+    "hatched": true,
+    "last_egg": "2025-06-12T05:00:45.536703",
+    "gems": 5,
+    "wins": 1
+  },
+  "7866254338": {
+    "name": "\ud83d\udc51\u20dd \ud83c\udd61\ud83c\udd50\ud83c\udd5c\ud83c\udd53\ud83c\udd57\ud83c\udd50\ud83c\udd5d\ud83c\udd64\ud83c\udd62\ud83c\udd57\u22c6\u02d9",
+    "dragons": [],
+    "level": 1,
+    "hatched": false
+  },
+  "1774709471": {
+    "name": "Dr.sirii",
+    "dragons": [
+      {
+        "name": "Venomscale",
+        "element": "Fire",
+        "power": 31,
+        "level": 1
+      }
+    ],
+    "level": 1,
+    "hatched": true
+  },
+  "7350242895": {
+    "name": "\u2764\ufe0f\ud83c\udf39Rp17\ud83c\udf39\u2764\ufe0f",
+    "dragons": [
+      {
+        "name": "Frostclaw",
+        "element": "Air",
+        "power": 38,
+        "level": 1
+      }
+    ],
+    "level": 1,
+    "hatched": true,
+    "losses": 1
+  },
+  "7245856317": {
+    "name": "\u13d5\u13be\u13ec\u13d2\u13af\u13f0\u13bb",
+    "dragons": [
+      {
+        "name": "Blazetail",
+        "element": "Earth",
+        "power": 40,
+        "level": 1
+      }
+    ],
+    "level": 1,
+    "hatched": true,
+    "eggs": [
+      {
+        "rarity": "Rare",
+        "emoji": "\ud83d\udd37",
+        "timestamp": "2025-06-13T03:46:53.194931",
+        "status": "pending",
+        "will_hatch": true
+      }
+    ],
+    "last_egg": "2025-06-13T03:46:53.194935",
+    "losses": 1
+  },
+  "6306216999": {
+    "name": "\u6e26\u5dfb Thanos\u269c\ufe0f\ud83c\udccf",
+    "dragons": [
+      {
+        "name": "Blazetail",
+        "element": "Water",
+        "power": 20,
+        "level": 1
+      }
+    ],
+    "level": 1,
+    "hatched": true
+  },
+  "6620360093": {
+    "name": "\ud80c\udc80\ud835\ude78\ud835\ude7d\ud835\ude7d\ud835\ude7e\ud835\ude72\ud835\ude74\ud835\ude7d\ud835\ude83 \ud835\ude89\ud835\ude74\ud835\ude81\ud835\ude7e\ud80c\udc80",
+    "dragons": [],
+    "level": 1,
+    "hatched": false
+  },
+  "6079723099": {
+    "name": "\u265b\ud835\ude78z\ud835\ude8a\ud835\ude96\ud835\ude9e \u2661\u3099",
+    "dragons": [
+      {
+        "name": "Pyron",
+        "element": "Water",
+        "power": 26,
+        "level": 1
+      }
+    ],
+    "level": 1,
+    "hatched": true
+  },
+  "7764806974": {
+    "name": "\u039b\u0274\u1d0fx\u3164\u6b7b",
+    "dragons": [],
+    "level": 1,
+    "hatched": false
+  },
+  "2002317664": {
+    "name": "PRANAV",
+    "dragons": [],
+    "level": 1,
+    "hatched": false
+  },
+  "2129052793": {
+    "name": "Blood God",
+    "dragons": [
+      {
+        "name": "Frostclaw",
+        "element": "Air",
+        "power": 42,
+        "level": 1
+      }
+    ],
+    "level": 1,
+    "hatched": true,
+    "eggs": [
+      {
+        "rarity": "Rare",
+        "emoji": "\ud83d\udd37",
+        "timestamp": "2025-06-14T01:44:03.185831",
+        "status": "pending",
+        "will_hatch": true
+      }
+    ],
+    "last_egg": "2025-06-14T01:44:03.185836"
+  },
+  "7938281439": {
+    "name": "\u2501\u2501\u0f3a\u273f \ud835\udd3b\ud835\udd52\ud835\udd63\ud835\udd68\ud835\udd5a\ud835\udd5f \u273f\u0f3b\u2501\u2501",
+    "dragons": [],
+    "level": 1,
+    "hatched": false
+  },
+  "7335713366": {
+    "name": "\u2765\u0e4b\ud834\udd1f\u225b\u20dd\ud83e\uddda\ud835\udf39\uabed\ud835\udd8e\u2202\uabed\u2202\uabed\ud835\udd8e\ud835\udc10 \u2718\u2122\u1d05\u327f\u2074\u2077\u20ea\u22c6\u0e4b\ud83d\ude08 \ud83d\udc98",
+    "dragons": [],
+    "level": 1,
+    "hatched": false
+  },
+  "5843654328": {
+    "name": "Omni-man",
+    "dragons": [
+      {
+        "name": "Pyron",
+        "element": "Air",
+        "power": 41,
+        "level": 1
+      }
+    ],
+    "level": 1,
+    "hatched": true,
+    "eggs": [
+      {
+        "rarity": "Rare",
+        "emoji": "\ud83d\udd37",
+        "timestamp": "2025-06-14T01:44:01.940721",
+        "status": "pending",
+        "will_hatch": true
+      }
+    ],
+    "last_egg": "2025-06-14T01:44:01.940727"
+  },
+  "8082401358": {
+    "name": "Snowdrop",
+    "dragons": [
+      {
+        "name": "Blazetail",
+        "element": "Water",
+        "power": 33,
+        "level": 1
+      }
+    ],
+    "level": 1,
+    "hatched": true,
+    "last_explore": "2025-06-12T16:38:09.125284",
+    "eggs": [
+      {
+        "rarity": "Normal",
+        "emoji": "\ud83e\udd5a",
+        "timestamp": "2025-06-14T01:44:04.901836",
+        "status": "pending",
+        "will_hatch": false
+      }
+    ],
+    "last_egg": "2025-06-14T01:44:04.901841"
+  },
+  "904337037": {
+    "name": "\ud835\udd05\ud835\udd1e\ud835\udd29\ud835\udd1e",
+    "dragons": [],
+    "level": 1,
+    "hatched": false
+  },
+  "7436236645": {
+    "name": "Mr. SELENO",
+    "dragons": [
+      {
+        "name": "Frostclaw",
+        "element": "Earth",
+        "power": 37,
+        "level": 1
+      }
+    ],
+    "level": 1,
+    "hatched": true,
+    "losses": 1,
+    "gems": 5,
+    "wins": 1,
+    "last_mine": "2025-06-13T03:22:37.150882",
+    "last_daily": "2025-06-13T03:23:58.086965",
+    "eggs": [
+      {
+        "rarity": "Legendary",
+        "emoji": "\ud83c\udf1f",
+        "timestamp": "2025-06-13T13:57:13.893692",
+        "status": "pending",
+        "will_hatch": true
+      }
+    ],
+    "last_egg": "2025-06-13T13:57:13.893697"
+  },
+  "6998981970": {
+    "name": "Aditya [Comeback time]",
+    "dragons": [
+      {
+        "name": "Frostclaw",
+        "element": "Shadow",
+        "power": 25,
+        "level": 1
+      }
+    ],
+    "level": 1,
+    "hatched": true,
+    "losses": 1,
+    "last_work": "2025-06-14T01:50:08.825380",
+    "last_mine": "2025-06-14T01:50:13.142949",
+    "last_daily": "2025-06-13T03:22:47.252107",
+    "gems": 5,
+    "wins": 1,
+    "eggs": [
+      {
+        "rarity": "Normal",
+        "emoji": "\ud83e\udd5a",
+        "timestamp": "2025-06-14T01:50:05.452450",
+        "status": "pending",
+        "will_hatch": true
+      }
+    ],
+    "last_egg": "2025-06-14T01:50:05.452456",
+    "duskar": 222
+  },
+  "7753659049": {
+    "name": "\u273fMitu\u273f",
+    "dragons": [],
+    "level": 1,
+    "hatched": false
+  },
+  "5531463962": {
+    "name": "Superir\u0fcan_lonely \u238a\u03a9",
+    "dragons": [
+      {
+        "name": "Blazetail",
+        "element": "Fire",
+        "power": 27,
+        "level": 1
+      }
+    ],
+    "level": 1,
+    "hatched": true
+  },
+  "5553834478": {
+    "name": "\u275b \ud835\ude70\ud835\ude73\ud835\ude78\ud835\ude83\ud835\ude88\ud835\ude70 \u275c",
+    "dragons": [
+      {
+        "name": "Pyron",
+        "element": "Fire",
+        "power": 21,
+        "level": 1
+      }
+    ],
+    "level": 1,
+    "hatched": true
+  },
+  "6027018943": {
+    "name": "\u23e4\u035f\u035e\u035f\u035e\ud835\udc07\ud835\udc00\ud835\udc11\ud835\udc12\ud835\udc07\ud835\udc08\ud835\udc13 !!",
+    "dragons": [],
+    "level": 1,
+    "hatched": false
+  },
+  "7704409461": {
+    "name": "\ud835\ude3d\ud835\ude47\ud835\ude50\ud835\ude49\ud835\ude3f\ud835\ude40\ud835\ude4d \ud835\ude4a\ud835\ude4b",
+    "dragons": [],
+    "level": 1,
+    "hatched": false
+  },
+  "852385161": {
+    "name": "\ud835\ude3f\ud835\ude67\ud835\ude56\ud835\ude5c\ud835\ude64\ud835\ude63 \u0362\u032f\u0331\u034a\ud835\ude48\ud835\ude56\ud835\ude63\ud835\ude64 \u0362\u032f\u0331\u034a",
+    "dragons": [
+      {
+        "name": "Aetherwing",
+        "element": "Fire",
+        "power": 25,
+        "level": 1
+      }
+    ],
+    "level": 1,
+    "hatched": true,
+    "eggs": [
+      {
+        "rarity": "Normal",
+        "emoji": "\ud83e\udd5a",
+        "timestamp": "2025-06-13T04:22:15.424972",
+        "status": "pending",
+        "will_hatch": false
+      }
+    ],
+    "last_egg": "2025-06-13T04:22:15.424976"
+  },
+  "8112516275": {
+    "name": "\u22c6\u23e4\u035f\u035f\u035e\ud800\udfd3\u2363\u20df\ud835\udc12\ud835\udc07\ud835\udc08\ud835\udc0a\ud835\udc00\ud835\udc0c\ud835\udc00\ud835\udc11\ud835\udc14\ud83d\udc94\u0627\u0627\u200c\u0640\uabed\u0640\u0640\uabed\u0640\u20db\u0648\uabed",
+    "dragons": [],
+    "level": 1,
+    "hatched": false
+  },
+  "8178434030": {
+    "name": "\u23af\u302c\u20db\ud80c\udda9\u302c\u200c\u20d7\uabed\ud83d\udc97\u20dd\uabed\ud834\uddbc\uabed \u20ea\ud83c\udd5f\ud83c\udd78\ud83c\udd69\ud83c\udd89\ud83c\udd50\ufe0e\u20de\u20de\ud83e\udd8b\u20ea\uabed\u0f0e\uabed\u082b\u2386\u066d\uabed \u200c\u0eb7\u20ef\u0f85",
+    "dragons": [],
+    "level": 1,
+    "hatched": false
+  },
+  "6019388925": {
+    "name": "\ud83c\udf3fJOHN KEATS\ud83c\udf3f",
+    "dragons": [],
+    "level": 1,
+    "hatched": false
+  },
+  "7879993882": {
+    "name": "Priyanuj\ud83e\udd42",
+    "dragons": [],
+    "level": 1,
+    "hatched": false
+  },
+  "1125152767": {
+    "name": "Abhay",
+    "dragons": [],
+    "level": 1,
+    "hatched": false
+  },
+  "7367985475": {
+    "name": "Uchiha sasuke \u300e \ud80c\udd43 \u300f",
+    "dragons": [
+      {
+        "name": "Pyron",
+        "element": "Shadow",
+        "power": 23,
+        "level": 1
+      }
+    ],
+    "level": 1,
+    "hatched": true,
+    "eggs": [
+      {
+        "rarity": "Ultimate",
+        "emoji": "\ud83d\udca0",
+        "timestamp": "2025-06-13T04:38:14.695021",
+        "status": "pending",
+        "will_hatch": true
+      }
+    ],
+    "last_egg": "2025-06-13T04:38:14.695025"
+  },
+  "5903871499": {
+    "name": "\u2122Sood \u03b9",
+    "dragons": [],
+    "level": 1,
+    "hatched": false
+  },
+  "7200052671": {
+    "name": "I Z U Y U",
+    "dragons": [],
+    "level": 1,
+    "hatched": false
+  },
+  "5300221451": {
+    "name": "DRAKEN KUN\u03a8",
+    "dragons": [
+      {
+        "name": "Venomscale",
+        "element": "Air",
+        "power": 33,
+        "level": 1
+      }
+    ],
+    "level": 1,
+    "hatched": true
+  },
+  "6180599897": {
+    "name": "\ua731\u029c\u1d1c\u0299\u029c \u03b1",
+    "dragons": [],
+    "level": 1,
+    "hatched": false
+  },
+  "6076549174": {
+    "name": "Aryan \ud83d\udc51",
+    "dragons": [
+      {
+        "name": "Blazetail",
+        "element": "Water",
+        "power": 38,
+        "level": 1
+      }
+    ],
+    "level": 1,
+    "hatched": true,
+    "eggs": [
+      {
+        "rarity": "Rare",
+        "emoji": "\ud83d\udd37",
+        "timestamp": "2025-06-14T01:43:56.823979",
+        "status": "pending",
+        "will_hatch": true
+      }
+    ],
+    "last_egg": "2025-06-14T01:43:56.823986"
+  },
+  "5091615616": {
+    "name": "|| \ud835\ude3c \ud835\ude46 \ud835\ude3c \ud835\ude4e \ud835\ude43 || \ud83c\uddee\ud83c\uddf3",
+    "dragons": [],
+    "level": 1,
+    "hatched": false
+  },
+  "7697238353": {
+    "name": "\ud835\udc0f\ud835\udc08\ud835\udc11\ud835\udc00\ud835\udc13\ud835\udc04[</>] \ud83c\uddee\ud83c\uddf3 {#DEAD}",
+    "dragons": [
+      {
+        "name": "Blazetail",
+        "element": "Fire",
+        "power": 26,
+        "level": 1
+      }
+    ],
+    "level": 1,
+    "hatched": true,
+    "eggs": [
+      {
+        "rarity": "Normal",
+        "emoji": "\ud83e\udd5a",
+        "timestamp": "2025-06-14T01:43:52.712639",
+        "status": "pending",
+        "will_hatch": false
+      }
+    ],
+    "last_egg": "2025-06-14T01:43:52.712657"
+  },
+  "6485380150": {
+    "name": "\ud81a\udcd4\ua80b\ua80b\ua80b\ua80b\ua80b\ua80b\ua80b\ua80b\ua80b\ua80b\ua80b\ua80b\ua80b\ua80b\ua80b\ua80b\ua80b\ua80b\ua80b\ua80b\ua80b\ua80b\ua80b\ua80b\ua80b\ua80b\ua80b\ua80b\ua80b\ua80b\ua80b\ua80b\ua80b\ua80b\ua80b\ua80b \ud835\ude4e\ud835\ude56\ud835\ude63\ud835\ude5c\ud835\ude67\ud835\ude56\ud835\ude62 \ud80c\udda9\ud811\ude13\ud80c\uddaa",
+    "dragons": [
+      {
+        "name": "Frostclaw",
+        "element": "Shadow",
+        "power": 20,
+        "level": 1
+      }
+    ],
+    "level": 1,
+    "hatched": true,
+    "gems": 0,
+    "win": 0,
+    "loss": 0
+  },
+  "7865884722": {
+    "name": "Prabhat",
+    "dragons": [],
+    "level": 1,
+    "hatched": false,
+    "gems": 0,
+    "win": 0,
+    "loss": 0
+  },
+  "6505199654": {
+    "name": "Peeyush\ud83d\ude07\u270c",
+    "dragons": [],
+    "level": 1,
+    "hatched": false,
+    "gems": 0,
+    "win": 0,
+    "loss": 0
+  },
+  "7357995346": {
+    "name": "V\u039bID\u03a3\u0389I",
+    "dragons": [],
+    "level": 1,
+    "hatched": false,
+    "gems": 0,
+    "win": 0,
+    "loss": 0
+  },
+  "7331016337": {
+    "name": "\u0f04\ud808\udc4d \u20dd \ud835\udde2\ud835\uddd5\ud835\udddc\ud835\udde7\ud835\udde2 \u2023\u1b44\ud80c\uddaa",
+    "dragons": [],
+    "level": 1,
+    "hatched": false,
+    "gems": 0,
+    "win": 0,
+    "loss": 0,
+    "eggs": [
+      {
+        "rarity": "Rare",
+        "emoji": "\ud83d\udd37",
+        "timestamp": "2025-06-14T01:43:52.330531",
+        "status": "pending",
+        "will_hatch": true
+      }
+    ],
+    "last_egg": "2025-06-14T01:43:52.330536"
+  },
+  "6677710009": {
+    "name": "\u51ac\ud800\udec4\u13d5\u13b7\u13a7\u13e6\u13cbY\u271e\ufe0e\u30b7\ufe0e... \u232f\ud83c\udc04",
+    "dragons": [],
+    "level": 1,
+    "hatched": false,
+    "gems": 0,
+    "win": 0,
+    "loss": 0
+  },
+  "8049934625": {
+    "name": "Optimus Prime",
+    "dragons": [],
+    "level": 1,
+    "hatched": false,
+    "gems": 0,
+    "win": 0,
+    "loss": 0
+  },
+  "7785203182": {
+    "name": "\ud835\udc15\ud835\udc0e\ud835\udc0b\ud835\udc13 \ud835\udfd2\ud835\udfd2\ud835\udfce\u26a1\ufe0f\u26c8\ufe0f",
+    "dragons": [],
+    "level": 1,
+    "hatched": false,
+    "gems": 0,
+    "win": 0,
+    "loss": 0
+  },
+  "6679124999": {
+    "name": "\ud835\udc03\ud835\ude74\ud835\ude7c\ud835\ude7e\ud835\ude72\ud835\ude81\ud835\ude70\ud835\ude72\ud835\ude88",
+    "dragons": [
+      {
+        "name": "Blazetail",
+        "element": "Earth",
+        "power": 32,
+        "level": 1
+      }
+    ],
+    "level": 1,
+    "hatched": true,
+    "gems": 0,
+    "win": 0,
+    "loss": 0,
+    "eggs": [
+      {
+        "rarity": "Normal",
+        "emoji": "\ud83e\udd5a",
+        "timestamp": "2025-06-14T01:43:55.632463",
+        "status": "pending",
+        "will_hatch": false
+      }
+    ],
+    "last_egg": "2025-06-14T01:43:55.632467"
+  },
+  "8167226246": {
+    "name": "EL HALCON \ud83e\udd85\ud83e\udd85",
+    "dragons": [],
+    "level": 1,
+    "hatched": false,
+    "gems": 0,
+    "win": 0,
+    "loss": 0
+  },
+  "8130271170": {
+    "name": "\ud80c\udd02\ud834\uddbc\u20dd\ud83e\udd40\ud81a\udd6b\uabed\uabed/s\u028fs\u1d1b\u1d07\u1d0d \u1d1b\u1d0fx\u026a\u1d04\ud83c\udfad\ud81a\udd6b\uabed\ud83c\udf39\uabed",
+    "dragons": [],
+    "level": 1,
+    "hatched": false,
+    "gems": 0,
+    "win": 0,
+    "loss": 0
+  },
+  "5479536848": {
+    "name": "RIOO DA TRIKAL DORSHI AEONIAN",
+    "dragons": [],
+    "level": 1,
+    "hatched": false,
+    "gems": 0,
+    "win": 0,
+    "loss": 0
+  },
+  "8080620981": {
+    "name": "\u2137 Deku \u05d2",
+    "dragons": [
+      {
+        "name": "Frostclaw",
+        "element": "Shadow",
+        "power": 21,
+        "level": 1
+      }
+    ],
+    "level": 1,
+    "hatched": true,
+    "gems": 0,
+    "win": 0,
+    "loss": 0,
+    "eggs": [
+      {
+        "rarity": "Normal",
+        "emoji": "\ud83e\udd5a",
+        "timestamp": "2025-06-14T01:43:58.381454",
+        "status": "pending",
+        "will_hatch": true
+      }
+    ],
+    "last_egg": "2025-06-14T01:43:58.381458"
+  },
+  "8025710476": {
+    "name": "Kai",
+    "dragons": [],
+    "level": 1,
+    "hatched": false,
+    "gems": 0,
+    "win": 0,
+    "loss": 0
+  },
+  "6262064767": {
+    "name": "\ud835\ude4f\u028f\ua731\u1d0f\u0274 #dead",
+    "dragons": [],
+    "level": 1,
+    "hatched": false,
+    "gems": 0,
+    "win": 0,
+    "loss": 0
+  },
+  "8027292436": {
+    "name": ".",
+    "dragons": [],
+    "level": 1,
+    "hatched": false,
+    "gems": 0,
+    "win": 0,
+    "loss": 0
+  },
+  "6265526043": {
+    "name": "Dhruv Garg",
+    "dragons": [],
+    "level": 1,
+    "hatched": false,
+    "gems": 0,
+    "win": 0,
+    "loss": 0
+  },
+  "7560540703": {
+    "name": "\ud834\udc8a\ud834\uddc4\ud83e\udd0d\ud835\udc0c\u200c\u059f\u135d\u1d00\u1d0d\u1d00\ud835\udc0a\u1d1c\u1d1b\u1d1b\u028f\ud83d\udde1\ufe0f\u0fd0",
+    "dragons": [],
+    "level": 1,
+    "hatched": false,
+    "gems": 0,
+    "win": 0,
+    "loss": 0,
+    "eggs": [
+      {
+        "rarity": "Normal",
+        "emoji": "\ud83e\udd5a",
+        "timestamp": "2025-06-14T01:44:06.732412",
+        "status": "pending",
+        "will_hatch": true
+      }
+    ],
+    "last_egg": "2025-06-14T01:44:06.732416"
+  },
+  "7793966371": {
+    "name": "[~_-\u00af Echo \u00af-_~]\ud83e\udd77",
+    "dragons": [],
+    "level": 1,
+    "hatched": false,
+    "gems": 0,
+    "win": 0,
+    "loss": 0,
+    "duskar": 100
+  },
+  "7894218723": {
+    "name": "J A M E S",
+    "dragons": [],
+    "level": 1,
+    "hatched": false,
+    "gems": 0,
+    "win": 0,
+    "loss": 0,
+    "duskar": 100
+  },
+  "7460266461": {
+    "name": "SHU\u00dfH \u2604",
+    "dragons": [],
+    "level": 1,
+    "hatched": false,
+    "gems": 0,
+    "win": 0,
+    "loss": 0,
+    "duskar": 100
+  },
+  "6682155076": {
+    "name": "\u01e4\u043d\u03c3s\u03c4",
+    "dragons": [],
+    "level": 1,
+    "hatched": false,
+    "gems": 0,
+    "win": 0,
+    "loss": 0,
+    "duskar": 100
+  },
+  "1338408261": {
+    "name": "\u1691\u169b\u1b44\u0336\ua9bf\u0336\u1b44\u0336\ua9bf\u0336\ua23c\u0336V\u0336\u0337\u0336\ud83c\udd78\u20a1\u0336K\u0336Y\u0336\u0337\u0336\u1b44\u0336\ua9bf\u0336\u1b44\u0336\ua9bf\u0336\u1aa3",
+    "dragons": [],
+    "level": 1,
+    "hatched": false,
+    "gems": 0,
+    "win": 0,
+    "loss": 0,
+    "eggs": [
+      {
+        "rarity": "Rare",
+        "emoji": "\ud83d\udd37",
+        "timestamp": "2025-06-13T16:06:58.760626",
+        "status": "pending",
+        "will_hatch": false
+      }
+    ],
+    "last_egg": "2025-06-13T16:06:58.760632",
+    "duskar": 100
+  },
+  "5872389286": {
+    "name": "Kirmada",
+    "dragons": [],
+    "level": 1,
+    "hatched": false,
+    "gems": 0,
+    "win": 0,
+    "loss": 0,
+    "duskar": 100
+  },
+  "8157285805": {
+    "name": "\ud835\ude3e\ud835\ude54\ud835\ude3d\ud835\ude40\ud835\ude4d \ud835\ude53",
+    "dragons": [],
+    "level": 1,
+    "hatched": false,
+    "gems": 0,
+    "win": 0,
+    "loss": 0,
+    "duskar": 100
+  },
+  "6632519077": {
+    "name": "A\u1d0b\u026a\u1d1b\u1d0f Y\u1d00\u1d0d\u1d00\u1d05\u1d00 (\"\u2067;\u2067(\u2067\"\u2067",
+    "dragons": [
+      {
+        "name": "Frostclaw",
+        "element": "Water",
+        "power": 43,
+        "level": 1
+      }
+    ],
+    "level": 1,
+    "hatched": true,
+    "gems": 0,
+    "win": 0,
+    "loss": 0,
+    "eggs": [
+      {
+        "rarity": "Legendary",
+        "emoji": "\ud83c\udf1f",
+        "timestamp": "2025-06-13T16:17:52.411971",
+        "status": "pending",
+        "will_hatch": true
+      }
+    ],
+    "last_egg": "2025-06-13T16:17:52.411976",
+    "duskar": 100
+  },
+  "7361622601": {
+    "name": "\u3164\u3164\u3164\u3164\u3164\u3164\u3164\u3164\u3164\u3164\u3164\u3164\u3164\u3164\u3164\u3164\u3164\u3164\u3164\u3164\u3164\u3164\u3164\u3164",
+    "dragons": [],
+    "level": 1,
+    "hatched": false,
+    "gems": 0,
+    "win": 0,
+    "loss": 0,
+    "duskar": 100
+  },
+  "8079872415": {
+    "name": "\ud83e\udda9",
+    "dragons": [],
+    "level": 1,
+    "hatched": false,
+    "gems": 0,
+    "win": 0,
+    "loss": 0,
+    "duskar": 100
+  },
+  "1977598826": {
+    "name": "Hecker",
+    "dragons": [
+      {
+        "name": "Aetherwing",
+        "element": "Earth",
+        "power": 25,
+        "level": 1
+      }
+    ],
+    "level": 1,
+    "hatched": true,
+    "gems": 0,
+    "win": 0,
+    "loss": 0,
+    "duskar": 100
+  },
+  "1231784043": {
+    "name": "\u2022\u2500\u253c\u1da6\u03fb\u0363\u0f0d \u0362\u20ea\u0365 \ud83e\udd40\ud835\udeb3\u0264. \ud835\udec5\ud835\udeae\ud835\udec2\u0264\u03fb\ud835\udec2ji \u2765\u2500",
+    "dragons": [],
+    "level": 1,
+    "hatched": false,
+    "gems": 0,
+    "win": 0,
+    "loss": 0,
+    "duskar": 100
+  }
+}
