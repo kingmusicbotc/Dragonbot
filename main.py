@@ -16,20 +16,6 @@ from datetime import date
 from telegram.ext import ChatMemberHandler
 from telegram.constants import ParseMode
 from minigames import minigames, handle_game_choice
-import asyncio
-import traceback
-import nest_asyncio
-nest_asyncio.apply()
-from db import load_json, save_json
-
-from telegram.ext import (
-    ApplicationBuilder, CommandHandler, MessageHandler, CallbackQueryHandler,
-    ChatMemberHandler, filters
-)
-from telegram.error import NetworkError
-from keep_alive import keep_alive
-
-
 
 # === CONFIG ===
 TOKEN = "8040202761:AAF_HEGJxbZjKsgJANNQQRP4ahXftlMsqCQ"
@@ -43,10 +29,58 @@ IMAGE_URL = "https://graph.org/file/c3057fdb933a40aac35a8-24eb9a945f2183a64c.jpg
 start_time = time.time()
 
 # === JSON Helpers ===
+def load_json(file):
+    if not os.path.exists(file):
+        return {}
+    try:
+        with open(file, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except json.JSONDecodeError:
+        return {}
 
+def save_json(file, data):
+    with open(file, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2)
+
+def load_users():
+    return load_json(JSON_FILE)
+
+def save_users(data):
+    save_json(JSON_FILE, data)
+
+def load_group_data():
+    return load_json(GROUP_FILE)
+
+def save_group_data(data):
+    save_json(GROUP_FILE, data)
+
+def load_group_data():
+    if not os.path.exists(GROUP_FILE):
+        return {}
+    try:
+        with open(GROUP_FILE, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except json.JSONDecodeError:
+        return {}
+
+def save_group_data(data):
+    with open(GROUP_FILE, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2)
+
+import json
+
+USER_FILE = "users.json"
+
+def load_json(file):
+    with open(file, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+def save_json(file, data):
+    with open(file, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2)
 
 def migrate_gold_to_duskar():
-    users = load_json("users.json")
+    users = load_json(USER_FILE)
     migrated = 0
 
     for user_id, data in users.items():
@@ -85,7 +119,24 @@ START_STICKER = "CAACAgEAAxkBAAID4GhLtzh83Y1jf5cWyFj7vwIZnEuvAAIVAwACr0ZxRUcBrjQ
 USERS_FILE = "users.json"
 
 # === JSON Helpers ===
+def load_users():
+    if not os.path.exists(USERS_FILE):
+        print("[INFO] users.json not found, creating new data store.")
+        return {}
+    try:
+        with open(USERS_FILE, "r") as f:
+            return json.load(f)
+    except Exception as e:
+        print("[LOAD ERROR]", e)
+        return {}
 
+def save_users(data):
+    try:
+        with open(USERS_FILE, "w") as f:
+            json.dump(data, f, indent=2)
+        print("[SAVE SUCCESS] User data updated.")
+    except Exception as e:
+        print("[SAVE ERROR]", e)
 
 # === /start Command ===
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -376,7 +427,7 @@ async def registergroup(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(f"✅ Group '{chat.title}' registered successfully!")
     
 import json
-from datetime import datetime, timezone
+from datetime import datetime
 from telegram import Update
 from telegram.ext import ContextTypes
 
@@ -384,45 +435,46 @@ from telegram.ext import ContextTypes
 BOT_OWNER_ID = 6020886539
 BOT_VERSION = "1.0.0"
 IMAGE_URL = "https://graph.org/file/a2b0ac48d16bd00589b8f-2da15263ad3f26ab8e.jpg"
-START_TIME = datetime.now(timezone.utc)
+START_TIME = datetime.utcnow()
 
 # === Utilities ===
-
 def get_uptime():
-    now = datetime.now(timezone.utc)
+    now = datetime.utcnow()
     delta = now - START_TIME
     hours, remainder = divmod(int(delta.total_seconds()), 3600)
     minutes, _ = divmod(remainder, 60)
     return f"{hours}h {minutes}m"
 
-def load_json_file(path):
+def load_mods():
     try:
-        with open(path, "r") as f:
+        with open("mod.json", "r") as f:
             return json.load(f)
     except:
         return {}
 
 def load_users():
-    return load_json_file("users.json")
+    try:
+        with open("users.json", "r") as f:
+            return json.load(f)
+    except:
+        return {}
 
 def load_group_data():
-    return load_json_file("group.json")
-
-def load_mods():
-    return load_json_file("mod.json")
+    try:
+        with open("group.json", "r") as f:
+            return json.load(f)
+    except:
+        return {}
 
 def is_admin(user_id):
-    return str(user_id) == str(BOT_OWNER_ID) or str(user_id) in load_mods()
+    user_id = str(user_id)
+    return str(user_id) == str(BOT_OWNER_ID) or user_id in load_mods()
 
 # === Command ===
 async def status(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_id = update.effective_user.id
-
     if not is_admin(user_id):
-        await update.message.reply_text(
-            "🚫 *Access Denied!*\nThis command is for the owner or mods only.",
-            parse_mode="Markdown"
-        )
+        await update.message.reply_text("🚫 *Access Denied!*\nThis command is for the owner or mods only.", parse_mode="Markdown")
         return
 
     users = load_users()
@@ -430,25 +482,22 @@ async def status(update: Update, context: ContextTypes.DEFAULT_TYPE):
     uptime = get_uptime()
 
     total_users = len(users)
-    total_duskar = sum(int(u.get("duskar", 0)) for u in users.values())
-    started_users = sum(1 for u in users.values() if u.get("dragons"))
+    total_duskar = sum(u.get("duskar", 0) for u in users.values())
+    started_users = sum(1 for u in users.values() if u.get("dragons") and len(u["dragons"]) > 0)
     started_chats = len(group_data)
 
     bot_username = context.bot.username
     group_info = group_data.get(str(update.effective_chat.id))
 
-    if group_info:
-        group_stats = (
-            f"\n\n<b>📍 Group Stats</b>\n"
-            f"🏷️ <b>Name:</b> {group_info.get('title', 'Unknown')}\n"
-            f"🐣 <b>Hatched Dragons:</b> {group_info.get('hatched_count', 0)}"
-        )
-    else:
-        group_stats = (
-            "\n\n<b>📍 Group Stats</b>\n"
-            "🔸 <i>Group not registered.</i>\n"
-            "📌 Use <code>/rgroup</code> to register this group."
-        )
+    group_stats = (
+        "\n\n<b>📍 Group Stats</b>\n"
+        "🔸 <i>Not Registered</i>\n"
+        "📌 Use <code>/rgroup</code> to register."
+    ) if not group_info else (
+        f"\n\n<b>📍 Group Stats</b>\n"
+        f"🏷️ <b>Name:</b> {group_info['title']}\n"
+        f"🐣 <b>Hatched Dragons:</b> {group_info['hatched_count']}"
+    )
 
     status_text = (
         f"⚙️ <b>DragonDusk – Bot Status</b>\n"
@@ -462,8 +511,7 @@ async def status(update: Update, context: ContextTypes.DEFAULT_TYPE):
         f"🐉 Dragons Hatched: <b>{started_users}</b>\n"
         f"💰 Duskar Distributed: <b>{total_duskar}</b>\n"
         f"💬 Registered Groups: <b>{started_chats}</b>"
-        + group_stats
-    )
+    ) + group_stats
 
     await context.bot.send_photo(
         chat_id=update.effective_chat.id,
@@ -999,7 +1047,28 @@ from datetime import datetime, timedelta
 USER_FILE = "users.json"
 
 # === File I/O ===
+def load_users():
+    try:
+        with open(USER_FILE, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except:
+        return {}
 
+def save_users(data):
+    with open(USER_FILE, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2)
+
+USER_FILE = "users.json"
+
+def load_json(file):
+    if os.path.exists(file):
+        with open(file, "r", encoding="utf-8") as f:
+            return json.load(f)
+    return {}
+
+def save_json(file, data):
+    with open(file, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2)
 
 def can_earn(last_time, cooldown_minutes):
     if not last_time:
@@ -1471,7 +1540,16 @@ import json
 # Replace with your actual owner ID
 BOT_OWNER_ID = 6020886539
 
+def load_users():
+    try:
+        with open("users.json", "r") as f:
+            return json.load(f)
+    except:
+        return {}
 
+def save_users(users):
+    with open("users.json", "w") as f:
+        json.dump(users, f, indent=2)
 
 async def sendduskar(update: Update, context: ContextTypes.DEFAULT_TYPE):
     sender_id = update.effective_user.id
@@ -1691,6 +1769,10 @@ from html import escape
 DRAGONS_PER_PAGE = 10
 DRAGONS_JSON_PATH = "dragons.json"
 
+def load_json(path):
+    import json
+    with open(path, "r", encoding="utf-8") as f:
+        return json.load(f)
 
 def rarity_stars(rarity):
     stars_map = {
