@@ -376,7 +376,7 @@ async def registergroup(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(f"✅ Group '{chat.title}' registered successfully!")
     
 import json
-from datetime import datetime
+from datetime import datetime, timezone
 from telegram import Update
 from telegram.ext import ContextTypes
 
@@ -384,10 +384,9 @@ from telegram.ext import ContextTypes
 BOT_OWNER_ID = 6020886539
 BOT_VERSION = "1.0.0"
 IMAGE_URL = "https://graph.org/file/a2b0ac48d16bd00589b8f-2da15263ad3f26ab8e.jpg"
-START_TIME = datetime.utcnow()
+START_TIME = datetime.now(timezone.utc)
 
 # === Utilities ===
-from datetime import datetime, timezone
 
 def get_uptime():
     now = datetime.now(timezone.utc)
@@ -396,37 +395,34 @@ def get_uptime():
     minutes, _ = divmod(remainder, 60)
     return f"{hours}h {minutes}m"
 
-
-def load_mods():
+def load_json_file(path):
     try:
-        with open("mod.json", "r") as f:
+        with open(path, "r") as f:
             return json.load(f)
     except:
         return {}
 
 def load_users():
-    try:
-        with open("users.json", "r") as f:
-            return json.load(f)
-    except:
-        return {}
+    return load_json_file("users.json")
 
 def load_group_data():
-    try:
-        with open("group.json", "r") as f:
-            return json.load(f)
-    except:
-        return {}
+    return load_json_file("group.json")
+
+def load_mods():
+    return load_json_file("mod.json")
 
 def is_admin(user_id):
-    user_id = str(user_id)
-    return str(user_id) == str(BOT_OWNER_ID) or user_id in load_mods()
+    return str(user_id) == str(BOT_OWNER_ID) or str(user_id) in load_mods()
 
 # === Command ===
 async def status(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_id = update.effective_user.id
+
     if not is_admin(user_id):
-        await update.message.reply_text("🚫 *Access Denied!*\nThis command is for the owner or mods only.", parse_mode="Markdown")
+        await update.message.reply_text(
+            "🚫 *Access Denied!*\nThis command is for the owner or mods only.",
+            parse_mode="Markdown"
+        )
         return
 
     users = load_users()
@@ -434,22 +430,25 @@ async def status(update: Update, context: ContextTypes.DEFAULT_TYPE):
     uptime = get_uptime()
 
     total_users = len(users)
-    total_duskar = sum(u.get("duskar", 0) for u in users.values())
-    started_users = sum(1 for u in users.values() if u.get("dragons") and len(u["dragons"]) > 0)
+    total_duskar = sum(int(u.get("duskar", 0)) for u in users.values())
+    started_users = sum(1 for u in users.values() if u.get("dragons"))
     started_chats = len(group_data)
 
     bot_username = context.bot.username
     group_info = group_data.get(str(update.effective_chat.id))
 
-    group_stats = (
-        "\n\n<b>📍 Group Stats</b>\n"
-        "🔸 <i>Not Registered</i>\n"
-        "📌 Use <code>/rgroup</code> to register."
-    ) if not group_info else (
-        f"\n\n<b>📍 Group Stats</b>\n"
-        f"🏷️ <b>Name:</b> {group_info['title']}\n"
-        f"🐣 <b>Hatched Dragons:</b> {group_info['hatched_count']}"
-    )
+    if group_info:
+        group_stats = (
+            f"\n\n<b>📍 Group Stats</b>\n"
+            f"🏷️ <b>Name:</b> {group_info.get('title', 'Unknown')}\n"
+            f"🐣 <b>Hatched Dragons:</b> {group_info.get('hatched_count', 0)}"
+        )
+    else:
+        group_stats = (
+            "\n\n<b>📍 Group Stats</b>\n"
+            "🔸 <i>Group not registered.</i>\n"
+            "📌 Use <code>/rgroup</code> to register this group."
+        )
 
     status_text = (
         f"⚙️ <b>DragonDusk – Bot Status</b>\n"
@@ -463,7 +462,8 @@ async def status(update: Update, context: ContextTypes.DEFAULT_TYPE):
         f"🐉 Dragons Hatched: <b>{started_users}</b>\n"
         f"💰 Duskar Distributed: <b>{total_duskar}</b>\n"
         f"💬 Registered Groups: <b>{started_chats}</b>"
-    ) + group_stats
+        + group_stats
+    )
 
     await context.bot.send_photo(
         chat_id=update.effective_chat.id,
@@ -2066,6 +2066,7 @@ async def run_bot():
     app.add_handler(CommandHandler("leaderboard", leaderboard))
     app.add_handler(CommandHandler("region", region))
     app.add_handler(CommandHandler("travel", travel))
+    app.add_handler(CommandHandler("explore", explore))
     app.add_handler(CommandHandler("dracklist", dragonslist))
     app.add_handler(CallbackQueryHandler(dragonslist_callback, pattern=r"^dragons_page_\d+$")) 
     app.add_handler(CommandHandler("drackinfo", dragonsinfo))
