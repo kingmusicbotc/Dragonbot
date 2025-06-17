@@ -2244,5 +2244,5 @@ if __name__ == "__main__":
         print("⛔ Bot stopped by user")
     except Exception as e:
         print(f"❌ Unexpected error: {e}")
-        time.sleep(10)
+        # No sleep needed — Render will auto-restart if necessary
 
