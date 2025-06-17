@@ -1,20 +1,4 @@
 {
-    "battle_6020886539_7793966371": {
-        "challenger_id": "7793966371",
-        "opponent_id": "6020886539",
-        "status": "active",
-        "dragons": {
-            "7793966371": "Aetherwing",
-            "6020886539": "frostclaw"
-        },
-        "group_id": -1002273742602,
-        "turn": "6020886539",
-        "hp": {
-            "7793966371": 90,
-            "6020886539": 84
-        },
-        "message_id": 621602
-    },
     "battle_6998981970_7436236645": {
         "challenger_id": "6998981970",
         "opponent_id": "7436236645",
@@ -95,15 +79,6 @@
         },
         "message_id": 625831
     },
-    "battle_5091615616_6020886539": {
-        "challenger_id": "6020886539",
-        "opponent_id": "5091615616",
-        "status": "pending",
-        "dragons": {
-            "6020886539": "frostclaw"
-        },
-        "group_id": -1002273742602
-    },
     "battle_1199385746_6020886539": {
         "challenger_id": "1199385746",
         "opponent_id": "6020886539",
@@ -135,13 +110,962 @@
             "rounds": []
         }
     ],
-    "battle_6020886539_7436236645": {
+    "battle_6020886539_7297151119": {
         "challenger_id": "6020886539",
-        "opponent_id": "7436236645",
-        "status": "pending",
+        "opponent_id": "7297151119",
+        "status": "active",
         "dragons": {
+            "7297151119": "Frostclaw",
             "6020886539": "Aqualing"
         },
-        "group_id": -1002588381035
+        "group_id": -1002834714399,
+        "turn": "6020886539",
+        "hp": {
+            "6020886539": 29,
+            "7297151119": 16
+        },
+        "message_id": 34
+    },
+    "battle_6998981970_7297151119": {
+        "challenger_id": "7297151119",
+        "opponent_id": "6998981970",
+        "status": "active",
+        "dragons": {
+            "7297151119": "Frostclaw",
+            "6998981970": "Frostclaw"
+        },
+        "group_id": -1002834714399,
+        "turn": "7297151119",
+        "hp": {
+            "7297151119": 64,
+            "6998981970": 26
+        },
+        "message_id": 222
+    },
+    "battle_6020886539_6960643099": {
+        "challenger_id": "6020886539",
+        "opponent_id": "6960643099",
+        "player1": "6020886539",
+        "player2": "6960643099",
+        "status": "finished",
+        "dragons": {
+            "6020886539": "Venomscale",
+            "6960643099": "Voidhorn"
+        },
+        "group_id": -1002834714399,
+        "turn": "6960643099",
+        "message_id": 5155,
+        "hp": {
+            "6020886539": 0,
+            "6960643099": 72
+        },
+        "defend_next": {},
+        "last_action_text": "\n\ud83d\udcdc \u2694\ufe0f <b>Gamer__boy__OG\u2694\ufe0f\u2694\ufe0f</b> used <b>Void Eruption</b>!\n\ud83d\udca5 It's a solid hit!\n\ud83d\udca5 <b>\ud835\udc0a\ud835\udc08\ud835\udc27\ud835\udc20 \ud83e\udd85</b> loses <b>73 HP</b>!\n\n\ud83c\udfc6 <b>Gamer__boy__OG\u2694\ufe0f\u2694\ufe0f</b> wins the battle!\n\ud83d\udcb0 <b>Gamer__boy__OG\u2694\ufe0f\u2694\ufe0f</b> earned 300 Duskar & 5 Gems\n\ud83e\udde0 <b>Gamer__boy__OG\u2694\ufe0f\u2694\ufe0f</b> earned 100 XP\n\ud83d\ude13 <b>\ud835\udc0a\ud835\udc08\ud835\udc27\ud835\udc20 \ud83e\udd85</b> earned 150 Duskar & 2 Gems\n\ud83e\udde0 <b>\ud835\udc0a\ud835\udc08\ud835\udc27\ud835\udc20 \ud83e\udd85</b> earned 40 XP"
+    },
+    "battle_7436236645_7793966371": {
+        "challenger_id": "7436236645",
+        "opponent_id": "7793966371",
+        "status": "active",
+        "dragons": {
+            "7793966371": "Blazetail",
+            "7436236645": "Aqualing"
+        },
+        "group_id": -1002834714399,
+        "turn": "7436236645",
+        "hp": {
+            "7436236645": 84,
+            "7793966371": 32
+        },
+        "message_id": 1787
+    },
+    "battle_6020886539_7436236645": {
+        "challenger_id": "7436236645",
+        "opponent_id": "6020886539",
+        "status": "active",
+        "dragons": {
+            "7436236645": "Voidhorn",
+            "6020886539": "Aqualing"
+        },
+        "group_id": -1002834714399,
+        "turn": "6020886539",
+        "hp": {
+            "7436236645": 12,
+            "6020886539": 1
+        },
+        "message_id": 1985
+    },
+    "battle_6632093393_7522283050": {
+        "challenger_id": "6632093393",
+        "opponent_id": "7522283050",
+        "status": "pending",
+        "dragons": {
+            "6632093393": "Aqualing"
+        },
+        "group_id": -1002677708096
+    },
+    "battle_6020886539_6632093393": {
+        "challenger_id": "6632093393",
+        "opponent_id": "6020886539",
+        "status": "active",
+        "dragons": {
+            "6020886539": "Aqualing",
+            "6632093393": "Pyron"
+        },
+        "group_id": -1002677708096,
+        "turn": "6020886539",
+        "hp": {
+            "6632093393": 2,
+            "6020886539": 55
+        },
+        "message_id": 11861
+    },
+    "battle_5493290801_7436236645": {
+        "challenger_id": "7436236645",
+        "opponent_id": "5493290801",
+        "status": "active",
+        "dragons": {
+            "5493290801": "Aetherwing",
+            "7436236645": "Frostclaw"
+        },
+        "group_id": -1002834714399,
+        "turn": "7436236645",
+        "hp": {
+            "7436236645": 57,
+            "5493290801": 12
+        },
+        "message_id": 1408
+    },
+    "battle_5493290801_6960643099": {
+        "challenger_id": "6960643099",
+        "opponent_id": "5493290801",
+        "status": "active",
+        "dragons": {
+            "5493290801": "Aqualing",
+            "6960643099": "Nocturnex"
+        },
+        "group_id": -1002834714399,
+        "turn": "6960643099",
+        "hp": {
+            "6960643099": 64,
+            "5493290801": 28
+        },
+        "message_id": 2223
+    },
+    "battle_6632093393_7297151119": {
+        "challenger_id": "7297151119",
+        "opponent_id": "6632093393",
+        "status": "active",
+        "dragons": {
+            "7297151119": "Aqualing",
+            "6632093393": "Aqualing"
+        },
+        "group_id": -1002677708096,
+        "turn": "6632093393",
+        "hp": {
+            "7297151119": 25,
+            "6632093393": 12
+        },
+        "message_id": 13115
+    },
+    "battle_7285696774_7436236645": {
+        "challenger_id": "7285696774",
+        "opponent_id": "7436236645",
+        "status": "active",
+        "dragons": {
+            "7285696774": "Blazetail",
+            "7436236645": "Aqualing"
+        },
+        "group_id": -1002834714399,
+        "turn": "7436236645",
+        "hp": {
+            "7285696774": 6,
+            "7436236645": 56
+        },
+        "message_id": 1704
+    },
+    "battle_7297151119_7436236645": {
+        "challenger_id": "7436236645",
+        "opponent_id": "7297151119",
+        "status": "active",
+        "dragons": {
+            "7436236645": "Aqualing",
+            "7297151119": "Frostclaw"
+        },
+        "group_id": -1002834714399,
+        "turn": "7436236645",
+        "hp": {
+            "7436236645": 17,
+            "7297151119": 6
+        },
+        "message_id": 1810
+    },
+    "battle_7245856317_7436236645": {
+        "challenger_id": "7436236645",
+        "opponent_id": "7245856317",
+        "status": "pending",
+        "dragons": {
+            "7436236645": "Aqualing"
+        },
+        "group_id": -1002273742602
+    },
+    "battle_7436236645_7548231103": {
+        "challenger_id": "7436236645",
+        "opponent_id": "7548231103",
+        "status": "finished",
+        "dragons": {
+            "7436236645": "Voidhorn",
+            "7548231103": "Aqualing"
+        },
+        "group_id": -1002273742602,
+        "turn": "7436236645",
+        "message_id": 635116,
+        "hp": {
+            "7436236645": 40,
+            "7548231103": 0
+        },
+        "defend_next": {},
+        "last_action_text": "\n\u2694\ufe0f <b>Battle Turn</b>  \n\ud83d\udc64 <b>\ud83c\udd30\ud83c\udd3f\ud83c\udd44\ud83c\udd41\ud83c\udd31\ud83c\udd30</b> vs <b>Mr. SELENO</b>  \n\ud83d\udc09 <b>Aqualing</b> (<i>Water</i>) vs <b>Voidhorn</b> (<i>Shadow</i>)  \n\u2764\ufe0f <b>HP:</b>  \n<b>\ud83c\udd30\ud83c\udd3f\ud83c\udd44\ud83c\udd41\ud83c\udd31\ud83c\udd30</b>: \u2588\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591 <code>20/132</code>  \n<b>Mr. SELENO</b>: \u2588\u2588\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591 <code>40/157</code>\n\n\ud83c\udfaf <b>\ud83c\udd30\ud83c\udd3f\ud83c\udd44\ud83c\udd41\ud83c\udd31\ud83c\udd30</b> used <b>Hydro Vortex</b>!  \n\ud83d\udca5 It's a solid hit!  \n\ud83d\udca5 <b>Mr. SELENO</b> loses <b>26</b> HP!\n"
+    },
+    "battle_6061178519_7436236645": {
+        "challenger_id": "7436236645",
+        "opponent_id": "6061178519",
+        "status": "pending",
+        "dragons": {
+            "7436236645": "Voidhorn"
+        },
+        "group_id": -1002273742602
+    },
+    "battle_1774709471_8082401358": {
+        "challenger_id": "8082401358",
+        "opponent_id": "1774709471",
+        "player1": "8082401358",
+        "player2": "1774709471",
+        "status": "finished",
+        "dragons": {
+            "1774709471": "Venomscale",
+            "8082401358": "Solarion"
+        },
+        "group_id": -1002834714399,
+        "turn": "8082401358",
+        "message_id": 5804,
+        "hp": {
+            "8082401358": 180,
+            "1774709471": 0
+        },
+        "defend_next": {},
+        "last_action_text": "\n\ud83d\udcdc \u2694\ufe0f <b>Snowdrop</b> used <b>Radiant Beam</b>!\n\ud83d\udca7 It\u2019s not very effective...\n\ud83d\udca5 <b>Dr.sirii</b> loses <b>53 HP</b>!\n\n\ud83c\udfc6 <b>Snowdrop</b> wins the battle!\n\ud83d\udcb0 <b>Snowdrop</b> earned 300 Duskar & 5 Gems\n\ud83e\udde0 <b>Snowdrop</b> earned 100 XP\n\ud83d\ude13 <b>Dr.sirii</b> earned 150 Duskar & 2 Gems\n\ud83e\udde0 <b>Dr.sirii</b> earned 40 XP"
+    },
+    "battle_1774709471_7548231103": {
+        "challenger_id": "7548231103",
+        "opponent_id": "1774709471",
+        "status": "finished",
+        "dragons": {
+            "7548231103": "Voidhorn",
+            "1774709471": "Zephira"
+        },
+        "group_id": -1002273742602,
+        "turn": "7548231103",
+        "message_id": 635136,
+        "hp": {
+            "7548231103": 90,
+            "1774709471": 0
+        },
+        "defend_next": {},
+        "last_action_text": "\n\u2694\ufe0f <b>Battle Turn</b>  \n\ud83d\udc64 <b>Dr.sirii</b> vs <b>\ud83c\udd30\ud83c\udd3f\ud83c\udd44\ud83c\udd41\ud83c\udd31\ud83c\udd30</b>  \n\ud83d\udc09 <b>Zephira</b> (<i>Air</i>) vs <b>Voidhorn</b> (<i>Shadow</i>)  \n\u2764\ufe0f <b>HP:</b>  \n<b>Dr.sirii</b>: \u2588\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591 <code>12/89</code>  \n<b>\ud83c\udd30\ud83c\udd3f\ud83c\udd44\ud83c\udd41\ud83c\udd31\ud83c\udd30</b>: \u2588\u2588\u2588\u2588\u2588\u2591\u2591\u2591\u2591\u2591 <code>90/157</code>\n\n\ud83c\udfaf <b>Dr.sirii</b> used <b>Cyclone Piercer</b>!  \n\ud83d\udca5 It's a solid hit!  \n\ud83d\udca5 <b>\ud83c\udd30\ud83c\udd3f\ud83c\udd44\ud83c\udd41\ud83c\udd31\ud83c\udd30</b> loses <b>25</b> HP!\n"
+    },
+    "battle_1774709471_6020886539": {
+        "challenger_id": "6020886539",
+        "opponent_id": "1774709471",
+        "status": "active",
+        "dragons": {
+            "6020886539": "Solarion",
+            "1774709471": "Venomscale"
+        },
+        "group_id": -1002834714399,
+        "turn": "6020886539",
+        "hp": {
+            "6020886539": 134,
+            "1774709471": 5
+        },
+        "message_id": 2182
+    },
+    "battle_6020886539_7793966371": {
+        "challenger_id": "7793966371",
+        "opponent_id": "6020886539",
+        "player1": "7793966371",
+        "player2": "6020886539",
+        "status": "finished",
+        "dragons": {
+            "7793966371": "Elementis",
+            "6020886539": "Solarion"
+        },
+        "group_id": -1002689253330,
+        "turn": "6020886539",
+        "message_id": 8674,
+        "hp": {
+            "7793966371": 0,
+            "6020886539": 17
+        },
+        "defend_next": {},
+        "last_action_text": "\n\ud83d\udcdc \u2694\ufe0f <b>\ud835\udc0a\ud835\udc08\ud835\udc27\ud835\udc20 \ud83e\udd85</b> used <b>Sun Flare</b>!\n\ud83d\udca5 It's a solid hit!\n\ud83d\udca5 <b>[~_-\u00af Echo \u00af-_~]\ud83e\udd77</b> loses <b>83 HP</b>!\n\n\ud83c\udfc6 <b>\ud835\udc0a\ud835\udc08\ud835\udc27\ud835\udc20 \ud83e\udd85</b> wins the battle!\n\ud83e\udde0 <b>\ud835\udc0a\ud835\udc08\ud835\udc27\ud835\udc20 \ud83e\udd85</b> earned 100 XP\n\ud83d\ude13 <b>[~_-\u00af Echo \u00af-_~]\ud83e\udd77</b> earned 40 XP"
+    },
+    "battle_7245856317_7548231103": {
+        "challenger_id": "7548231103",
+        "opponent_id": "7245856317",
+        "player1": "7548231103",
+        "player2": "7245856317",
+        "status": "active",
+        "dragons": {
+            "7548231103": "Voidhorn",
+            "7245856317": "Spectronox"
+        },
+        "group_id": -1002273742602,
+        "turn": "7548231103",
+        "message_id": 636720,
+        "hp": {
+            "7548231103": 157,
+            "7245856317": 102
+        }
+    },
+    "battle_6960643099_7460266461": {
+        "challenger_id": "6960643099",
+        "opponent_id": "7460266461",
+        "player1": "6960643099",
+        "player2": "7460266461",
+        "status": "finished",
+        "dragons": {
+            "7460266461": "Lavagron",
+            "6960643099": "Voidhorn"
+        },
+        "group_id": -1002834714399,
+        "turn": "6960643099",
+        "message_id": 4930,
+        "hp": {
+            "6960643099": 107,
+            "7460266461": 0
+        },
+        "defend_next": {},
+        "last_action_text": "\n\ud83d\udcdc \u2694\ufe0f <b>Gamer__boy__OG\u2694\ufe0f\u2694\ufe0f</b> used <b>Void Eruption</b>!\n\ud83d\udca5 It's a solid hit!\n\ud83d\udca5 <b>SHU\u00dfH \u2604</b> loses <b>73 HP</b>!\n\n\ud83c\udfc6 <b>Gamer__boy__OG\u2694\ufe0f\u2694\ufe0f</b> wins the battle!\n\ud83d\udcb0 <b>Gamer__boy__OG\u2694\ufe0f\u2694\ufe0f</b> earned 300 Duskar & 5 Gems\n\ud83e\udde0 <b>Gamer__boy__OG\u2694\ufe0f\u2694\ufe0f</b> earned 100 XP\n\ud83d\ude13 <b>SHU\u00dfH \u2604</b> earned 150 Duskar & 2 Gems\n\ud83e\udde0 <b>SHU\u00dfH \u2604</b> earned 40 XP"
+    },
+    "battle_6960643099_8082401358": {
+        "challenger_id": "6960643099",
+        "opponent_id": "8082401358",
+        "player1": "6960643099",
+        "player2": "8082401358",
+        "status": "finished",
+        "dragons": {
+            "6960643099": "Voidhorn",
+            "8082401358": "Solarion"
+        },
+        "group_id": -1002834714399,
+        "turn": "8082401358",
+        "message_id": 5785,
+        "hp": {
+            "6960643099": 0,
+            "8082401358": 89
+        },
+        "defend_next": {},
+        "last_action_text": "\n\ud83d\udcdc \u2694\ufe0f <b>Snowdrop</b> used <b>Radiant Beam</b>!\n\ud83d\udd25 It\u2019s super effective!\n\ud83d\udca5 <b>Gamer__boy__OG\u2694\ufe0f\u2694\ufe0f</b> loses <b>98 HP</b>!\n\n\ud83c\udfc6 <b>Snowdrop</b> wins the battle!\n\ud83d\udcb0 <b>Snowdrop</b> earned 300 Duskar & 5 Gems\n\ud83e\udde0 <b>Snowdrop</b> earned 100 XP\n\ud83d\ude13 <b>Gamer__boy__OG\u2694\ufe0f\u2694\ufe0f</b> earned 150 Duskar & 2 Gems\n\ud83e\udde0 <b>Gamer__boy__OG\u2694\ufe0f\u2694\ufe0f</b> earned 40 XP"
+    },
+    "battle_8080620981_8082401358": {
+        "challenger_id": "8082401358",
+        "opponent_id": "8080620981",
+        "status": "finished",
+        "dragons": {
+            "8082401358": "Blazetail",
+            "8080620981": "Frostclaw"
+        },
+        "group_id": -1002834714399,
+        "turn": "8082401358",
+        "hp": {
+            "8082401358": 1,
+            "8080620981": 0
+        },
+        "message_id": 2629,
+        "last_action_text": "\n\u2694\ufe0f <b>Battle Turn</b>  \n\ud83d\udc64 <b>Deku</b> vs <b>Snowdrop</b>  \n\ud83d\udc09 <b>Frostclaw</b> (<i>Ice</i>) vs <b>Blazetail</b> (<i>Fire</i>)  \n\u2764\ufe0f <b>HP:</b>  \n<b>Deku</b>: \u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591 <code>7/105</code>  \n<b>Snowdrop</b>: \u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591 <code>1/98</code>\n\n\ud83c\udfaf <b>Deku</b> used <b>Blizzard Roar</b>!  \n\ud83d\udca7 It\u2019s not very effective...  \n\ud83d\udca5 <b>Snowdrop</b> loses <b>21</b> HP!\n"
+    },
+    "battle_7460266461_8082401358": {
+        "challenger_id": "7460266461",
+        "opponent_id": "8082401358",
+        "player1": "7460266461",
+        "player2": "8082401358",
+        "status": "finished",
+        "dragons": {
+            "7460266461": "Lavagron",
+            "8082401358": "Solarion"
+        },
+        "group_id": -1002834714399,
+        "turn": "8082401358",
+        "message_id": 4689,
+        "hp": {
+            "7460266461": 0,
+            "8082401358": 135
+        },
+        "defend_next": {},
+        "last_action_text": "\n\ud83d\udcdc \u2694\ufe0f <b>Snowdrop</b> used <b>Radiant Beam</b>!\n\ud83d\udca5 It's a solid hit!\n\ud83d\udca5 <b>SHU\u00dfH \u2604</b> loses <b>76 HP</b>!\n\n\ud83c\udfc6 <b>Snowdrop</b> wins the battle!\n\ud83d\udcb0 <b>Snowdrop</b> earned 300 Duskar & 5 Gems\n\ud83e\udde0 <b>Snowdrop</b> earned 100 XP\n\ud83d\ude13 <b>SHU\u00dfH \u2604</b> earned 150 Duskar & 2 Gems\n\ud83e\udde0 <b>SHU\u00dfH \u2604</b> earned 40 XP"
+    },
+    "battle_8082401358_852385161": {
+        "challenger_id": "852385161",
+        "opponent_id": "8082401358",
+        "player1": "852385161",
+        "player2": "8082401358",
+        "status": "finished",
+        "dragons": {
+            "852385161": "Aetherwing",
+            "8082401358": "Solarion"
+        },
+        "group_id": -1002834714399,
+        "turn": "8082401358",
+        "message_id": 5836,
+        "hp": {
+            "852385161": 0,
+            "8082401358": 142
+        },
+        "defend_next": {},
+        "last_action_text": "\n\ud83d\udcdc \u2694\ufe0f <b>Snowdrop</b> used <b>Radiant Beam</b>!\n\ud83d\udca5 It's a solid hit!\n\ud83d\udca5 <b>\ud835\ude3f\ud835\ude67\ud835\ude56\ud835\ude5c\ud835\ude64\ud835\ude63 \u0362\u032f\u0331\u034a\ud835\ude48\ud835\ude56\ud835\ude63\ud835\ude64 \u0362\u032f\u0331\u034a</b> loses <b>76 HP</b>!\n\n\ud83c\udfc6 <b>Snowdrop</b> wins the battle!\n\ud83d\udcb0 <b>Snowdrop</b> earned 300 Duskar & 5 Gems\n\ud83e\udde0 <b>Snowdrop</b> earned 100 XP\n\ud83d\ude13 <b>\ud835\ude3f\ud835\ude67\ud835\ude56\ud835\ude5c\ud835\ude64\ud835\ude63 \u0362\u032f\u0331\u034a\ud835\ude48\ud835\ude56\ud835\ude63\ud835\ude64 \u0362\u032f\u0331\u034a</b> earned 150 Duskar & 2 Gems\n\ud83e\udde0 <b>\ud835\ude3f\ud835\ude67\ud835\ude56\ud835\ude5c\ud835\ude64\ud835\ude63 \u0362\u032f\u0331\u034a\ud835\ude48\ud835\ude56\ud835\ude63\ud835\ude64 \u0362\u032f\u0331\u034a</b> earned 40 XP\n\ud83d\udd3c <b>Snowdrop</b> leveled up to Level 3!"
+    },
+    "battle_1774709471_7026597729": {
+        "challenger_id": "7026597729",
+        "opponent_id": "1774709471",
+        "status": "active",
+        "dragons": {
+            "7026597729": "Venomscale",
+            "1774709471": "Zephira"
+        },
+        "group_id": -1002834714399,
+        "turn": "1774709471",
+        "message_id": 3093,
+        "hp": {
+            "7026597729": 100,
+            "1774709471": 54
+        },
+        "defend_next": {},
+        "last_action_text": "\n\u2694\ufe0f <b>Battle Turn</b>  \n\ud83d\udc64 <b>Akshat</b> vs <b>Dr.sirii</b>  \n\ud83d\udc09 <b>Venomscale</b> (<i>Poison</i>) vs <b>Zephira</b> (<i>Air</i>)  \n\u2764\ufe0f <b>HP:</b>  \n<b>Akshat</b>: \u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588 <code>100/100</code>  \n<b>Dr.sirii</b>: \u2588\u2588\u2588\u2588\u2588\u2588\u2591\u2591\u2591\u2591 <code>54/89</code>\n\n\ud83c\udfaf <b>Akshat</b> used <b>Toxic Fang</b>!  \n\ud83d\udd25 It\u2019s super effective!  \n\ud83d\udca5 <b>Dr.sirii</b> loses <b>35</b> HP!\n"
+    },
+    "battle_7066534637_7436236645": {
+        "challenger_id": "7436236645",
+        "opponent_id": "7066534637",
+        "status": "pending",
+        "dragons": {
+            "7436236645": "Voidhorn"
+        },
+        "group_id": -1002273742602
+    },
+    "battle_6960643099_7548231103": {
+        "challenger_id": "7548231103",
+        "opponent_id": "6960643099",
+        "status": "pending",
+        "dragons": {
+            "6960643099": "Nocturnex"
+        },
+        "group_id": -1002834714399
+    },
+    "battle_1774709471_7436236645": {
+        "challenger_id": "7436236645",
+        "opponent_id": "1774709471",
+        "status": "active",
+        "dragons": {
+            "7436236645": "Voidhorn",
+            "1774709471": "Venomscale"
+        },
+        "group_id": -1002273742602,
+        "turn": "7436236645",
+        "message_id": 635263,
+        "hp": {
+            "7436236645": 63,
+            "1774709471": 0
+        },
+        "defend_next": {},
+        "last_action_text": "\n\u2694\ufe0f <b>Battle Turn</b>  \n\ud83d\udc64 <b>Dr.sirii</b> vs <b>Mr. SELENO</b>  \n\ud83d\udc09 <b>Venomscale</b> (<i>Poison</i>) vs <b>Voidhorn</b> (<i>Shadow</i>)  \n\u2764\ufe0f <b>HP:</b>  \n<b>Dr.sirii</b>: \u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591 <code>6/100</code>  \n<b>Mr. SELENO</b>: \u2588\u2588\u2588\u2588\u2591\u2591\u2591\u2591\u2591\u2591 <code>63/157</code>\n\n\ud83c\udfaf <b>Dr.sirii</b> used <b>Venom Spit</b>!  \n\ud83d\udca5 It's a solid hit!  \n\ud83d\udca5 <b>Mr. SELENO</b> loses <b>21</b> HP!\n"
+    },
+    "battle_1232168026_1774709471": {
+        "challenger_id": "1232168026",
+        "opponent_id": "1774709471",
+        "status": "pending",
+        "dragons": {
+            "1774709471": "Venomscale"
+        },
+        "group_id": -1002273742602
+    },
+    "battle_1232168026_7436236645": {
+        "challenger_id": "7436236645",
+        "opponent_id": "1232168026",
+        "status": "pending",
+        "dragons": {
+            "7436236645": "Voidhorn"
+        },
+        "group_id": -1002273742602
+    },
+    "battle_6960643099_7530121612": {
+        "challenger_id": "6960643099",
+        "opponent_id": "7530121612",
+        "player1": "6960643099",
+        "player2": "7530121612",
+        "status": "finished",
+        "dragons": {
+            "6960643099": "Voidhorn",
+            "7530121612": "Glacira"
+        },
+        "group_id": -1002834714399,
+        "turn": "6960643099",
+        "message_id": 5936,
+        "hp": {
+            "6960643099": 19,
+            "7530121612": 0
+        },
+        "defend_next": {},
+        "last_action_text": "\n\ud83d\udcdc \u2694\ufe0f <b>Gamer__boy__OG\u2694\ufe0f\u2694\ufe0f</b> used <b>Void Eruption</b>!\n\ud83d\udca5 It's a solid hit!\n\ud83d\udca5 <b>\u79c1\u0489\u306f\u0489\u3046\u0489\u3061\u0489\u306f\u0489\u30de\u0489\u30c0\u0489\u30e9\u0489\u306e\u0489\u5e7d\u0489\u970a\u0489\u3067\u0489\u3059\u0489</b> loses <b>73 HP</b>!\n\n\ud83c\udfc6 <b>Gamer__boy__OG\u2694\ufe0f\u2694\ufe0f</b> wins the battle!\n\ud83d\udcb0 <b>Gamer__boy__OG\u2694\ufe0f\u2694\ufe0f</b> earned 300 Duskar & 5 Gems\n\ud83e\udde0 <b>Gamer__boy__OG\u2694\ufe0f\u2694\ufe0f</b> earned 100 XP\n\ud83d\ude13 <b>\u79c1\u0489\u306f\u0489\u3046\u0489\u3061\u0489\u306f\u0489\u30de\u0489\u30c0\u0489\u30e9\u0489\u306e\u0489\u5e7d\u0489\u970a\u0489\u3067\u0489\u3059\u0489</b> earned 150 Duskar & 2 Gems\n\ud83e\udde0 <b>\u79c1\u0489\u306f\u0489\u3046\u0489\u3061\u0489\u306f\u0489\u30de\u0489\u30c0\u0489\u30e9\u0489\u306e\u0489\u5e7d\u0489\u970a\u0489\u3067\u0489\u3059\u0489</b> earned 40 XP"
+    },
+    "battle_6960643099_7026597729": {
+        "challenger_id": "7026597729",
+        "opponent_id": "6960643099",
+        "player1": "7026597729",
+        "player2": "6960643099",
+        "status": "finished",
+        "dragons": {
+            "7026597729": "Venomscale",
+            "6960643099": "Voidhorn"
+        },
+        "group_id": -1002834714399,
+        "turn": "6960643099",
+        "message_id": 4929,
+        "hp": {
+            "7026597729": 0,
+            "6960643099": 67
+        },
+        "defend_next": {},
+        "last_action_text": "\n\ud83d\udcdc \u2694\ufe0f <b>Gamer__boy__OG\u2694\ufe0f\u2694\ufe0f</b> used <b>Void Eruption</b>!\n\ud83d\udca5 It's a solid hit!\n\ud83d\udca5 <b>Akshat</b> loses <b>73 HP</b>!\n\n\ud83c\udfc6 <b>Gamer__boy__OG\u2694\ufe0f\u2694\ufe0f</b> wins the battle!\n\ud83d\udcb0 <b>Gamer__boy__OG\u2694\ufe0f\u2694\ufe0f</b> earned 300 Duskar & 5 Gems\n\ud83e\udde0 <b>Gamer__boy__OG\u2694\ufe0f\u2694\ufe0f</b> earned 100 XP\n\ud83d\ude13 <b>Akshat</b> earned 150 Duskar & 2 Gems\n\ud83e\udde0 <b>Akshat</b> earned 40 XP"
+    },
+    "battle_6020886539_7530121612": {
+        "challenger_id": "7530121612",
+        "opponent_id": "6020886539",
+        "player1": "7530121612",
+        "player2": "6020886539",
+        "status": "pending",
+        "dragons": {
+            "7530121612": "Dragon"
+        },
+        "group_id": -1002834714399
+    },
+    "battle_7426563365_7530121612": {
+        "challenger_id": "7426563365",
+        "opponent_id": "7530121612",
+        "player1": "7426563365",
+        "player2": "7530121612",
+        "status": "finished",
+        "dragons": {
+            "7530121612": "Zephira",
+            "7426563365": "Pyron"
+        },
+        "group_id": -1002834714399,
+        "turn": "7426563365",
+        "message_id": 3507,
+        "hp": {
+            "7426563365": 42,
+            "7530121612": 0
+        },
+        "defend_next": {},
+        "last_action_text": "\n\ud83d\udcdc \u2694\ufe0f <b>Rahul</b> used <b>Inferno Surge</b>!\n\ud83d\udca5 It's a solid hit!\n\ud83d\udca5 <b>\u79c1\u0489\u306f\u0489\u3046\u0489\u3061\u0489\u306f\u0489\u30de\u0489\u30c0\u0489\u30e9\u0489\u306e\u0489\u5e7d\u0489\u970a\u0489\u3067\u0489\u3059\u0489</b> loses <b>29 HP</b>!\n\n\ud83c\udfc6 <b>Rahul</b> wins the battle!\n\ud83e\udde0 <b>Rahul</b> earned 100 XP\n\ud83d\ude13 <b>\u79c1\u0489\u306f\u0489\u3046\u0489\u3061\u0489\u306f\u0489\u30de\u0489\u30c0\u0489\u30e9\u0489\u306e\u0489\u5e7d\u0489\u970a\u0489\u3067\u0489\u3059\u0489</b> earned 40 XP"
+    },
+    "battle_7426563365_7460266461": {
+        "challenger_id": "7460266461",
+        "opponent_id": "7426563365",
+        "player1": "7460266461",
+        "player2": "7426563365",
+        "status": "finished",
+        "dragons": {
+            "7426563365": "Zephira",
+            "7460266461": "Frostclaw"
+        },
+        "group_id": -1002834714399,
+        "turn": "7460266461",
+        "message_id": 3528,
+        "hp": {
+            "7460266461": 25,
+            "7426563365": 0
+        },
+        "defend_next": {},
+        "last_action_text": "\n\ud83d\udcdc \u2694\ufe0f <b>SHU\u00dfH \u2604</b> used <b>Blizzard Roar</b>!\n\ud83d\udd25 It\u2019s super effective!\n\ud83d\udca5 <b>Rahul</b> loses <b>39 HP</b>!\n\n\ud83c\udfc6 <b>SHU\u00dfH \u2604</b> wins the battle!\n\ud83e\udde0 <b>SHU\u00dfH \u2604</b> earned 100 XP\n\ud83d\ude13 <b>Rahul</b> earned 40 XP"
+    },
+    "battle_7460266461_7530121612": {
+        "challenger_id": "7530121612",
+        "opponent_id": "7460266461",
+        "player1": "7530121612",
+        "player2": "7460266461",
+        "status": "active",
+        "dragons": {
+            "7460266461": "pyron",
+            "7530121612": "Pyron"
+        },
+        "group_id": -1002834714399,
+        "turn": "7530121612",
+        "message_id": 3984
+    },
+    "battle_7460266461_7460362488": {
+        "challenger_id": "7460266461",
+        "opponent_id": "7460362488",
+        "player1": "7460266461",
+        "player2": "7460362488",
+        "status": "active",
+        "dragons": {
+            "7460266461": "Drakelet",
+            "7460362488": "Frostclaw"
+        },
+        "group_id": -1002834714399,
+        "turn": "7460266461",
+        "message_id": 3847
+    },
+    "battle_6020886539_7460266461": {
+        "challenger_id": "7460266461",
+        "opponent_id": "6020886539",
+        "player1": "7460266461",
+        "player2": "6020886539",
+        "status": "pending",
+        "dragons": {
+            "7460266461": "Lavagron"
+        },
+        "group_id": -1002834714399
+    },
+    "battle_8038066196_8082401358": {
+        "challenger_id": "8038066196",
+        "opponent_id": "8082401358",
+        "player1": "8038066196",
+        "player2": "8082401358",
+        "status": "finished",
+        "dragons": {
+            "8038066196": "Aetherwing",
+            "8082401358": "Solarion"
+        },
+        "group_id": -1002834714399,
+        "turn": "8082401358",
+        "message_id": 4433,
+        "hp": {
+            "8038066196": 0,
+            "8082401358": 153
+        },
+        "defend_next": {},
+        "last_action_text": "\n\ud83d\udcdc \u2694\ufe0f <b>Snowdrop</b> used <b>Radiant Beam</b>!\n\ud83d\udca5 It's a solid hit!\n\ud83d\udca5 <b>\ud835\udc00\ud835\udc11\ud835\udc0d\ud835\udc00\ud835\udc01</b> loses <b>76 HP</b>!\n\n\ud83c\udfc6 <b>Snowdrop</b> wins the battle!\n\ud83d\udcb0 <b>Snowdrop</b> earned 300 Duskar & 5 Gems\n\ud83e\udde0 <b>Snowdrop</b> earned 100 XP\n\ud83d\ude13 <b>\ud835\udc00\ud835\udc11\ud835\udc0d\ud835\udc00\ud835\udc01</b> earned 150 Duskar & 2 Gems\n\ud83e\udde0 <b>\ud835\udc00\ud835\udc11\ud835\udc0d\ud835\udc00\ud835\udc01</b> earned 40 XP"
+    },
+    "battle_6960643099_8038066196": {
+        "challenger_id": "8038066196",
+        "opponent_id": "6960643099",
+        "player1": "8038066196",
+        "player2": "6960643099",
+        "status": "finished",
+        "dragons": {
+            "8038066196": "Aetherwing",
+            "6960643099": "Voidhorn"
+        },
+        "group_id": -1002834714399,
+        "turn": "6960643099",
+        "message_id": 4416,
+        "hp": {
+            "8038066196": 0,
+            "6960643099": 89
+        },
+        "defend_next": {},
+        "last_action_text": "\n\ud83d\udcdc \u2694\ufe0f <b>Gamer__boy__OG\u2694\ufe0f\u2694\ufe0f</b> used <b>Horn Crush</b>!\n\ud83d\udca5 It's a solid hit!\n\ud83d\udca5 <b>\ud835\udc00\ud835\udc11\ud835\udc0d\ud835\udc00\ud835\udc01</b> loses <b>55 HP</b>!\n\n\ud83c\udfc6 <b>Gamer__boy__OG\u2694\ufe0f\u2694\ufe0f</b> wins the battle!\n\ud83d\udcb0 <b>Gamer__boy__OG\u2694\ufe0f\u2694\ufe0f</b> earned 300 Duskar & 5 Gems\n\ud83e\udde0 <b>Gamer__boy__OG\u2694\ufe0f\u2694\ufe0f</b> earned 100 XP\n\ud83d\ude13 <b>\ud835\udc00\ud835\udc11\ud835\udc0d\ud835\udc00\ud835\udc01</b> earned 150 Duskar & 2 Gems\n\ud83e\udde0 <b>\ud835\udc00\ud835\udc11\ud835\udc0d\ud835\udc00\ud835\udc01</b> earned 40 XP"
+    },
+    "battle_6020886539_8082401358": {
+        "challenger_id": "6020886539",
+        "opponent_id": "8082401358",
+        "player1": "6020886539",
+        "player2": "8082401358",
+        "status": "pending",
+        "dragons": {
+            "8082401358": "Solarion"
+        },
+        "group_id": -1002834714399
+    },
+    "battle_7460266461_8038066196": {
+        "challenger_id": "7460266461",
+        "opponent_id": "8038066196",
+        "player1": "7460266461",
+        "player2": "8038066196",
+        "status": "finished",
+        "dragons": {
+            "7460266461": "Lavagron",
+            "8038066196": "Aetherwing"
+        },
+        "group_id": -1002834714399,
+        "turn": "7460266461",
+        "message_id": 4702,
+        "hp": {
+            "7460266461": 69,
+            "8038066196": 0
+        },
+        "defend_next": {},
+        "last_action_text": "\n\ud83d\udcdc \u2694\ufe0f <b>SHU\u00dfH \u2604</b> used <b>Blazing Howl</b>!\n\ud83d\udca5 It's a solid hit!\n\ud83d\udca5 <b>\ud835\udc00\ud835\udc11\ud835\udc0d\ud835\udc00\ud835\udc01</b> loses <b>40 HP</b>!\n\n\ud83c\udfc6 <b>SHU\u00dfH \u2604</b> wins the battle!\n\ud83d\udcb0 <b>SHU\u00dfH \u2604</b> earned 300 Duskar & 5 Gems\n\ud83e\udde0 <b>SHU\u00dfH \u2604</b> earned 100 XP\n\ud83d\ude13 <b>\ud835\udc00\ud835\udc11\ud835\udc0d\ud835\udc00\ud835\udc01</b> earned 150 Duskar & 2 Gems\n\ud83e\udde0 <b>\ud835\udc00\ud835\udc11\ud835\udc0d\ud835\udc00\ud835\udc01</b> earned 40 XP"
+    },
+    "battle_7026597729_8038066196": {
+        "challenger_id": "8038066196",
+        "opponent_id": "7026597729",
+        "player1": "8038066196",
+        "player2": "7026597729",
+        "status": "finished",
+        "dragons": {
+            "7026597729": "Venomscale",
+            "8038066196": "Aetherwing"
+        },
+        "group_id": -1002834714399,
+        "turn": "7026597729",
+        "message_id": 4749,
+        "hp": {
+            "8038066196": 0,
+            "7026597729": 26
+        },
+        "defend_next": {},
+        "last_action_text": "\n\ud83d\udcdc \u2694\ufe0f <b>Akshat</b> used <b>Toxic Fang</b>!\n\ud83d\udd25 It\u2019s super effective!\n\ud83d\udca5 <b>\ud835\udc00\ud835\udc11\ud835\udc0d\ud835\udc00\ud835\udc01</b> loses <b>58 HP</b>!\n\n\ud83c\udfc6 <b>Akshat</b> wins the battle!\n\ud83d\udcb0 <b>Akshat</b> earned 300 Duskar & 5 Gems\n\ud83e\udde0 <b>Akshat</b> earned 100 XP\n\ud83d\ude13 <b>\ud835\udc00\ud835\udc11\ud835\udc0d\ud835\udc00\ud835\udc01</b> earned 150 Duskar & 2 Gems\n\ud83e\udde0 <b>\ud835\udc00\ud835\udc11\ud835\udc0d\ud835\udc00\ud835\udc01</b> earned 40 XP"
+    },
+    "battle_7026597729_7460266461": {
+        "challenger_id": "7460266461",
+        "opponent_id": "7026597729",
+        "player1": "7460266461",
+        "player2": "7026597729",
+        "status": "finished",
+        "dragons": {
+            "7026597729": "Venomscale",
+            "7460266461": "Lavagron"
+        },
+        "group_id": -1002834714399,
+        "turn": "7460266461",
+        "message_id": 4955,
+        "hp": {
+            "7460266461": 15,
+            "7026597729": 0
+        },
+        "defend_next": {},
+        "last_action_text": "\n\ud83d\udcdc \u2694\ufe0f <b>SHU\u00dfH \u2604</b> used <b>Seismic Slam</b>!\n\ud83d\udca5 It's a solid hit!\n\ud83d\udca5 <b>Akshat</b> loses <b>35 HP</b>!\n\n\ud83c\udfc6 <b>SHU\u00dfH \u2604</b> wins the battle!\n\ud83d\udcb0 <b>SHU\u00dfH \u2604</b> earned 300 Duskar & 5 Gems\n\ud83e\udde0 <b>SHU\u00dfH \u2604</b> earned 100 XP\n\ud83d\ude13 <b>Akshat</b> earned 150 Duskar & 2 Gems\n\ud83e\udde0 <b>Akshat</b> earned 40 XP"
+    },
+    "battle_7026597729_7548231103": {
+        "challenger_id": "7026597729",
+        "opponent_id": "7548231103",
+        "player1": "7026597729",
+        "player2": "7548231103",
+        "status": "pending",
+        "dragons": {
+            "7026597729": "Venomscale"
+        },
+        "group_id": -1002834714399
+    },
+    "battle_6960643099_8091638039": {
+        "challenger_id": "6960643099",
+        "opponent_id": "8091638039",
+        "player1": "6960643099",
+        "player2": "8091638039",
+        "status": "finished",
+        "dragons": {
+            "8091638039": "Aetherwing",
+            "6960643099": "Voidhorn"
+        },
+        "group_id": -1002569586559,
+        "turn": "6960643099",
+        "message_id": 48504,
+        "hp": {
+            "6960643099": 112,
+            "8091638039": 0
+        },
+        "defend_next": {},
+        "last_action_text": "\n\ud83d\udcdc \u2694\ufe0f <b>Gamer__boy__OG\u2694\ufe0f\u2694\ufe0f</b> used <b>Obsidian Slam</b>!\n\ud83d\udca5 It's a solid hit!\n\ud83d\udca5 <b>D_M \u3010\ud835\udc18\ud835\uddde\ud835\udc19\u3011\u3029</b> loses <b>53 HP</b>!\n\n\ud83c\udfc6 <b>Gamer__boy__OG\u2694\ufe0f\u2694\ufe0f</b> wins the battle!\n\ud83d\udcb0 <b>Gamer__boy__OG\u2694\ufe0f\u2694\ufe0f</b> earned 300 Duskar & 5 Gems\n\ud83e\udde0 <b>Gamer__boy__OG\u2694\ufe0f\u2694\ufe0f</b> earned 100 XP\n\ud83d\ude13 <b>D_M \u3010\ud835\udc18\ud835\uddde\ud835\udc19\u3011\u3029</b> earned 150 Duskar & 2 Gems\n\ud83e\udde0 <b>D_M \u3010\ud835\udc18\ud835\uddde\ud835\udc19\u3011\u3029</b> earned 40 XP"
+    },
+    "battle_7026597729_8049934625": {
+        "challenger_id": "7026597729",
+        "opponent_id": "8049934625",
+        "player1": "7026597729",
+        "player2": "8049934625",
+        "status": "pending",
+        "dragons": {
+            "7026597729": "Venomscale"
+        },
+        "group_id": -1002834714399
+    },
+    "battle_7460266461_8040202761": {
+        "challenger_id": "7460266461",
+        "opponent_id": "8040202761",
+        "player1": "7460266461",
+        "player2": "8040202761",
+        "status": "pending",
+        "dragons": {
+            "7460266461": "Lavagron"
+        },
+        "group_id": -1002834714399
+    },
+    "battle_7458573752_8091638039": {
+        "challenger_id": "7458573752",
+        "opponent_id": "8091638039",
+        "player1": "7458573752",
+        "player2": "8091638039",
+        "status": "finished",
+        "dragons": {
+            "7458573752": "Blazetail",
+            "8091638039": "Aetherwing"
+        },
+        "group_id": -1002569586559,
+        "turn": "7458573752",
+        "message_id": 48790,
+        "hp": {
+            "7458573752": 62,
+            "8091638039": 0
+        },
+        "defend_next": {},
+        "last_action_text": "\n\ud83d\udcdc \u2694\ufe0f <b>\u0f12\u273f\u2661...\ud835\udd50\ud835\udd52\ud835\udd64\ud835\udd59\ud835\udd5a\ud835\udd5a...\u2661\u273f\u0f12</b> used <b>Ember Rush</b>!\n\ud83d\udca5 It's a solid hit!\n\ud83d\udca5 <b>D_M \u3010\ud835\udc18\ud835\uddde\ud835\udc19\u3011\u3029</b> loses <b>41 HP</b>!\n\n\ud83c\udfc6 <b>\u0f12\u273f\u2661...\ud835\udd50\ud835\udd52\ud835\udd64\ud835\udd59\ud835\udd5a\ud835\udd5a...\u2661\u273f\u0f12</b> wins the battle!\n\ud83d\udcb0 <b>\u0f12\u273f\u2661...\ud835\udd50\ud835\udd52\ud835\udd64\ud835\udd59\ud835\udd5a\ud835\udd5a...\u2661\u273f\u0f12</b> earned 300 Duskar & 5 Gems\n\ud83e\udde0 <b>\u0f12\u273f\u2661...\ud835\udd50\ud835\udd52\ud835\udd64\ud835\udd59\ud835\udd5a\ud835\udd5a...\u2661\u273f\u0f12</b> earned 100 XP\n\ud83d\ude13 <b>D_M \u3010\ud835\udc18\ud835\uddde\ud835\udc19\u3011\u3029</b> earned 150 Duskar & 2 Gems\n\ud83e\udde0 <b>D_M \u3010\ud835\udc18\ud835\uddde\ud835\udc19\u3011\u3029</b> earned 40 XP"
+    },
+    "battle_6020886539_7026597729": {
+        "challenger_id": "7026597729",
+        "opponent_id": "6020886539",
+        "player1": "7026597729",
+        "player2": "6020886539",
+        "status": "pending",
+        "dragons": {
+            "6020886539": "Solarion"
+        },
+        "group_id": -1002834714399
+    },
+    "battle_6960643099_7147982334": {
+        "challenger_id": "6960643099",
+        "opponent_id": "7147982334",
+        "player1": "6960643099",
+        "player2": "7147982334",
+        "status": "pending",
+        "dragons": {
+            "6960643099": "Voidhorn"
+        },
+        "group_id": -1002569586559
+    },
+    "battle_7147982334_8091638039": {
+        "challenger_id": "8091638039",
+        "opponent_id": "7147982334",
+        "player1": "8091638039",
+        "player2": "7147982334",
+        "status": "pending",
+        "dragons": {
+            "8091638039": "Aetherwing"
+        },
+        "group_id": -1002569586559
+    },
+    "battle_7147982334_7458573752": {
+        "challenger_id": "7147982334",
+        "opponent_id": "7458573752",
+        "player1": "7147982334",
+        "player2": "7458573752",
+        "status": "pending",
+        "dragons": {
+            "7458573752": "Blazetail"
+        },
+        "group_id": -1002569586559
+    },
+    "battle_6960643099_7458573752": {
+        "challenger_id": "7458573752",
+        "opponent_id": "6960643099",
+        "player1": "7458573752",
+        "player2": "6960643099",
+        "status": "finished",
+        "dragons": {
+            "7458573752": "Blazetail",
+            "6960643099": "Pyron"
+        },
+        "group_id": -1002569586559,
+        "turn": "7458573752",
+        "message_id": 48622,
+        "hp": {
+            "7458573752": 28,
+            "6960643099": 0
+        },
+        "defend_next": {},
+        "last_action_text": "\n\ud83d\udcdc \u2694\ufe0f <b>\u0f12\u273f\u2661...\ud835\udd50\ud835\udd52\ud835\udd64\ud835\udd59\ud835\udd5a\ud835\udd5a...\u2661\u273f\u0f12</b> used <b>Scorch Spiral</b>!\n\ud83d\udca5 It's a solid hit!\n\ud83d\udca5 <b>Gamer__boy__OG\u2694\ufe0f\u2694\ufe0f</b> loses <b>49 HP</b>!\n\n\ud83c\udfc6 <b>\u0f12\u273f\u2661...\ud835\udd50\ud835\udd52\ud835\udd64\ud835\udd59\ud835\udd5a\ud835\udd5a...\u2661\u273f\u0f12</b> wins the battle!\n\ud83d\udcb0 <b>\u0f12\u273f\u2661...\ud835\udd50\ud835\udd52\ud835\udd64\ud835\udd59\ud835\udd5a\ud835\udd5a...\u2661\u273f\u0f12</b> earned 300 Duskar & 5 Gems\n\ud83e\udde0 <b>\u0f12\u273f\u2661...\ud835\udd50\ud835\udd52\ud835\udd64\ud835\udd59\ud835\udd5a\ud835\udd5a...\u2661\u273f\u0f12</b> earned 100 XP\n\ud83d\ude13 <b>Gamer__boy__OG\u2694\ufe0f\u2694\ufe0f</b> earned 150 Duskar & 2 Gems\n\ud83e\udde0 <b>Gamer__boy__OG\u2694\ufe0f\u2694\ufe0f</b> earned 40 XP"
+    },
+    "battle_5284997893_6935260438": {
+        "challenger_id": "6935260438",
+        "opponent_id": "5284997893",
+        "player1": "6935260438",
+        "player2": "5284997893",
+        "status": "pending",
+        "dragons": {},
+        "group_id": -1002569586559
+    },
+    "battle_7460266461_7548231103": {
+        "challenger_id": "7548231103",
+        "opponent_id": "7460266461",
+        "player1": "7548231103",
+        "player2": "7460266461",
+        "status": "pending",
+        "dragons": {
+            "7548231103": "Voidhorn"
+        },
+        "group_id": -1002834714399
+    },
+    "battle_6974356430_7530121612": {
+        "challenger_id": "6974356430",
+        "opponent_id": "7530121612",
+        "player1": "6974356430",
+        "player2": "7530121612",
+        "status": "active",
+        "dragons": {
+            "7530121612": "Pyron",
+            "6974356430": "Scaleling"
+        },
+        "group_id": -1002588789790,
+        "turn": "6974356430",
+        "message_id": 226
+    },
+    "battle_5283882856_6960643099": {
+        "challenger_id": "6960643099",
+        "opponent_id": "5283882856",
+        "player1": "6960643099",
+        "player2": "5283882856",
+        "status": "pending",
+        "dragons": {
+            "6960643099": "Voidhorn"
+        },
+        "group_id": -1002834714399
+    },
+    "battle_7530121612_8082401358": {
+        "challenger_id": "8082401358",
+        "opponent_id": "7530121612",
+        "player1": "8082401358",
+        "player2": "7530121612",
+        "status": "finished",
+        "dragons": {
+            "8082401358": "Solarion",
+            "7530121612": "Glacira"
+        },
+        "group_id": -1002834714399,
+        "turn": "8082401358",
+        "message_id": 5739,
+        "hp": {
+            "8082401358": 87,
+            "7530121612": 0
+        },
+        "defend_next": {},
+        "last_action_text": "\n\ud83d\udcdc \u2694\ufe0f <b>Snowdrop</b> used <b>Radiant Beam</b>!\n\ud83d\udca5 It's a solid hit!\n\ud83d\udca5 <b>\u79c1\u0489\u306f\u0489\u3046\u0489\u3061\u0489\u306f\u0489\u30de\u0489\u30c0\u0489\u30e9\u0489\u306e\u0489\u5e7d\u0489\u970a\u0489\u3067\u0489\u3059\u0489</b> loses <b>76 HP</b>!\n\n\ud83c\udfc6 <b>Snowdrop</b> wins the battle!\n\ud83d\udcb0 <b>Snowdrop</b> earned 300 Duskar & 5 Gems\n\ud83e\udde0 <b>Snowdrop</b> earned 100 XP\n\ud83d\ude13 <b>\u79c1\u0489\u306f\u0489\u3046\u0489\u3061\u0489\u306f\u0489\u30de\u0489\u30c0\u0489\u30e9\u0489\u306e\u0489\u5e7d\u0489\u970a\u0489\u3067\u0489\u3059\u0489</b> earned 150 Duskar & 2 Gems\n\ud83e\udde0 <b>\u79c1\u0489\u306f\u0489\u3046\u0489\u3061\u0489\u306f\u0489\u30de\u0489\u30c0\u0489\u30e9\u0489\u306e\u0489\u5e7d\u0489\u970a\u0489\u3067\u0489\u3059\u0489</b> earned 40 XP\n\ud83d\udd3c <b>Snowdrop</b> leveled up to Level 2!"
+    },
+    "battle_7928089155_8082401358": {
+        "challenger_id": "8082401358",
+        "opponent_id": "7928089155",
+        "player1": "8082401358",
+        "player2": "7928089155",
+        "status": "pending",
+        "dragons": {
+            "8082401358": "Solarion"
+        },
+        "group_id": -1002834714399
+    },
+    "battle_6960643099_852385161": {
+        "challenger_id": "852385161",
+        "opponent_id": "6960643099",
+        "player1": "852385161",
+        "player2": "6960643099",
+        "status": "active",
+        "dragons": {
+            "852385161": "Aetherwing",
+            "6960643099": "Voidhorn"
+        },
+        "group_id": -1002834714399,
+        "turn": "852385161",
+        "message_id": 5880,
+        "hp": {
+            "852385161": 90,
+            "6960643099": 157
+        }
     }
 }
