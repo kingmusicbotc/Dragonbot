@@ -2101,7 +2101,6 @@ async def dragon_master_joined(update: Update, context: ContextTypes.DEFAULT_TYP
         print(f"[ERROR] dragon_master_joined: {e}")
         
 import asyncio
-import nest_asyncio
 from telegram.error import NetworkError
 from telegram.ext import (
     ApplicationBuilder, CommandHandler, MessageHandler, CallbackQueryHandler,
@@ -2109,16 +2108,13 @@ from telegram.ext import (
 )
 from keep_alive import keep_alive
 
-# Enable nested asyncio
-nest_asyncio.apply()
-
-# Bot token
+# === Bot Token ===
 TOKEN = "8040202761:AAF_HEGJxbZjKsgJANNQQRP4ahXftlMsqCQ"
 
-# Keep Render/Replit awake (optional)
+# === Keep Alive for Render Ping (optional) ===
 keep_alive()
 
-# === Run Bot Safely ===
+# === Bot Entry Function ===
 async def main():
     print("🐉 DragonDusk is starting...")
 
@@ -2126,7 +2122,6 @@ async def main():
 
     # === Register Handlers ===
 
-    # 🧠 Command Logger
     app.add_handler(MessageHandler(filters.COMMAND, command_logger), group=1)
 
     # 📜 Core Commands
@@ -2236,6 +2231,12 @@ async def main():
         print(f"❌ Unexpected error: {e}")
         await asyncio.sleep(10)
 
-# === Entry Point ===
+# === Safe Entry Point ===
 if __name__ == "__main__":
-    asyncio.run(main())
+    try:
+        asyncio.run(main())
+    except RuntimeError as e:
+        print("❌ Runtime error:", e)
+        import sys
+        sys.exit(1)
+
