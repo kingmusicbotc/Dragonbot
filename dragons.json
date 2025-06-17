@@ -3,100 +3,781 @@
     "element": "Fire",
     "base_hp": 100,
     "moves": [
-      { "name": "Flame Burst", "type": "elemental", "power": 40 },
-      { "name": "Inferno Surge", "type": "elemental", "power": 50 },
-      { "name": "Snatch Claw", "type": "physical", "power": 35 },
-      { "name": "Tail Smash", "type": "physical", "power": 30 }
+      {
+        "name": "Flame Burst",
+        "type": "elemental",
+        "power": 40
+      },
+      {
+        "name": "Inferno Surge",
+        "type": "elemental",
+        "power": 50
+      },
+      {
+        "name": "Snatch Claw",
+        "type": "physical",
+        "power": 35
+      },
+      {
+        "name": "Tail Smash",
+        "type": "physical",
+        "power": 30
+      }
     ]
   },
   "Aetherwing": {
     "element": "Air",
     "base_hp": 90,
     "moves": [
-      { "name": "Gale Cutter", "type": "elemental", "power": 38 },
-      { "name": "Tornado Flare", "type": "elemental", "power": 45 },
-      { "name": "Wing Jab", "type": "physical", "power": 32 },
-      { "name": "Air Slash", "type": "physical", "power": 36 }
+      {
+        "name": "Gale Cutter",
+        "type": "elemental",
+        "power": 38
+      },
+      {
+        "name": "Tornado Flare",
+        "type": "elemental",
+        "power": 45
+      },
+      {
+        "name": "Wing Jab",
+        "type": "physical",
+        "power": 32
+      },
+      {
+        "name": "Air Slash",
+        "type": "physical",
+        "power": 36
+      }
     ]
   },
   "Aquazor": {
     "element": "Water",
     "base_hp": 110,
     "moves": [
-      { "name": "Aqua Jet", "type": "elemental", "power": 42 },
-      { "name": "Tidal Crush", "type": "elemental", "power": 50 },
-      { "name": "Fin Swipe", "type": "physical", "power": 30 },
-      { "name": "Shell Bash", "type": "physical", "power": 34 }
+      {
+        "name": "Aqua Jet",
+        "type": "elemental",
+        "power": 42
+      },
+      {
+        "name": "Tidal Crush",
+        "type": "elemental",
+        "power": 50
+      },
+      {
+        "name": "Fin Swipe",
+        "type": "physical",
+        "power": 30
+      },
+      {
+        "name": "Shell Bash",
+        "type": "physical",
+        "power": 34
+      }
     ]
   },
   "Terranox": {
     "element": "Earth",
     "base_hp": 120,
     "moves": [
-      { "name": "Rock Slam", "type": "elemental", "power": 45 },
-      { "name": "Earthquake", "type": "elemental", "power": 55 },
-      { "name": "Stone Fist", "type": "physical", "power": 38 },
-      { "name": "Ground Pound", "type": "physical", "power": 40 }
+      {
+        "name": "Rock Slam",
+        "type": "elemental",
+        "power": 45
+      },
+      {
+        "name": "Earthquake",
+        "type": "elemental",
+        "power": 55
+      },
+      {
+        "name": "Stone Fist",
+        "type": "physical",
+        "power": 38
+      },
+      {
+        "name": "Ground Pound",
+        "type": "physical",
+        "power": 40
+      }
     ]
   },
   "Umbrazor": {
     "element": "Shadow",
     "base_hp": 95,
     "moves": [
-      { "name": "Dark Pulse", "type": "elemental", "power": 44 },
-      { "name": "Void Slash", "type": "elemental", "power": 48 },
-      { "name": "Shadow Claw", "type": "physical", "power": 37 },
-      { "name": "Specter Kick", "type": "physical", "power": 35 }
+      {
+        "name": "Dark Pulse",
+        "type": "elemental",
+        "power": 44
+      },
+      {
+        "name": "Void Slash",
+        "type": "elemental",
+        "power": 48
+      },
+      {
+        "name": "Shadow Claw",
+        "type": "physical",
+        "power": 37
+      },
+      {
+        "name": "Specter Kick",
+        "type": "physical",
+        "power": 35
+      }
     ]
   },
   "Venomscale": {
     "element": "Poison",
     "base_hp": 100,
     "moves": [
-      { "name": "Toxic Fang", "type": "elemental", "power": 45 },
-      { "name": "Venom Spit", "type": "elemental", "power": 40 },
-      { "name": "Tail Lash", "type": "physical", "power": 30 },
-      { "name": "Bite", "type": "physical", "power": 35 }
+      {
+        "name": "Toxic Fang",
+        "type": "elemental",
+        "power": 45
+      },
+      {
+        "name": "Venom Spit",
+        "type": "elemental",
+        "power": 40
+      },
+      {
+        "name": "Tail Lash",
+        "type": "physical",
+        "power": 30
+      },
+      {
+        "name": "Bite",
+        "type": "physical",
+        "power": 35
+      }
     ]
   },
   "Trevor": {
     "element": "Shadow",
     "base_hp": 95,
     "moves": [
-      { "name": "Shadow Pierce", "type": "elemental", "power": 44 },
-      { "name": "Night Shroud", "type": "elemental", "power": 46 },
-      { "name": "Fade Kick", "type": "physical", "power": 33 },
-      { "name": "Phantom Claw", "type": "physical", "power": 37 }
+      {
+        "name": "Shadow Pierce",
+        "type": "elemental",
+        "power": 44
+      },
+      {
+        "name": "Night Shroud",
+        "type": "elemental",
+        "power": 46
+      },
+      {
+        "name": "Fade Kick",
+        "type": "physical",
+        "power": 33
+      },
+      {
+        "name": "Phantom Claw",
+        "type": "physical",
+        "power": 37
+      }
     ]
   },
   "Frostclaw": {
     "element": "Ice",
     "base_hp": 105,
     "moves": [
-      { "name": "Glacial Spike", "type": "elemental", "power": 43 },
-      { "name": "Blizzard Roar", "type": "elemental", "power": 47 },
-      { "name": "Frostbite Slash", "type": "physical", "power": 36 },
-      { "name": "Frozen Tail", "type": "physical", "power": 34 }
+      {
+        "name": "Glacial Spike",
+        "type": "elemental",
+        "power": 43
+      },
+      {
+        "name": "Blizzard Roar",
+        "type": "elemental",
+        "power": 47
+      },
+      {
+        "name": "Frostbite Slash",
+        "type": "physical",
+        "power": 36
+      },
+      {
+        "name": "Frozen Tail",
+        "type": "physical",
+        "power": 34
+      }
     ]
   },
   "Blazetail": {
     "element": "Fire",
     "base_hp": 98,
     "moves": [
-      { "name": "Ember Rush", "type": "elemental", "power": 41 },
-      { "name": "Scorch Spiral", "type": "elemental", "power": 49 },
-      { "name": "Flare Claw", "type": "physical", "power": 34 },
-      { "name": "Charred Slam", "type": "physical", "power": 36 }
+      {
+        "name": "Ember Rush",
+        "type": "elemental",
+        "power": 41
+      },
+      {
+        "name": "Scorch Spiral",
+        "type": "elemental",
+        "power": 49
+      },
+      {
+        "name": "Flare Claw",
+        "type": "physical",
+        "power": 34
+      },
+      {
+        "name": "Charred Slam",
+        "type": "physical",
+        "power": 36
+      }
     ]
   },
   "Aqualing": {
     "element": "Water",
-    "base_hp": 120,
+    "base_hp": 132,
     "moves": [
-      { "name": "Bubble Barrage", "type": "elemental", "power": 40 },
-      { "name": "Hydro Vortex", "type": "elemental", "power": 46 },
-      { "name": "Fin Slash", "type": "physical", "power": 32 },
-      { "name": "Wave Tackle", "type": "physical", "power": 34 }
+      {
+        "name": "Bubble Barrage",
+        "type": "elemental",
+        "power": 44
+      },
+      {
+        "name": "Hydro Vortex",
+        "type": "elemental",
+        "power": 51
+      },
+      {
+        "name": "Fin Slash",
+        "type": "physical",
+        "power": 36
+      },
+      {
+        "name": "Wave Tackle",
+        "type": "physical",
+        "power": 38
+      }
     ]
+  },
+  "Voidhorn": {
+    "element": "Shadow",
+    "base_hp": 157,
+    "moves": [
+      {
+        "name": "Abyssal Quake",
+        "type": "elemental",
+        "power": 63
+      },
+      {
+        "name": "Void Eruption",
+        "type": "elemental",
+        "power": 73
+      },
+      {
+        "name": "Horn Crush",
+        "type": "physical",
+        "power": 55
+      },
+      {
+        "name": "Obsidian Slam",
+        "type": "physical",
+        "power": 53
+      }
+    ]
+  },
+  "Emberfang": {
+    "element": "Fire",
+    "base_hp": 102,
+    "moves": [
+      {
+        "name": "Blazing Bite",
+        "type": "elemental",
+        "power": 42
+      },
+      {
+        "name": "Infernal Breath",
+        "type": "elemental",
+        "power": 47
+      },
+      {
+        "name": "Claw Strike",
+        "type": "physical",
+        "power": 34
+      },
+      {
+        "name": "Magma Slam",
+        "type": "physical",
+        "power": 36
+      }
+    ]
+  },
+  "Stormscale": {
+    "element": "Air",
+    "base_hp": 88,
+    "moves": [
+      {
+        "name": "Lightning Dash",
+        "type": "elemental",
+        "power": 46
+      },
+      {
+        "name": "Thunder Wing",
+        "type": "elemental",
+        "power": 50
+      },
+      {
+        "name": "Feather Slash",
+        "type": "physical",
+        "power": 32
+      },
+      {
+        "name": "Sky Dive",
+        "type": "physical",
+        "power": 35
+      }
+    ]
+  },
+  "Cryostrike": {
+    "element": "Ice",
+    "base_hp": 108,
+    "moves": [
+      {
+        "name": "Freezing Blast",
+        "type": "elemental",
+        "power": 43
+      },
+      {
+        "name": "Crystal Storm",
+        "type": "elemental",
+        "power": 45
+      },
+      {
+        "name": "Chill Claw",
+        "type": "physical",
+        "power": 33
+      },
+      {
+        "name": "Snow Slam",
+        "type": "physical",
+        "power": 36
+      }
+    ]
+  },
+  "Duneblade": {
+    "element": "Earth",
+    "base_hp": 115,
+    "moves": [
+      {
+        "name": "Sandstorm",
+        "type": "elemental",
+        "power": 44
+      },
+      {
+        "name": "Dust Collapse",
+        "type": "elemental",
+        "power": 51
+      },
+      {
+        "name": "Clay Fist",
+        "type": "physical",
+        "power": 38
+      },
+      {
+        "name": "Boulder Bash",
+        "type": "physical",
+        "power": 39
+      }
+    ]
+  },
+  "Spectronox": {
+    "element": "Shadow",
+    "base_hp": 102,
+    "moves": [
+      {
+        "name": "Black Flame",
+        "type": "elemental",
+        "power": 54
+      },
+      {
+        "name": "Phantom Howl",
+        "type": "elemental",
+        "power": 50
+      },
+      {
+        "name": "Dark Lunge",
+        "type": "physical",
+        "power": 39
+      },
+      {
+        "name": "Ghost Fang",
+        "type": "physical",
+        "power": 42
+      }
+    ]
+  },
+  "Venodrax": {
+    "element": "Poison",
+    "base_hp": 129,
+    "moves": [
+      {
+        "name": "Neurotoxin",
+        "type": "elemental",
+        "power": 57
+      },
+      {
+        "name": "Acid Spray",
+        "type": "elemental",
+        "power": 44
+      },
+      {
+        "name": "Toxin Fang",
+        "type": "physical",
+        "power": 36
+      },
+      {
+        "name": "Venom Bite",
+        "type": "physical",
+        "power": 53
+      }
+    ]
+  },
+  "Solarion": {
+    "element": "Light",
+    "base_hp": 225,
+    "moves": [
+      {
+        "name": "Radiant Beam",
+        "type": "elemental",
+        "power": 76
+      },
+      {
+        "name": "Sun Flare",
+        "type": "elemental",
+        "power": 63
+      },
+      {
+        "name": "Shining Slash",
+        "type": "physical",
+        "power": 57
+      },
+      {
+        "name": "Photon Strike",
+        "type": "physical",
+        "power": 59
+      }
+    ]
+  },
+  "Nocturnex": {
+    "element": "Shadow",
+    "base_hp": 154,
+    "moves": [
+      {
+        "name": "Twilight Pulse",
+        "type": "elemental",
+        "power": 60
+      },
+      {
+        "name": "Nightmare Blast",
+        "type": "elemental",
+        "power": 69
+      },
+      {
+        "name": "Lurking Slash",
+        "type": "physical",
+        "power": 58
+      },
+      {
+        "name": "Wraith Kick",
+        "type": "physical",
+        "power": 55
+      }
+    ]
+  },
+  "Zephira": {
+    "element": "Air",
+    "base_hp": 89,
+    "moves": [
+      {
+        "name": "Cyclone Piercer",
+        "type": "elemental",
+        "power": 44
+      },
+      {
+        "name": "Whirlwind Arc",
+        "type": "elemental",
+        "power": 47
+      },
+      {
+        "name": "Twister Jab",
+        "type": "physical",
+        "power": 35
+      },
+      {
+        "name": "Air Uppercut",
+        "type": "physical",
+        "power": 33
+      }
+    ]
+  },
+  "Glacira": {
+    "element": "Ice",
+    "base_hp": 198,
+    "moves": [
+      {
+        "name": "Frost Nova",
+        "type": "elemental",
+        "power": 69
+      },
+      {
+        "name": "Icicle Rain",
+        "type": "elemental",
+        "power": 65
+      },
+      {
+        "name": "Freeze Kick",
+        "type": "physical",
+        "power": 51
+      },
+      {
+        "name": "Blizzard Swipe",
+        "type": "physical",
+        "power": 58
+      }
+    ]
+  },
+  "Lavagron": {
+    "element": "Fire",
+    "base_hp": 105,
+    "moves": [
+      {
+        "name": "Magma Surge",
+        "type": "elemental",
+        "power": 50
+      },
+      {
+        "name": "Blazing Howl",
+        "type": "elemental",
+        "power": 40
+      },
+      {
+        "name": "Charclaw",
+        "type": "physical",
+        "power": 30
+      },
+      {
+        "name": "Seismic Slam",
+        "type": "physical",
+        "power": 35
+      }
+    ]
+  },
+  "Cindersnout": {
+    "element": "Fire",
+    "base_hp": 105,
+    "moves": [
+      {
+        "name": "Ash Storm",
+        "type": "elemental",
+        "power": 50
+      },
+      {
+        "name": "Fire Jet",
+        "type": "elemental",
+        "power": 39
+      },
+      {
+        "name": "Tail Whip",
+        "type": "physical",
+        "power": 28
+      },
+      {
+        "name": "Lava Claw",
+        "type": "physical",
+        "power": 33
+      }
+    ]
+  },
+  "Snowpiercer": {
+    "element": "Ice",
+    "base_hp": 111,
+    "moves": [
+      {
+        "name": "Icicle Barrage",
+        "type": "elemental",
+        "power": 44
+      },
+      {
+        "name": "Blizzard Crash",
+        "type": "elemental",
+        "power": 56
+      },
+      {
+        "name": "Frostbite",
+        "type": "physical",
+        "power": 33
+      },
+      {
+        "name": "Frozen Slam",
+        "type": "physical",
+        "power": 39
+      }
+    ]
+  },
+  "Shardbite": {
+    "element": "Ice",
+    "base_hp": 90,
+    "moves": [
+      {
+        "name": "Crystal Shards",
+        "type": "elemental",
+        "power": 35
+      },
+      {
+        "name": "Cold Snap",
+        "type": "elemental",
+        "power": 40
+      },
+      {
+        "name": "Icy Pounce",
+        "type": "physical",
+        "power": 25
+      },
+      {
+        "name": "Snow Slam",
+        "type": "physical",
+        "power": 30
+      }
+    ]
+  },
+  "Duskwraith": {
+    "element": "Shadow",
+    "base_hp": 110,
+    "moves": [
+      {
+        "name": "Dark Pulse",
+        "type": "elemental",
+        "power": 50
+      },
+      {
+        "name": "Haunting Mist",
+        "type": "elemental",
+        "power": 45
+      },
+      {
+        "name": "Specter Claw",
+        "type": "physical",
+        "power": 30
+      },
+      {
+        "name": "Shadow Lunge",
+        "type": "physical",
+        "power": 35
+      }
+    ]
+  },
+  "Grimhorn": {
+    "element": "Shadow",
+    "base_hp": 100,
+    "moves": [
+      {
+        "name": "Phantom Strike",
+        "type": "elemental",
+        "power": 40
+      },
+      {
+        "name": "Void Slash",
+        "type": "elemental",
+        "power": 35
+      },
+      {
+        "name": "Dark Gore",
+        "type": "physical",
+        "power": 30
+      },
+      {
+        "name": "Pierce Night",
+        "type": "physical",
+        "power": 25
+      }
+    ]
+  },
+  "Skydread": {
+    "element": "Air",
+    "base_hp": 100,
+    "moves": [
+      {
+        "name": "Tempest Roar",
+        "type": "elemental",
+        "power": 50
+      },
+      {
+        "name": "Lightning Gust",
+        "type": "elemental",
+        "power": 40
+      },
+      {
+        "name": "Wing Slam",
+        "type": "physical",
+        "power": 35
+      },
+      {
+        "name": "Storm Peck",
+        "type": "physical",
+        "power": 30
+      }
+    ]
+  },
+  "Cloudpiercer": {
+    "element": "Air",
+    "base_hp": 105,
+    "moves": [
+      {
+        "name": "Sky Blade",
+        "type": "elemental",
+        "power": 44
+      },
+      {
+        "name": "Wind Cutter",
+        "type": "elemental",
+        "power": 39
+      },
+      {
+        "name": "Feather Strike",
+        "type": "physical",
+        "power": 28
+      },
+      {
+        "name": "Gale Punch",
+        "type": "physical",
+        "power": 33
+      }
+    ]
+  },
+  "Elementis": {
+    "element": "Cosmic",
+    "base_hp": 250,
+    "moves": [
+      {
+        "name": "Starpiercer Ray",
+        "type": "elemental",
+        "power": 60
+      },
+      {
+        "name": "Quantum Talon",
+        "type": "physical",
+        "power": 54
+      },
+      {
+        "name": "Astral Eclipse",
+        "type": "elemental",
+        "power": 70
+      },
+      {
+        "name": "Cosmic Guard",
+        "type": "defensive",
+        "power": 50
+      }
+    ],
+    "rarity": "Ultimate Mythic"
   }
 }
