@@ -2,29 +2,13 @@ import json, os
 from telegram import Update
 from telegram.constants import ParseMode
 from telegram.ext import ContextTypes
+from db import load_json, save_json
+
 
 CLAN_FILE = "clans.json"
 USER_FILE = "users.json"
 
-def load_clans():
-    if not os.path.exists(CLAN_FILE):
-        return {}
-    with open(CLAN_FILE, "r") as f:
-        return json.load(f)
 
-def save_clans(data):
-    with open(CLAN_FILE, "w") as f:
-        json.dump(data, f, indent=2)
-
-def load_users():
-    if not os.path.exists(USER_FILE):
-        return {}
-    with open(USER_FILE, "r") as f:
-        return json.load(f)
-
-def save_users(data):
-    with open(USER_FILE, "w") as f:
-        json.dump(data, f, indent=2)
 
 async def createclan(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user = update.effective_user
