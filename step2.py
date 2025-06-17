@@ -615,7 +615,12 @@ async def drackstats(update: Update, context: ContextTypes.DEFAULT_TYPE):
             return
 
         if not context.args:
-            await update.message.reply_text("📘 Usage: /drackstats <dragon_number>\nCheck your dragon number using /dragons.")
+            # Show a list of user's dragons
+            msg = "<b>📘 Your Dragons:</b>\n"
+            for i, d in enumerate(user_dragons, 1):
+                msg += f"  {i}. {escape(d.get('name', 'Unknown'))} (Lvl {d.get('level', 1)})\n"
+            msg += "\nUse <code>/drackstats <dragon_number></code> to see detailed stats."
+            await update.message.reply_text(msg, parse_mode="HTML")
             return
 
         try:
@@ -627,37 +632,29 @@ async def drackstats(update: Update, context: ContextTypes.DEFAULT_TYPE):
             return
 
         dragon = user_dragons[index]
-        name = escape(dragon["name"])
+        name = escape(dragon.get("name", "Unknown"))
         level = dragon.get("level", 1)
         power = dragon.get("power", "?")
+        element = escape(dragon.get("element", "Unknown"))
+        xp = dragon.get("xp", 0)
+        xp_needed = dragon.get("xp_needed", 100)
 
-        # Use dynamic HP from user dragon, fallback to static
-        current_hp = dragon.get("current_hp")
-        base_hp = dragon.get("base_hp")
-        if base_hp is None or current_hp is None:
-            static_info = dragon_data.get(dragon["name"], {})
-            base_hp = static_info.get("base_hp", "?")
+        # HP
+        current_hp = int(dragon.get("current_hp", 100))
+        base_hp = int(dragon.get("base_hp", 100))
+        if not base_hp:
+            static = dragon_data.get(dragon["name"], {})
+            base_hp = static.get("base_hp", 100)
             current_hp = base_hp
-        else:
-            # Ensure integers
-            base_hp = int(base_hp)
-            current_hp = int(current_hp)
 
-        # Use dynamic moves if present, else fallback to static
-        moves = dragon.get("moves")
-        if not moves:
-            moves = dragon_data.get(dragon["name"], {}).get("moves", [])
-
-        # Build stylish moveset showing current move powers
+        # Moves
+        moves = dragon.get("moves") or dragon_data.get(dragon["name"], {}).get("moves", [])
         move_lines = []
         for move in moves:
             emoji = "💥" if move["type"] == "physical" else "🌪️"
-            move_name = escape(move["name"])
-            move_type = escape(move["type"].capitalize())
-            move_power = move.get("power", "?")
             move_lines.append(
-                f"┊ {emoji} <b>{move_name}</b>\n"
-                f"┊    🌀 <i>{move_type}</i> | 🔋 <b>{move_power}</b>"
+                f"┊ {emoji} <b>{escape(move['name'])}</b>\n"
+                f"┊    🌀 <i>{escape(move['type'].capitalize())}</i> | 🔋 <b>{move.get('power', '?')}</b>"
             )
 
         msg = (
@@ -665,8 +662,9 @@ async def drackstats(update: Update, context: ContextTypes.DEFAULT_TYPE):
             f"    🐲 <b>Dragon #{index + 1} — Stats</b>\n"
             f"╚════════════════════╝\n\n"
             f"🏷️ <b>Name:</b> {name}\n"
-            f"🌈 <b>Element:</b> {escape(dragon.get('element', 'Unknown'))}\n"
+            f"🌈 <b>Element:</b> {element}\n"
             f"📶 <b>Level:</b> {level}\n"
+            f"📊 <b>XP:</b> {xp}/{xp_needed}\n"
             f"⚔️ <b>Power:</b> {power}\n"
             f"❤️ <b>HP:</b> {current_hp} / {base_hp}\n\n"
             f"📜 <b>Moveset:</b>\n" + "\n".join(move_lines)
