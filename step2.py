@@ -1,5 +1,5 @@
 # step2.py
-
+from db import load_json, save_json
 import json, os
 from telegram import Update
 from telegram.ext import CommandHandler, ContextTypes
@@ -9,15 +9,6 @@ USER_FILE = "users.json"
 GROUP_FILE = "group.json"
 
 # Load user data
-def load_user_data():
-    if os.path.exists(USER_FILE):
-        with open(USER_FILE, "r", encoding="utf-8") as f:
-            return json.load(f)
-    return {}
-
-def get_user_data(user_id):
-    users = load_user_data()
-    return users.get(str(user_id))
 
 def load_group_ids():
     if os.path.exists(GROUP_FILE):
@@ -590,11 +581,6 @@ async def send(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await update.message.reply_text(f"❌ Error during send: {e}")
 
 
-def load_user_data():
-    return load_json("users.json")
-
-def save_user_data(data):
-    save_json("users.json", data)
 
 
 from telegram.helpers import escape
@@ -685,15 +671,7 @@ import json, os
 USER_FILE = "users.json"
 
 # Load and save helpers
-def load_json(filename):
-    if not os.path.exists(filename):
-        return {}
-    with open(filename, "r") as f:
-        return json.load(f)
 
-def save_json(filename, data):
-    with open(filename, "w") as f:
-        json.dump(data, f, indent=4)
 
 # Get current week
 from datetime import datetime
@@ -704,14 +682,6 @@ from telegram.ext import ContextTypes
 USER_FILE = "users.json"
 
 # Utility functions
-def load_json(file):
-    import json, os
-    return json.load(open(file, encoding='utf-8')) if os.path.exists(file) else {}
-
-def save_json(file, data):
-    import json
-    with open(file, "w", encoding="utf-8") as f:
-        json.dump(data, f, indent=2)
 
 def get_current_week():
     return datetime.utcnow().strftime("%Y-W%U")
