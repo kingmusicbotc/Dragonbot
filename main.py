@@ -2124,10 +2124,10 @@ from keep_alive import keep_alive
 # === Bot Token ===
 TOKEN = "8040202761:AAF_HEGJxbZjKsgJANNQQRP4ahXftlMsqCQ"
 
-# === Keep the bot alive (Render/replit)
+# === Keep Alive for Render / Replit ===
 keep_alive()
 
-# === Main bot function ===
+# === Main Bot Runner ===
 async def run_bot():
     print("🐉 DragonDusk is starting...")
 
@@ -2135,7 +2135,7 @@ async def run_bot():
 
     # === Register Handlers ===
     app.add_handler(MessageHandler(filters.COMMAND, command_logger), group=1)
-
+    
     # 📜 Core Commands
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CommandHandler("status", status))
@@ -2234,22 +2234,13 @@ async def run_bot():
     # 🔄 Bot Lifecycle Events
     app.add_handler(ChatMemberHandler(bot_added_or_promoted, ChatMemberHandler.MY_CHAT_MEMBER))
 
-    # === Run Bot with Safe Lifecycle ===
+    # ✅ Only this — handles all setup
     try:
-        await app.initialize()
-        await app.start()
         await app.run_polling()
     except NetworkError:
-        print("⚠️ Network error. Retrying later...")
+        print("⚠️ Network error. Retrying...")
     except Exception:
         traceback.print_exc()
-    finally:
-        try:
-            if app.running:
-                await app.stop()
-                await app.shutdown()
-        except Exception:
-            pass
 
 # === Safe Event Loop ===
 if __name__ == "__main__":
@@ -2261,4 +2252,5 @@ if __name__ == "__main__":
         print("⛔ Bot stopped by user")
     except Exception:
         traceback.print_exc()
+
 
