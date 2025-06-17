@@ -2105,17 +2105,17 @@ import nest_asyncio
 from telegram.error import NetworkError
 from telegram.ext import (
     ApplicationBuilder, CommandHandler, MessageHandler, CallbackQueryHandler,
-    filters, ChatMemberHandler
+    ChatMemberHandler, filters
 )
 from keep_alive import keep_alive
 
-# === Enable nested event loop for Replit ===
+# Enable nested asyncio for async handling
 nest_asyncio.apply()
 
 # === Bot Token ===
 TOKEN = "8040202761:AAF_HEGJxbZjKsgJANNQQRP4ahXftlMsqCQ"
 
-# === Keep Replit Alive ===
+# Keep service alive (optional)
 keep_alive()
 
 # === Build Bot Application ===
@@ -2154,7 +2154,6 @@ app.add_handler(CommandHandler("travel", travel))
 app.add_handler(CommandHandler("dracklist", dragonslist))
 app.add_handler(CallbackQueryHandler(dragonslist_callback, pattern=r"^dragons_page_\d+$")) 
 app.add_handler(CommandHandler("drackinfo", dragonsinfo))
-
 
 # 🗺️ Region UI
 app.add_handler(CallbackQueryHandler(show_region_details, pattern=r"^region_"))
@@ -2195,7 +2194,6 @@ app.add_handler(CommandHandler("cancel", cancel_battle))
 app.add_handler(CommandHandler("task", task))
 app.add_handler(CommandHandler("missions", missions))
 
-
 # 🛡️ Clan System
 app.add_handler(CommandHandler("createclan", createclan))
 app.add_handler(CommandHandler("joinclan", joinclan))
@@ -2210,7 +2208,6 @@ app.add_handler(CallbackQueryHandler(pve_flee, pattern="^pve_flee$"))
 app.add_handler(CallbackQueryHandler(pve_tame, pattern="^pve_tame$"))
 app.add_handler(CommandHandler("minigames", minigames))
 app.add_handler(CallbackQueryHandler(handle_game_choice))
-
 
 # 💰 Currency Transfers
 app.add_handler(CommandHandler("sendusks", sendduskar))
@@ -2243,8 +2240,3 @@ async def main():
 if __name__ == "__main__":
     asyncio.run(main())
 
-    # Start webhook setup before Flask runs
-    asyncio.get_event_loop().run_until_complete(set_webhook())
-
-    # Start Flask app
-    flask_app.run(host="0.0.0.0", port=PORT)
