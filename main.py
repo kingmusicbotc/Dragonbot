@@ -2228,8 +2228,11 @@ async def main():
     except Exception as e:
         print(f"❌ Unexpected error: {e}")
     finally:
-        if app.running:
-            await app.shutdown()
+        try:
+            if app.running:
+                await app.shutdown()
+        except Exception as shutdown_error:
+            print(f"⚠️ Shutdown failed: {shutdown_error}")
 
 # === Safe Event Loop for Render ===
 if __name__ == "__main__":
