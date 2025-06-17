@@ -2101,6 +2101,7 @@ async def dragon_master_joined(update: Update, context: ContextTypes.DEFAULT_TYP
         print(f"[ERROR] dragon_master_joined: {e}")
         
 import asyncio
+import time
 from telegram.error import NetworkError
 from telegram.ext import (
     ApplicationBuilder, CommandHandler, MessageHandler, CallbackQueryHandler,
@@ -2226,12 +2227,13 @@ async def main():
         await app.run_polling()
     except NetworkError:
         print("⚠️ Network error. Retrying in 10 seconds...")
-        await asyncio.sleep(10)
+        time.sleep(10)
     except Exception as e:
         print(f"❌ Unexpected error: {e}")
-        await asyncio.sleep(10)
+        time.sleep(10)
 
 
+# === Safe Event Loop for Render ===
 if __name__ == "__main__":
     loop = asyncio.get_event_loop()
 
@@ -2242,5 +2244,5 @@ if __name__ == "__main__":
         print("⛔ Bot stopped by user")
     except Exception as e:
         print(f"❌ Unexpected error: {e}")
-
+        time.sleep(10)
 
