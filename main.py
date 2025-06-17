@@ -2120,7 +2120,6 @@ async def main():
     app = ApplicationBuilder().token(TOKEN).build()
 
     # === Register Handlers ===
-
     app.add_handler(MessageHandler(filters.COMMAND, command_logger), group=1)
 
     # 📜 Core Commands
@@ -2221,12 +2220,15 @@ async def main():
     # 🔄 Bot Lifecycle Events
     app.add_handler(ChatMemberHandler(bot_added_or_promoted, ChatMemberHandler.MY_CHAT_MEMBER))
 
+    # === Polling + Graceful Shutdown ===
     try:
         await app.run_polling()
     except NetworkError:
         print("⚠️ Network error. Retrying soon...")
+        await app.shutdown()
     except Exception as e:
         print(f"❌ Unexpected error: {e}")
+        await app.shutdown()
 
 # === Safe Event Loop for Render ===
 if __name__ == "__main__":
@@ -2237,4 +2239,4 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         print("⛔ Bot stopped by user")
     except Exception as e:
-        print(f"❌ Unexpected error: {e}")
+        print(f"❌ Unexpected error in __main__: {e}")
