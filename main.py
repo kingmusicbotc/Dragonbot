@@ -2109,124 +2109,124 @@ from telegram.ext import (
 )
 from keep_alive import keep_alive
 
-# Enable nested asyncio for async handling
+# Enable nested asyncio
 nest_asyncio.apply()
 
-# === Bot Token ===
+# Bot token
 TOKEN = "8040202761:AAF_HEGJxbZjKsgJANNQQRP4ahXftlMsqCQ"
 
-# Keep service alive (optional)
+# Keep Render/Replit awake (optional)
 keep_alive()
-
-# === Build Bot Application ===
-app = ApplicationBuilder().token(TOKEN).build()
-
-# === Register Handlers ===
-
-# 🧠 Command Logger
-app.add_handler(MessageHandler(filters.COMMAND, command_logger), group=1)
-
-# 📜 Core Commands
-app.add_handler(CommandHandler("start", start))
-app.add_handler(CommandHandler("status", status))
-app.add_handler(CommandHandler("profile", profile))
-app.add_handler(CommandHandler("inventory", inventory))
-app.add_handler(CommandHandler("buy", buy))
-app.add_handler(CommandHandler("balance", balance))
-app.add_handler(CommandHandler("hatch", hatch))
-app.add_handler(CommandHandler("id", myid))
-app.add_handler(CommandHandler("gift", gift))
-app.add_handler(CommandHandler("send", send))
-app.add_handler(CommandHandler("debug", debug))
-app.add_handler(CommandHandler("drackstats", drackstats))
-app.add_handler(CommandHandler("cooldowns", cooldowns))
-app.add_handler(CommandHandler("fortune", fortune))
-app.add_handler(CommandHandler("dailyegg", dailyegg))
-app.add_handler(CommandHandler("userstats", userstats))
-app.add_handler(CommandHandler("broadcast", broadcast))
-app.add_handler(CommandHandler("challenge", challenge))
-app.add_handler(CommandHandler("work", work))
-app.add_handler(CommandHandler("mine", mine))
-app.add_handler(CommandHandler("daily", daily))
-app.add_handler(CommandHandler("leaderboard", leaderboard))
-app.add_handler(CommandHandler("region", region))
-app.add_handler(CommandHandler("travel", travel))
-app.add_handler(CommandHandler("dracklist", dragonslist))
-app.add_handler(CallbackQueryHandler(dragonslist_callback, pattern=r"^dragons_page_\d+$")) 
-app.add_handler(CommandHandler("drackinfo", dragonsinfo))
-
-# 🗺️ Region UI
-app.add_handler(CallbackQueryHandler(show_region_details, pattern=r"^region_"))
-app.add_handler(CallbackQueryHandler(region_back, pattern="^region_back$"))
-
-# 🐉 Dragon System
-app.add_handler(CommandHandler("dragons", dragons))
-app.add_handler(CommandHandler("feed", feed))
-app.add_handler(CommandHandler("train", train))
-app.add_handler(CommandHandler("release", release))
-app.add_handler(CommandHandler("market", market))
-app.add_handler(CommandHandler("Wheremi", whereami))
-
-# 🥚 Egg System
-app.add_handler(CommandHandler("getegg", getegg))
-app.add_handler(CommandHandler("eggs", eggs))
-app.add_handler(CommandHandler("eghatch", eghatch))
-
-# 📚 Guides
-app.add_handler(CommandHandler("guide", guide))
-app.add_handler(CommandHandler("stats", command_stats))
-app.add_handler(CommandHandler("giftdrack", giftdrack))
-
-# 🔘 Inline Button Handlers
-app.add_handler(CallbackQueryHandler(select_dragon_callback, pattern=r"^selectdragon_"))
-app.add_handler(CallbackQueryHandler(handle_move, pattern=r"^move_"))
-app.add_handler(CallbackQueryHandler(help_callback, pattern=r"^help_"))
-app.add_handler(CallbackQueryHandler(lambda u, c: u.callback_query.answer(), pattern=r"^ignore$"))
-app.add_handler(CallbackQueryHandler(buy_button_handler, pattern=r"^buy_\d+$"))
-app.add_handler(ChatMemberHandler(dragon_master_joined, ChatMemberHandler.CHAT_MEMBER))
-
-# 👥 Group Features
-app.add_handler(CommandHandler("rgroup", registergroup))
-app.add_handler(CommandHandler("addmod", addmod))
-app.add_handler(CommandHandler("mods", mods))
-app.add_handler(CommandHandler("rmmod", rmmod))
-app.add_handler(CommandHandler("cancel", cancel_battle))
-app.add_handler(CommandHandler("task", task))
-app.add_handler(CommandHandler("missions", missions))
-
-# 🛡️ Clan System
-app.add_handler(CommandHandler("createclan", createclan))
-app.add_handler(CommandHandler("joinclan", joinclan))
-app.add_handler(CommandHandler("myclan", myclan))
-app.add_handler(CommandHandler("leaveclan", leaveclan))
-app.add_handler(CommandHandler("disband", disbandclan))
-app.add_handler(CommandHandler("clanchallenge", clanchallenge))
-app.add_handler(CallbackQueryHandler(accept_clanwar, pattern=r"^accept_clanwar\|"))
-app.add_handler(CallbackQueryHandler(select_pve_dragon, pattern=r"^select_pve_dragon\|"))
-app.add_handler(CallbackQueryHandler(pve_move_handler, pattern=r"^pve_move\|"))
-app.add_handler(CallbackQueryHandler(pve_flee, pattern="^pve_flee$"))
-app.add_handler(CallbackQueryHandler(pve_tame, pattern="^pve_tame$"))
-app.add_handler(CommandHandler("minigames", minigames))
-app.add_handler(CallbackQueryHandler(handle_game_choice))
-
-# 💰 Currency Transfers
-app.add_handler(CommandHandler("sendusks", sendduskar))
-app.add_handler(CommandHandler("sendgems", sendgems))
-
-# 🆘 Help
-app.add_handler(CommandHandler("help", help_command))
-
-# 🛠 Background Tasks
-app.add_handler(MessageHandler(filters.TEXT & filters.ChatType.GROUPS, track_messages))
-app.add_handler(MessageHandler(filters.StatusUpdate.NEW_CHAT_MEMBERS, welcome_new_member))
-app.add_handler(MessageHandler(filters.PHOTO, get_file_id))
-
-# 🔄 Bot Lifecycle Events
-app.add_handler(ChatMemberHandler(bot_added_or_promoted, ChatMemberHandler.MY_CHAT_MEMBER))
 
 # === Run Bot Safely ===
 async def main():
     print("🐉 DragonDusk is starting...")
+
+    app = ApplicationBuilder().token(TOKEN).build()
+
+    # === Register Handlers ===
+
+    # 🧠 Command Logger
+    app.add_handler(MessageHandler(filters.COMMAND, command_logger), group=1)
+
+    # 📜 Core Commands
+    app.add_handler(CommandHandler("start", start))
+    app.add_handler(CommandHandler("status", status))
+    app.add_handler(CommandHandler("profile", profile))
+    app.add_handler(CommandHandler("inventory", inventory))
+    app.add_handler(CommandHandler("buy", buy))
+    app.add_handler(CommandHandler("balance", balance))
+    app.add_handler(CommandHandler("hatch", hatch))
+    app.add_handler(CommandHandler("id", myid))
+    app.add_handler(CommandHandler("gift", gift))
+    app.add_handler(CommandHandler("send", send))
+    app.add_handler(CommandHandler("debug", debug))
+    app.add_handler(CommandHandler("drackstats", drackstats))
+    app.add_handler(CommandHandler("cooldowns", cooldowns))
+    app.add_handler(CommandHandler("fortune", fortune))
+    app.add_handler(CommandHandler("dailyegg", dailyegg))
+    app.add_handler(CommandHandler("userstats", userstats))
+    app.add_handler(CommandHandler("broadcast", broadcast))
+    app.add_handler(CommandHandler("challenge", challenge))
+    app.add_handler(CommandHandler("work", work))
+    app.add_handler(CommandHandler("mine", mine))
+    app.add_handler(CommandHandler("daily", daily))
+    app.add_handler(CommandHandler("leaderboard", leaderboard))
+    app.add_handler(CommandHandler("region", region))
+    app.add_handler(CommandHandler("travel", travel))
+    app.add_handler(CommandHandler("dracklist", dragonslist))
+    app.add_handler(CallbackQueryHandler(dragonslist_callback, pattern=r"^dragons_page_\d+$")) 
+    app.add_handler(CommandHandler("drackinfo", dragonsinfo))
+
+    # 🗺️ Region UI
+    app.add_handler(CallbackQueryHandler(show_region_details, pattern=r"^region_"))
+    app.add_handler(CallbackQueryHandler(region_back, pattern="^region_back$"))
+
+    # 🐉 Dragon System
+    app.add_handler(CommandHandler("dragons", dragons))
+    app.add_handler(CommandHandler("feed", feed))
+    app.add_handler(CommandHandler("train", train))
+    app.add_handler(CommandHandler("release", release))
+    app.add_handler(CommandHandler("market", market))
+    app.add_handler(CommandHandler("Wheremi", whereami))
+
+    # 🥚 Egg System
+    app.add_handler(CommandHandler("getegg", getegg))
+    app.add_handler(CommandHandler("eggs", eggs))
+    app.add_handler(CommandHandler("eghatch", eghatch))
+
+    # 📚 Guides
+    app.add_handler(CommandHandler("guide", guide))
+    app.add_handler(CommandHandler("stats", command_stats))
+    app.add_handler(CommandHandler("giftdrack", giftdrack))
+
+    # 🔘 Inline Button Handlers
+    app.add_handler(CallbackQueryHandler(select_dragon_callback, pattern=r"^selectdragon_"))
+    app.add_handler(CallbackQueryHandler(handle_move, pattern=r"^move_"))
+    app.add_handler(CallbackQueryHandler(help_callback, pattern=r"^help_"))
+    app.add_handler(CallbackQueryHandler(lambda u, c: u.callback_query.answer(), pattern=r"^ignore$"))
+    app.add_handler(CallbackQueryHandler(buy_button_handler, pattern=r"^buy_\d+$"))
+    app.add_handler(ChatMemberHandler(dragon_master_joined, ChatMemberHandler.CHAT_MEMBER))
+
+    # 👥 Group Features
+    app.add_handler(CommandHandler("rgroup", registergroup))
+    app.add_handler(CommandHandler("addmod", addmod))
+    app.add_handler(CommandHandler("mods", mods))
+    app.add_handler(CommandHandler("rmmod", rmmod))
+    app.add_handler(CommandHandler("cancel", cancel_battle))
+    app.add_handler(CommandHandler("task", task))
+    app.add_handler(CommandHandler("missions", missions))
+
+    # 🛡️ Clan System
+    app.add_handler(CommandHandler("createclan", createclan))
+    app.add_handler(CommandHandler("joinclan", joinclan))
+    app.add_handler(CommandHandler("myclan", myclan))
+    app.add_handler(CommandHandler("leaveclan", leaveclan))
+    app.add_handler(CommandHandler("disband", disbandclan))
+    app.add_handler(CommandHandler("clanchallenge", clanchallenge))
+    app.add_handler(CallbackQueryHandler(accept_clanwar, pattern=r"^accept_clanwar\|"))
+    app.add_handler(CallbackQueryHandler(select_pve_dragon, pattern=r"^select_pve_dragon\|"))
+    app.add_handler(CallbackQueryHandler(pve_move_handler, pattern=r"^pve_move\|"))
+    app.add_handler(CallbackQueryHandler(pve_flee, pattern="^pve_flee$"))
+    app.add_handler(CallbackQueryHandler(pve_tame, pattern="^pve_tame$"))
+    app.add_handler(CommandHandler("minigames", minigames))
+    app.add_handler(CallbackQueryHandler(handle_game_choice))
+
+    # 💰 Currency Transfers
+    app.add_handler(CommandHandler("sendusks", sendduskar))
+    app.add_handler(CommandHandler("sendgems", sendgems))
+
+    # 🆘 Help
+    app.add_handler(CommandHandler("help", help_command))
+
+    # 🛠 Background Tasks
+    app.add_handler(MessageHandler(filters.TEXT & filters.ChatType.GROUPS, track_messages))
+    app.add_handler(MessageHandler(filters.StatusUpdate.NEW_CHAT_MEMBERS, welcome_new_member))
+    app.add_handler(MessageHandler(filters.PHOTO, get_file_id))
+
+    # 🔄 Bot Lifecycle Events
+    app.add_handler(ChatMemberHandler(bot_added_or_promoted, ChatMemberHandler.MY_CHAT_MEMBER))
+
     try:
         await app.run_polling()
     except NetworkError:
@@ -2239,4 +2239,3 @@ async def main():
 # === Entry Point ===
 if __name__ == "__main__":
     asyncio.run(main())
-
