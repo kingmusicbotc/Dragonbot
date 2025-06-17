@@ -2236,7 +2236,6 @@ async def main():
 # === Safe Event Loop for Render ===
 if __name__ == "__main__":
     loop = asyncio.get_event_loop()
-
     try:
         loop.create_task(main())
         loop.run_forever()
@@ -2244,5 +2243,4 @@ if __name__ == "__main__":
         print("⛔ Bot stopped by user")
     except Exception as e:
         print(f"❌ Unexpected error: {e}")
-        # No sleep needed — Render will auto-restart if necessary
 
