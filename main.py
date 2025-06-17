@@ -2231,12 +2231,16 @@ async def main():
         print(f"❌ Unexpected error: {e}")
         await asyncio.sleep(10)
 
-# === Safe Entry Point ===
+
 if __name__ == "__main__":
+    loop = asyncio.get_event_loop()
+
     try:
-        asyncio.run(main())
-    except RuntimeError as e:
-        print("❌ Runtime error:", e)
-        import sys
-        sys.exit(1)
+        loop.create_task(main())
+        loop.run_forever()
+    except KeyboardInterrupt:
+        print("⛔ Bot stopped by user")
+    except Exception as e:
+        print(f"❌ Unexpected error: {e}")
+
 
