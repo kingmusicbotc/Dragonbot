@@ -3,6 +3,8 @@ import json
 import random
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import ContextTypes
+from db import load_json, save_json
+
 
 BATTLE_FILE = "battle.json"
 USER_FILE = "users.json"
