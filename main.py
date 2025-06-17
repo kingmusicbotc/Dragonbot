@@ -20,6 +20,7 @@ import asyncio
 import traceback
 import nest_asyncio
 nest_asyncio.apply()
+from db import load_json, save_json
 
 from telegram.ext import (
     ApplicationBuilder, CommandHandler, MessageHandler, CallbackQueryHandler,
@@ -42,55 +43,7 @@ IMAGE_URL = "https://graph.org/file/c3057fdb933a40aac35a8-24eb9a945f2183a64c.jpg
 start_time = time.time()
 
 # === JSON Helpers ===
-def load_json(file):
-    if not os.path.exists(file):
-        return {}
-    try:
-        with open(file, "r", encoding="utf-8") as f:
-            return json.load(f)
-    except json.JSONDecodeError:
-        return {}
 
-def save_json(file, data):
-    with open(file, "w", encoding="utf-8") as f:
-        json.dump(data, f, indent=2)
-
-def load_users():
-    return load_json(JSON_FILE)
-
-def save_users(data):
-    save_json(JSON_FILE, data)
-
-def load_group_data():
-    return load_json(GROUP_FILE)
-
-def save_group_data(data):
-    save_json(GROUP_FILE, data)
-
-def load_group_data():
-    if not os.path.exists(GROUP_FILE):
-        return {}
-    try:
-        with open(GROUP_FILE, "r", encoding="utf-8") as f:
-            return json.load(f)
-    except json.JSONDecodeError:
-        return {}
-
-def save_group_data(data):
-    with open(GROUP_FILE, "w", encoding="utf-8") as f:
-        json.dump(data, f, indent=2)
-
-import json
-
-USER_FILE = "users.json"
-
-def load_json(file):
-    with open(file, "r", encoding="utf-8") as f:
-        return json.load(f)
-
-def save_json(file, data):
-    with open(file, "w", encoding="utf-8") as f:
-        json.dump(data, f, indent=2)
 
 def migrate_gold_to_duskar():
     users = load_json(USER_FILE)
@@ -132,24 +85,7 @@ START_STICKER = "CAACAgEAAxkBAAID4GhLtzh83Y1jf5cWyFj7vwIZnEuvAAIVAwACr0ZxRUcBrjQ
 USERS_FILE = "users.json"
 
 # === JSON Helpers ===
-def load_users():
-    if not os.path.exists(USERS_FILE):
-        print("[INFO] users.json not found, creating new data store.")
-        return {}
-    try:
-        with open(USERS_FILE, "r") as f:
-            return json.load(f)
-    except Exception as e:
-        print("[LOAD ERROR]", e)
-        return {}
 
-def save_users(data):
-    try:
-        with open(USERS_FILE, "w") as f:
-            json.dump(data, f, indent=2)
-        print("[SAVE SUCCESS] User data updated.")
-    except Exception as e:
-        print("[SAVE ERROR]", e)
 
 # === /start Command ===
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -1063,28 +999,7 @@ from datetime import datetime, timedelta
 USER_FILE = "users.json"
 
 # === File I/O ===
-def load_users():
-    try:
-        with open(USER_FILE, "r", encoding="utf-8") as f:
-            return json.load(f)
-    except:
-        return {}
 
-def save_users(data):
-    with open(USER_FILE, "w", encoding="utf-8") as f:
-        json.dump(data, f, indent=2)
-
-USER_FILE = "users.json"
-
-def load_json(file):
-    if os.path.exists(file):
-        with open(file, "r", encoding="utf-8") as f:
-            return json.load(f)
-    return {}
-
-def save_json(file, data):
-    with open(file, "w", encoding="utf-8") as f:
-        json.dump(data, f, indent=2)
 
 def can_earn(last_time, cooldown_minutes):
     if not last_time:
@@ -1556,16 +1471,7 @@ import json
 # Replace with your actual owner ID
 BOT_OWNER_ID = 6020886539
 
-def load_users():
-    try:
-        with open("users.json", "r") as f:
-            return json.load(f)
-    except:
-        return {}
 
-def save_users(users):
-    with open("users.json", "w") as f:
-        json.dump(users, f, indent=2)
 
 async def sendduskar(update: Update, context: ContextTypes.DEFAULT_TYPE):
     sender_id = update.effective_user.id
@@ -1785,10 +1691,6 @@ from html import escape
 DRAGONS_PER_PAGE = 10
 DRAGONS_JSON_PATH = "dragons.json"
 
-def load_json(path):
-    import json
-    with open(path, "r", encoding="utf-8") as f:
-        return json.load(f)
 
 def rarity_stars(rarity):
     stars_map = {
