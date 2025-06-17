@@ -2220,15 +2220,16 @@ async def main():
     # 🔄 Bot Lifecycle Events
     app.add_handler(ChatMemberHandler(bot_added_or_promoted, ChatMemberHandler.MY_CHAT_MEMBER))
 
-    # === Polling + Graceful Shutdown ===
+    # === Polling + Safe Shutdown ===
     try:
         await app.run_polling()
     except NetworkError:
         print("⚠️ Network error. Retrying soon...")
-        await app.shutdown()
     except Exception as e:
         print(f"❌ Unexpected error: {e}")
-        await app.shutdown()
+    finally:
+        if app.running:
+            await app.shutdown()
 
 # === Safe Event Loop for Render ===
 if __name__ == "__main__":
