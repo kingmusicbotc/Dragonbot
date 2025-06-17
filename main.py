@@ -46,7 +46,7 @@ start_time = time.time()
 
 
 def migrate_gold_to_duskar():
-    users = load_json(USER_FILE)
+    users = load_json(users.json)
     migrated = 0
 
     for user_id, data in users.items():
