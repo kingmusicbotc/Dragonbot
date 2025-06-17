@@ -2,7 +2,8 @@ from pymongo import MongoClient
 import os
 
 # === MongoDB Connection ===
-MONGO_URI = os.getenv("MONGO_URI") or "mongodb+srvvewm:grovvewm@cluster0.5aeo13r.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+MONGO_URI = os.getenv("MONGO_URI") or "mongodb+srv://grovvewm:grovvewm@cluster0.5aeo13r.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+
 
 client = MongoClient(MONGO_URI)
 db = client["dragon_dusk"]
