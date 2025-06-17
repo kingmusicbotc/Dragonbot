@@ -8,16 +8,18 @@ from step2 import userstats, broadcast
 from battle import challenge,  select_dragon_callback, handle_move
 from telegram.ext import CallbackQueryHandler
 from battle import load_json, cancel_battle
-from earn import work, mine, daily
-from step2 import getegg, eggs, eghatch, addmod, mods, rmmod
+from step2 import getegg, eggs, eghatch, addmod, mods, rmmod, missions
 from clan import createclan, joinclan, myclan, leaveclan, disbandclan, clanchallenge, accept_clanwar
-
-
-
+from step2 import gift, send, drackstats
+from travelexp import region, show_region_details, region_back, travel, whereami, explore, select_pve_dragon, pve_move_handler, pve_flee, pve_tame
+from datetime import date
+from telegram.ext import ChatMemberHandler
+from telegram.constants import ParseMode
+from minigames import minigames, handle_game_choice
 
 # === CONFIG ===
 TOKEN = "8040202761:AAF_HEGJxbZjKsgJANNQQRP4ahXftlMsqCQ"
-LOG_GROUP_ID = -1002689253330
+LOG_GROUP_ID = -1002834714399
 JSON_FILE = "users.json"
 GROUP_FILE = "group.json"
 ALLOWED_ADMINS = [6020886539, 7793966371]
@@ -109,8 +111,8 @@ from telegram.error import BadRequest, Forbidden
 import json, os
 
 # === Configs ===
-LOG_GROUP_ID = "-1002689253330"
-SUPPORT_LINK = "https://t.me/+P5lRNelMP2w3N2M1"
+LOG_GROUP_ID = "-1002834714399"
+SUPPORT_LINK = "https://t.me/Dragon_Realm"
 OWNER_USERNAME = "meee_offline"
 IMAGE_URL = "https://graph.org/file/c3057fdb933a40aac35a8-24eb9a945f2183a64c.jpg"
 START_STICKER = "CAACAgEAAxkBAAID4GhLtzh83Y1jf5cWyFj7vwIZnEuvAAIVAwACr0ZxRUcBrjQ033EnNgQ"
@@ -143,10 +145,15 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     args = context.args
     print(f"🚀 /start triggered by {user_id} ({user.full_name})")
 
-    # Redirect to /help if argument is "help"
-    if args and args[0].lower() == "help":
-        await help_command(update, context)
-        return
+    # Redirect to /help or /explore if passed via deep link
+    if args:
+        arg = args[0].lower()
+        if arg == "help":
+            await help_command(update, context)
+            return
+        elif arg == "explore":
+            await explore(update, context)
+            return
 
     users = load_users()
     is_new = False
@@ -190,7 +197,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     except Exception as e:
         print("[STICKER ERROR]", e)
 
-    # Prepare keyboard
+    # Welcome Keyboard
     keyboard = InlineKeyboardMarkup([
         [
             InlineKeyboardButton("🛠 Support", url=SUPPORT_LINK),
@@ -202,7 +209,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         ]
     ])
 
-    # Prepare welcome message
+    # Welcome Caption
     safe_name = user.first_name.replace("<", "").replace(">", "")
     caption = (
         f"🐉 <u><b>Welcome, Dragon Tamer {safe_name}!</b></u>\n\n"
@@ -232,11 +239,156 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         print("[PHOTO SENT] Welcome image sent.")
     except Exception as e:
         print("[PHOTO ERROR]", e)
-        await update.message.reply_text(
-            caption,
-            parse_mode=ParseMode.HTML,
-            reply_markup=keyboard
+        if update.message:
+            await update.message.reply_text(
+                caption,
+                parse_mode=ParseMode.HTML,
+                reply_markup=keyboard
+            )
+
+from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, InputMediaPhoto
+from telegram.ext import ContextTypes, CallbackQueryHandler, CommandHandler
+
+HELP_IMAGE_URL = "https://graph.org/file/a2b0ac48d16bd00589b8f-2da15263ad3f26ab8e.jpg"  # Replace with your actual image URL
+
+HELP_CATEGORIES = {
+    "main": {
+        "title": "🚀 *Main Commands*",
+        "commands": [
+            "🧭 `/start` — Begin your dragon journey",
+            "📊 `/status` — Check your current status",
+            "👤 `/profile` — View your profile",
+            "🎒 `/inventory` — Show your items and dragons",
+            "💰 `/balance` — Show Duskar & Gem",
+            "🆔 `/id` — Show your Telegram ID",
+            "⏳ `/cooldowns` — View active cooldowns",
+            "🔮 `/fortune` — Reveal today's luck",
+            "🎁 `/daily` — Claim daily Duskar",
+            "🥚 `/dailyegg` — Claim daily egg",
+            "🏆 `/leaderboard` — View top players",
+            "📈 `/userstats` — Win rate and match stats",
+            "📢 `/broadcast` — Send message to all users (Admin)"
+        ]
+    },
+    "dragon": {
+        "title": "🐉 *Dragon Commands*",
+        "commands": [
+            "📜 `/dragons` — Show all owned dragons",
+            "🍗 `/feed` — Feed your dragons",
+            "🏋️ `/train` — Train your dragons",
+            "⚰️ `/release` — Release unwanted dragon",
+            "🛒 `/market` — View dragon marketplace"
+        ]
+    },
+    "battle": {
+        "title": "⚔️ *Battle Commands*",
+        "commands": [
+            "🎯 `/challenge` — Challenge someone to a battle",
+            "❌ `/cancel` — Cancel an ongoing challenge"
+        ]
+    },
+    "egg": {
+        "title": "🥚 *Egg Commands*",
+        "commands": [
+            "🥚 `/getegg` — Earn eggs",
+            "📦 `/eggs` — View your eggs",
+            "🐣 `/eghatch` — Hatch ready eggs",
+            "🔀 `/hatch` — Hatch a dragon from egg"
+        ]
+    },
+    "clan": {
+        "title": "🛡️ *Clan Commands*",
+        "commands": [
+            "🏰 `/createclan` — Start a new clan",
+            "👥 `/joinclan` — Join an existing clan",
+            "🧙 `/myclan` — Info about your clan",
+            "🚪 `/leaveclan` — Leave your clan",
+            "💀 `/disband` — Disband your clan",
+            "⚔️ `/clanchallenge` — Start clan war",
+            "💸 `/sendusks` — Send Duskar to member"
+        ]
+    },
+    "admin": {
+        "title": "🧰 *Admin/Mod Commands*",
+        "commands": [
+            "➕ `/addmod` — Add a mod (reply/username)",
+            "🧑‍⚖️ `/mods` — List all current mods",
+            "➖ `/rmmod` — Remove a mod",
+            "⛏️ `/mine` — Earn Duskar (Work style)",
+            "🪓 `/work` — Simple job for Duskar",
+            "🏟️ `/rgroup` — Register this group"
+        ]
+    }
+}
+
+# ========== /help ==========
+async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    keyboard = [
+        [
+            InlineKeyboardButton("🚀 Main", callback_data="help_main"),
+            InlineKeyboardButton("🐉 Dragon", callback_data="help_dragon"),
+            InlineKeyboardButton("⚔️ Battle", callback_data="help_battle")
+        ],
+        [
+            InlineKeyboardButton("🥚 Eggs", callback_data="help_egg"),
+            InlineKeyboardButton("🛡️ Clan", callback_data="help_clan"),
+            InlineKeyboardButton("🧰 Admin", callback_data="help_admin")
+        ]
+    ]
+    reply_markup = InlineKeyboardMarkup(keyboard)
+
+    await update.message.reply_photo(
+        photo=HELP_IMAGE_URL,
+        caption="`🧙‍♂️ Welcome to Dragon Dusk Help Menu!`\n\n*Choose a category below to view commands:*",
+        parse_mode="MarkdownV2",
+        reply_markup=reply_markup
+    )
+
+# ========== Callback ==========
+async def help_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    query = update.callback_query
+    await query.answer()
+
+    category = query.data.replace("help_", "")
+    help_data = HELP_CATEGORIES.get(category)
+
+    if help_data:
+        text = f"{help_data['title']}\n\n" + "\n".join(help_data["commands"])
+        text += "\n\n➤ _Tap a button below to view other sections_"
+
+        keyboard = [
+            [
+                InlineKeyboardButton("🚀 Main", callback_data="help_main"),
+                InlineKeyboardButton("🐉 Dragon", callback_data="help_dragon"),
+                InlineKeyboardButton("⚔️ Battle", callback_data="help_battle")
+            ],
+            [
+                InlineKeyboardButton("🥚 Eggs", callback_data="help_egg"),
+                InlineKeyboardButton("🛡️ Clan", callback_data="help_clan"),
+                InlineKeyboardButton("🧰 Admin", callback_data="help_admin")
+            ]
+        ]
+        await query.edit_message_caption(
+            caption=text,
+            parse_mode="Markdown",
+            reply_markup=InlineKeyboardMarkup(keyboard)
         )
+
+from telegram import Update
+from telegram.ext import ContextTypes
+
+GUIDE_LINK = "https://t.me/Nexxxxxo_bots/5"  # Replace with your actual message link
+
+async def guide(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text(
+        f"📖 **DragonDusk Beginner’s Guide**\n"
+        f"━━━━━━━━━━━━━━━━━━━\n"
+        f"🧭 Step-by-step instructions to dominate the realm!\n\n"
+        f"👉 [Click here to open the official guide]({GUIDE_LINK})\n\n"
+        f"🔥 _Train. Hatch. Battle. Rule._",
+        parse_mode="Markdown", disable_web_page_preview=False
+    )
+
 
 from telegram.ext import MessageHandler, filters
 
@@ -273,37 +425,92 @@ async def registergroup(update: Update, context: ContextTypes.DEFAULT_TYPE):
     }
     save_group_data(group_data)
     await update.message.reply_text(f"✅ Group '{chat.title}' registered successfully!")
+    
+import json
+from datetime import datetime
+from telegram import Update
+from telegram.ext import ContextTypes
+
+# === CONFIG ===
+BOT_OWNER_ID = 6020886539
+BOT_VERSION = "1.0.0"
+IMAGE_URL = "https://graph.org/file/a2b0ac48d16bd00589b8f-2da15263ad3f26ab8e.jpg"
+START_TIME = datetime.utcnow()
+
+# === Utilities ===
+def get_uptime():
+    now = datetime.utcnow()
+    delta = now - START_TIME
+    hours, remainder = divmod(int(delta.total_seconds()), 3600)
+    minutes, _ = divmod(remainder, 60)
+    return f"{hours}h {minutes}m"
+
+def load_mods():
+    try:
+        with open("mod.json", "r") as f:
+            return json.load(f)
+    except:
+        return {}
+
+def load_users():
+    try:
+        with open("users.json", "r") as f:
+            return json.load(f)
+    except:
+        return {}
+
+def load_group_data():
+    try:
+        with open("group.json", "r") as f:
+            return json.load(f)
+    except:
+        return {}
+
+def is_admin(user_id):
+    user_id = str(user_id)
+    return str(user_id) == str(BOT_OWNER_ID) or user_id in load_mods()
+
+# === Command ===
 async def status(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    user_id = update.effective_user.id
+    if not is_admin(user_id):
+        await update.message.reply_text("🚫 *Access Denied!*\nThis command is for the owner or mods only.", parse_mode="Markdown")
+        return
+
     users = load_users()
     group_data = load_group_data()
     uptime = get_uptime()
 
     total_users = len(users)
-    total_coins = sum(u.get("gold", 0) for u in users.values())
+    total_duskar = sum(u.get("duskar", 0) for u in users.values())
     started_users = sum(1 for u in users.values() if u.get("dragons") and len(u["dragons"]) > 0)
-
-    started_chats = len(group_data)  # <- Fixed this
+    started_chats = len(group_data)
 
     bot_username = context.bot.username
-
     group_info = group_data.get(str(update.effective_chat.id))
-    group_stats = "\n\n<b>Group Stats</b>\nNot registered. Use /rgroup." if not group_info else (
-        f"\n\n<b>Group Stats</b>\n"
-        f"📛 Name: {group_info['title']}\n"
-        f"🐲 Hatched Dragons: {group_info['hatched_count']}"
+
+    group_stats = (
+        "\n\n<b>📍 Group Stats</b>\n"
+        "🔸 <i>Not Registered</i>\n"
+        "📌 Use <code>/rgroup</code> to register."
+    ) if not group_info else (
+        f"\n\n<b>📍 Group Stats</b>\n"
+        f"🏷️ <b>Name:</b> {group_info['title']}\n"
+        f"🐣 <b>Hatched Dragons:</b> {group_info['hatched_count']}"
     )
 
     status_text = (
-        f"🤖 <b>Bot Status</b> 🤖\n\n"
-        f"🆔 <b>Bot Username:</b> @{bot_username}\n"
-        f"⏰ <b>Uptime:</b> {uptime}\n"
-        f"👥 <b>Total Users:</b> {total_users}\n"
-        f"💰 <b>Total Duskar Distributed:</b> {total_coins}\n"
-        f"📊 <b>Additional Stats:</b>\n"
-        f" ┗ Started Users: {started_users}\n"
-        f" ┗ Started Chats: {started_chats}\n"
-        f"⚙️ <b>Version:</b> {BOT_VERSION}\n"
-        f"👑 <b>Owned by:</b> REDEX "
+        f"⚙️ <b>DragonDusk – Bot Status</b>\n"
+        f"━━━━━━━━━━━━━━━━━━━━━━\n"
+        f"🤖 <b>Bot:</b> @{bot_username}\n"
+        f"🕒 <b>Uptime:</b> {uptime}\n"
+        f"🌍 <b>Version:</b> {BOT_VERSION}\n"
+        f"👑 <b>Owner:</b> REDEX\n\n"
+        f"📊 <b>Global Stats</b>\n"
+        f"👥 Users: <b>{total_users}</b>\n"
+        f"🐉 Dragons Hatched: <b>{started_users}</b>\n"
+        f"💰 Duskar Distributed: <b>{total_duskar}</b>\n"
+        f"💬 Registered Groups: <b>{started_chats}</b>"
     ) + group_stats
 
     await context.bot.send_photo(
@@ -312,6 +519,7 @@ async def status(update: Update, context: ContextTypes.DEFAULT_TYPE):
         caption=status_text,
         parse_mode="HTML"
     )
+
 
 # === /hatch Command ===
 dragon_names = ["Pyron", "Aetherwing", "Blazetail", "Frostclaw", "Venomscale"]
@@ -377,7 +585,8 @@ async def hatch(update: Update, context: ContextTypes.DEFAULT_TYPE):
         parse_mode="HTML"
     )
 
-    from telegram import InputFile
+from telegram import InputFile
+from telegram import InputMediaPhoto
 
 async def profile(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_id = str(update.effective_user.id)
@@ -389,46 +598,108 @@ async def profile(update: Update, context: ContextTypes.DEFAULT_TYPE):
     gems = user.get("gems", 0)
     wins = user.get("wins", 0)
     losses = user.get("losses", 0)
+    xp = user.get("xp", 0)
+    level = user.get("level", 1)
+    explore_count = user.get("explore_count", 0)
+    tamed_dragons = len(user.get("dragons", []))
+
     total = wins + losses
     win_percent = round((wins / total) * 100, 2) if total > 0 else 0.0
 
+    next_level_xp = level * 1000
+    xp_bar = int((xp / next_level_xp) * 10)
+    xp_bar_str = "█" * xp_bar + "░" * (10 - xp_bar)
+
     text = f"""
-👤 <b>{name}'s Profile</b>
+<b>╭━━━━━━━◆༻👤༺◆━━━━━━━╮
+┃   {name}'s Dragon Profile
+╰━━━━━━━◆༻💠༺◆━━━━━━━╯</b>
 
-💰 Duskar: <b>{duskar}</b>
-💎 Gems: <b>{gems}</b>
+💰 <b>Duskar:</b> {duskar}   💎 <b>Gems:</b> {gems}
 
-📊 Battle Stats:
-✅ Wins: <b>{wins}</b>
-❌ Losses: <b>{losses}</b>
-📈 Win Rate: <b>{win_percent}%</b>
-    """
+🎮 <b>Battle Stats</b>
+• ✅ Wins: <b>{wins}</b>  ❌ Losses: <b>{losses}</b>
+• 📈 Win Rate: <b>{win_percent}%</b>
 
-    await update.message.reply_text(text, parse_mode="HTML")
+🧭 <b>Exploration</b>
+• 🌍 Regions Explored: <b>{explore_count}</b>
+• 🐉 Dragons Tamed: <b>{tamed_dragons}</b>
+
+🧠 <b>XP:</b> {xp_bar_str} <code>{xp}/{next_level_xp}</code>
+🔼 <b>Level:</b> {level}
+
+🌟 <i>Keep battling and exploring to become a legend!</i>
+"""
+
+    try:
+        photos = await context.bot.get_user_profile_photos(update.effective_user.id, limit=1)
+        if photos.total_count > 0:
+            await update.message.reply_photo(
+                photo=photos.photos[0][-1].file_id,
+                caption=text,
+                parse_mode="HTML"
+            )
+        else:
+            await update.message.reply_text(text, parse_mode="HTML")
+    except Exception as e:
+        print(f"[PROFILE ERROR] {e}")
+        await update.message.reply_text(text, parse_mode="HTML")
+
 
 async def inventory(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    user_id = str(update.effective_user.id)
-    user_data = load_users().get(user_id)
+        user_id = str(update.effective_user.id)
+        user_data = load_users().get(user_id)
 
-    if not user_data:
-        await update.message.reply_text("❌ You are not registered yet. Use /start to begin.")
-        return
+        if not user_data:
+            await update.message.reply_text("❌ You are not registered yet. Use /start to begin.")
+            return
 
-    dragons = user_data.get("dragons", [])
+        dragons = user_data.get("dragons", [])
+        potions = user_data.get("potions", {})  # Example: { "1": 2, "2": 1 }
 
-    if not dragons:
-        await update.message.reply_text("🐣 You don't own any dragons yet. Use /hatch to get one!")
-        return
+        # Dragon List
+        if dragons:
+            dragon_list = "\n".join(
+                [f"{i+1}. 🐉 <b>{dragon['name']}</b>  •  Level <b>{dragon.get('level', 1)}</b>"
+                 for i, dragon in enumerate(dragons)]
+            )
+        else:
+            dragon_list = "🐣 You don't own any dragons yet."
 
-    # Build dragon list text
-    dragon_list = "\n".join(
-        [f"{i+1}. 🐉 {dragon['name']} – Level {dragon.get('level', 1)}" for i, dragon in enumerate(dragons)]
-    )
+        # Potion List
+        potion_names = {
+            "1": "Small Potion (20 HP)",
+            "2": "Medium Potion (50 HP)",
+            "3": "Large Potion (100 HP)"
+        }
 
-    await update.message.reply_text(
-        f"📦 <b>Your Dragon Inventory:</b>\n\n{dragon_list}",
-        parse_mode="HTML"
-    )
+        if potions:
+            potion_list = "\n".join(
+                [f"🧪 <b>{potion_names.get(pid, 'Unknown')}</b> x{qty}" for pid, qty in potions.items()]
+            )
+        else:
+            potion_list = "🧪 You don't have any potions."
+
+        # Final Caption
+        caption = f"""
+    ╔═༻📦 Your Dragon Inventory ༺═╗
+
+    🐉 <b>Dragons:</b>
+    {dragon_list}
+
+    🧪 <b>Potions:</b>
+    {potion_list}
+
+    ✨ May your collection grow ever stronger!
+    """
+
+        await update.message.reply_photo(
+            photo="AgACAgUAAxkBAAIJeGhONCr1-YxoF8JUP2HQoRhA3BD0AAL-yjEbZEN5VgrrkGSOQuB0AQADAgADeQADNgQ",  # Replace if needed
+            caption=caption,
+            parse_mode="HTML"
+        )
+
+
 
 async def balance(update: Update, context: ContextTypes.DEFAULT_TYPE):
         user_id = str(update.effective_user.id)
@@ -438,53 +709,100 @@ async def balance(update: Update, context: ContextTypes.DEFAULT_TYPE):
         duskar = user.get("duskar", 0)
         gems = user.get("gems", 0)
 
-        await update.message.reply_text(
-            f"💰 Duskar: <b>{duskar}</b>\n💎 Gems: <b>{gems}</b>",
-            parse_mode="HTML"
-        )
+        text = f"""
+    ╭━━━💰 <b>Your Balance</b> 💎━━━╮
+    ┃ 
+    ┃ 🪙 <b>Duskar:</b> {duskar}
+    ┃ 💎 <b>Gems:</b> {gems}
+    ┃ 
+    ╰━━━━━━━━━━━━━━━━━━━━╯
+    """
+        await update.message.reply_text(text, parse_mode="HTML")
+
+import json
+
+def load_dragons():
+    with open("dragons.json", "r") as f:
+        return json.load(f)
+# assuming this loads your JSONs
 
 async def dragons(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    user_id = str(update.effective_user.id)
-    user_data = load_users().get(user_id)
+        user_id = str(update.effective_user.id)
+        user_data = load_users().get(user_id)
+        if not user_data:
+            await update.message.reply_text("❌ You are not registered. Use /start first.")
+            return
 
-    if not user_data:
-        await update.message.reply_text("❌ You are not registered. Use /start first.")
-        return
+        dragons_owned = user_data.get("dragons", [])
+        if not dragons_owned:
+            await update.message.reply_text("🐣 You don't have any dragons yet. Use /hatch to summon one!")
+            return
 
-    dragons = user_data.get("dragons", [])
-    if not dragons:
-        await update.message.reply_text("🐣 You don't have any dragons yet. Use /hatch to summon one!")
-        return
+        all_dragons = load_dragons()  # your full dataset
+        type_emojis = {
+            "Fire": "🔥", "Water": "💧", "Earth": "🌱", "Air": "🌪️", "Ice": "❄️",
+            "Electric": "⚡", "Dark": "🌑", "Light": "🌟", "Metal": "⚙️", "Dragon": "🐉",
+            "Poison": "☠️", "Shadow": "🕶️"
+        }
 
-    type_emojis = {
-        "Fire": "🔥",
-        "Water": "💧",
-        "Earth": "🌱",
-        "Air": "🌪️",
-        "Ice": "❄️",
-        "Electric": "⚡",
-        "Dark": "🌑",
-        "Light": "🌟",
-        "Metal": "⚙️",
-        "Dragon": "🐉"
-    }
+        msg = "🐲 <b>Your Dragon Collection</b>\n\n"
+        for i, dragon_entry in enumerate(dragons_owned, 1):
+            # Handle both dicts and string-only entries
+            if isinstance(dragon_entry, dict):
+                name = dragon_entry.get("name")
+                level = dragon_entry.get("level", 1)
+                power = dragon_entry.get("power", 0)
+            else:
+                name = dragon_entry
+                level = 1
+                power = 0
 
-    msg = "🐉 <b>Your Dragons</b>\n\n"
-    for i, d in enumerate(dragons, 1):
-        emoji = type_emojis.get(d.get("type", ""), "🐉")
-        name = d.get("name", "Unknown")
-        level = d.get("level", 1)
-        power = d.get("power", 0)
-        msg += (
-            f"{i}. {emoji} <b>{name}</b>\n"
-            f"   • Type: {d.get('type', 'Unknown')}\n"
-            f"   • Level: {level}\n"
-            f"   • Power: {power} ⚡\n\n"
-        )
+            data = all_dragons.get(name, {})
+            element = data.get("element", "Unknown")
+            emoji = type_emojis.get(element, "🐉")
 
-    await update.message.reply_text(msg, parse_mode="HTML")
+            msg += (
+                f"🔹 <b>{i}. {emoji} {name}</b>\n"
+                f"   ├ 🧪 <b>Type:</b> {element}\n"
+                f"   ├ 🎚️ <b>Level:</b> {level}\n"
+                f"   └ ⚔️ <b>Power:</b> {power}\n\n"
+            )
 
-import datetime
+        await update.message.reply_text(msg, parse_mode="HTML")
+
+
+
+import random
+from datetime import date
+from telegram import Update
+from telegram.ext import ContextTypes
+
+BASE_FEED_COST = 100
+BASE_TRAIN_COST = 250
+
+def level_up_dragon(dragon):
+        # Increase level
+        dragon["level"] = dragon.get("level", 1) + 1
+
+        # Boost moves power and collect descriptions
+        attack_boost = []
+        for move in dragon.get("moves", []):
+            boost = random.randint(2, 5)
+            move["power"] = move.get("power", 0) + boost
+            attack_boost.append(f"{move['name']} (+{boost})")
+
+        # Increase dragon power (at least keep old power, or add boost)
+        old_power = dragon.get("power", 30)
+        power_boost = random.randint(5, 15)
+        dragon["power"] = old_power + power_boost
+
+        # Increase current HP by 10–20 (initialize if missing)
+        old_hp = dragon.get("current_hp", dragon.get("base_hp", 100))
+        hp_boost = random.randint(10, 20)
+        dragon["current_hp"] = old_hp + hp_boost
+
+        return attack_boost
+
 
 async def feed(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_id = str(update.effective_user.id)
@@ -504,19 +822,22 @@ async def feed(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text("🍖 Usage: /feed <dragon_number>")
         return
 
-    # Check Duskar
-    if user_data.get("gold", 0) < 100:
-        await update.message.reply_text("💸 You need at least 100 coins to feed a dragon.")
+    today_str = date.today().isoformat()
+
+    # Reset or increment feed count
+    if user_data.get("last_feed_date") == today_str:
+        user_data["feed_count_today"] = user_data.get("feed_count_today", 0) + 1
+    else:
+        user_data["feed_count_today"] = 1
+    user_data["last_feed_date"] = today_str
+
+    feed_count = user_data["feed_count_today"]
+    cost = BASE_FEED_COST * feed_count
+
+    if user_data.get("duskar", 0) < cost:
+        await update.message.reply_text(f"💸 You need at least {cost} Duskar to feed a dragon now (feed count today: {feed_count}).")
         return
 
-    # Daily check
-    today_str = datetime.date.today().isoformat()
-    last_feed = user_data.get("last_feed")
-    if last_feed == today_str:
-        await update.message.reply_text("⏳ You can only feed once per day. Come back tomorrow!")
-        return
-
-    # Validate index
     try:
         index = int(context.args[0]) - 1
         if index < 0 or index >= len(dragons):
@@ -525,25 +846,29 @@ async def feed(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text("❌ Invalid dragon number.")
         return
 
-    # Feed dragon
     dragon = dragons[index]
-    added_power = random.randint(10, 25)
+    added_power = random.randint(1, 5)
     dragon["power"] = dragon.get("power", 0) + added_power
 
-    # Deduct coins and update feed time
-    user_data["gold"] -= 100
+    msg = (
+        f"🍖 You fed <b>{dragon['name']}</b>!\n"
+        f"⚡ Power increased by <b>{added_power}</b>.\n"
+        f"💰 {cost} Duskar spent | 🔋 Power: <b>{dragon['power']}</b>\n"
+        f"🛠️ Feed count today: {feed_count}"
+    )
+
+    # Check level-up
+    if dragon["power"] >= 95:
+        attack_boost = level_up_dragon(dragon)
+        msg += f"\n\n🔼 <b>{dragon['name']}</b> leveled up to Level {dragon['level']}!"
+        msg += "\n⚔️ Attack moves improved:\n• " + "\n• ".join(attack_boost)
+
+    user_data["duskar"] -= cost
     user_data["dragons"] = dragons
-    user_data["last_feed"] = today_str
     users[user_id] = user_data
     save_users(users)
 
-    await update.message.reply_text(
-        f"🍖 You fed <b>{dragon['name']}</b>!\n"
-        f"⚡ Power increased by <b>{added_power}</b>.\n"
-        f"💰 100 Duskar spent | 🔋 Power: <b>{dragon['power']}</b>",
-        parse_mode="HTML"
-    )
-import datetime
+    await update.message.reply_text(msg, parse_mode="HTML")
 
 async def train(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_id = str(update.effective_user.id)
@@ -563,23 +888,22 @@ async def train(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text("🏋️ Usage: /train <dragon_number>")
         return
 
-    # Check if user has enough Duskar
-    if user_data.get("gold", 0) < 150:
-        await update.message.reply_text("💸 You need at least 150 coins to train a dragon.")
+    today_str = date.today().isoformat()
+
+    # Reset or increment train count
+    if user_data.get("last_train_date") == today_str:
+        user_data["train_count_today"] = user_data.get("train_count_today", 0) + 1
+    else:
+        user_data["train_count_today"] = 1
+    user_data["last_train_date"] = today_str
+
+    train_count = user_data["train_count_today"]
+    cost = BASE_TRAIN_COST * train_count
+
+    if user_data.get("duskar", 0) < cost:
+        await update.message.reply_text(f"💸 You need at least {cost} Duskar to train a dragon now (train count today: {train_count}).")
         return
 
-    # Check 2-day cooldown
-    last_train_str = user_data.get("last_train")
-    today = datetime.date.today()
-
-    if last_train_str:
-        last_train = datetime.date.fromisoformat(last_train_str)
-        days_since = (today - last_train).days
-        if days_since < 2:
-            await update.message.reply_text("⏳ You can train a dragon only once every 2 days.")
-            return
-
-    # Validate dragon number
     try:
         index = int(context.args[0]) - 1
         if index < 0 or index >= len(dragons):
@@ -589,86 +913,96 @@ async def train(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return
 
     dragon = dragons[index]
-    power = dragon.get("power", 0)
-    level = dragon.get("level", 1)
-    required_power = level * 50
+    power_gain = random.randint(5, 8)
+    dragon["power"] = dragon.get("power", 0) + power_gain
 
-    if power < required_power:
-        await update.message.reply_text(
-            f"⚠️ <b>{dragon['name']}</b> needs at least {required_power} power to train!\n"
-            f"Current Power: {power}",
-            parse_mode="HTML"
-        )
-        return
+    # Boost attack moves by 1-3 for normal training
+    attack_boost = []
+    for move in dragon.get("moves", []):
+        boost = random.randint(1, 3)
+        move["power"] += boost
+        attack_boost.append(f"{move['name']} (+{boost})")
 
-    # Deduct Duskar
-    user_data["gold"] -= 150
-    user_data["last_train"] = today.isoformat()
+    msg = (
+        f"🏋️ Training complete for <b>{dragon['name']}</b>!\n"
+        f"🔋 Power increased by <b>{power_gain}</b>\n"
+        f"⚔️ Attack moves improved:\n• " + "\n• ".join(attack_boost) + "\n"
+        f"💰 {cost} Duskar spent\n"
+        f"🛠️ Train count today: {train_count}"
+    )
 
-    # 80% success chance
-    success = random.random() < 0.8
-    if success:
-        dragon["level"] += 1
-        dragon["power"] -= required_power
-        msg = (
-            f"🏆 Training successful!\n"
-            f"🐉 <b>{dragon['name']}</b> leveled up to <b>Level {dragon['level']}</b>!\n"
-            f"💰 150 Duskar spent | ⚡ Power left: {dragon['power']}"
-        )
-    else:
-        msg = (
-            f"😓 <b>{dragon['name']}</b> failed to level up.\n"
-            f"💰 150 Duskar spent — no progress made."
-        )
+    # Check for level up if power >= 95
+    if dragon["power"] >= 95:
+        level_boost = level_up_dragon(dragon)
+        msg += f"\n\n🔼 <b>{dragon['name']}</b> leveled up to Level {dragon['level']}!"
+        msg += "\n⚔️ Additional attack moves improved:\n• " + "\n• ".join(level_boost)
 
-    users[user_id]["dragons"] = dragons
-    users[user_id]["gold"] = user_data["gold"]
-    users[user_id]["last_train"] = user_data["last_train"]
+    user_data["duskar"] -= cost
+    user_data["dragons"] = dragons
+    users[user_id] = user_data
     save_users(users)
 
     await update.message.reply_text(msg, parse_mode="HTML")
 
 
+
 async def release(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    user_id = str(update.effective_user.id)
-    users = load_users()
-    user_data = users.get(user_id)
+        user_id = str(update.effective_user.id)
+        users = load_users()
+        user_data = users.get(user_id)
 
-    if not user_data:
-        await update.message.reply_text("❌ You are not registered. Use /start first.")
-        return
+        if not user_data:
+            await update.message.reply_text("❌ You are not registered. Use /start first.")
+            return
 
-    dragons = user_data.get("dragons", [])
-    if not dragons:
-        await update.message.reply_text("🐣 You don't have any dragons yet.")
-        return
+        dragons = user_data.get("dragons", [])
+        if not dragons:
+            await update.message.reply_text("🐣 You don't have any dragons yet.")
+            return
 
-    if not context.args:
-        await update.message.reply_text("🗑️ Usage: /release <dragon_number>")
-        return
+        if not context.args:
+            await update.message.reply_text("🗑️ Usage: /release <dragon_number>")
+            return
 
-    try:
-        index = int(context.args[0]) - 1
-        if index < 0 or index >= len(dragons):
-            raise ValueError
-    except ValueError:
-        await update.message.reply_text("❌ Invalid dragon number.")
-        return
+        try:
+            index = int(context.args[0]) - 1
+            if index < 0 or index >= len(dragons):
+                raise ValueError
+        except ValueError:
+            await update.message.reply_text("❌ Invalid dragon number.")
+            return
 
-    dragon = dragons.pop(index)
-    refund = dragon["level"] * 10 + dragon["power"] // 10
-    user_data["gold"] = user_data.get("gold", 0) + refund
-    users[user_id]["dragons"] = dragons
-    users[user_id]["gold"] = user_data["gold"]
-    save_users(users)
+        dragon = dragons.pop(index)
 
-    await update.message.reply_text(
-        f"🗑️ You released <b>{dragon['name']}</b>.\n"
-        f"💰 You earned <b>{refund} coins</b>.",
-        parse_mode="HTML"
-    )
+        # Safe refund calculation
+        level = dragon.get("level", 1)
+        power = dragon.get("power")
+        if power is None:
+            power = 100  # So power//10 = 10 duskar if power missing
+        try:
+            level = int(level)
+        except (TypeError, ValueError):
+            level = 1
+        try:
+            power = int(power)
+        except (TypeError, ValueError):
+            power = 100
 
-    import datetime
+        refund = level * 10 + power // 10
+
+        user_data["gold"] = user_data.get("gold", 0) + refund
+        users[user_id]["dragons"] = dragons
+        users[user_id]["gold"] = user_data["gold"]
+        save_users(users)
+
+        await update.message.reply_text(
+            f"🗑️ You released <b>{dragon['name']}</b>.\n"
+            f"💰 You earned <b>{refund} coins</b>.",
+            parse_mode="HTML"
+        )
+
+
+import datetime
 
 
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
@@ -707,6 +1041,8 @@ import random
 import datetime
 from telegram import Update
 from telegram.ext import ContextTypes, CommandHandler
+from datetime import datetime, timedelta
+
 
 USER_FILE = "users.json"
 
@@ -721,6 +1057,145 @@ def load_users():
 def save_users(data):
     with open(USER_FILE, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=2)
+
+USER_FILE = "users.json"
+
+def load_json(file):
+    if os.path.exists(file):
+        with open(file, "r", encoding="utf-8") as f:
+            return json.load(f)
+    return {}
+
+def save_json(file, data):
+    with open(file, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2)
+
+def can_earn(last_time, cooldown_minutes):
+    if not last_time:
+        return True
+    last = datetime.fromisoformat(last_time)
+    return datetime.now() - last >= timedelta(minutes=cooldown_minutes)
+    
+async def work(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    user_id = str(update.effective_user.id)
+    users = load_json(USER_FILE)
+    user = users.setdefault(user_id, {})
+
+    last_work = user.get("last_work")
+    if not can_earn(last_work, cooldown_minutes=180):  # 3 hour cooldown
+        next_time = datetime.fromisoformat(last_work) + timedelta(minutes=180)
+        time_left = next_time - datetime.now()
+        minutes = int(time_left.total_seconds() // 60)
+        await update.message.reply_text(f"🕒 You need to rest before working again. Try in {minutes} min.")
+        return
+
+    earned = 80  # Fixed Duskar amount
+    user["duskar"] = user.get("duskar", 0) + earned
+    user["last_work"] = datetime.now().isoformat()
+
+    save_json(USER_FILE, users)
+
+    await update.message.reply_text(
+        f"🔨 You worked hard and earned <b>{earned} Duskar</b>!\n"
+        f"💰 Your total Duskar: <b>{user['duskar']}</b>",
+        parse_mode="HTML"
+    )
+
+
+async def mine(update: Update, context: ContextTypes.DEFAULT_TYPE):
+        user_id = str(update.effective_user.id)
+        users = load_json("users.json")
+        user = users.setdefault(user_id, {})
+
+        cooldown = timedelta(minutes=90)
+        now = datetime.now()
+
+        last_mine_str = user.get("last_mine")
+        mine_date = user.get("mine_date")
+        mine_count = user.get("mine_count", 0)
+
+        # Reset mine_count if date changed
+        today_str = now.date().isoformat()
+        if mine_date != today_str:
+            mine_count = 0
+            user["mine_date"] = today_str
+            user["mine_count"] = 0
+
+        # Check if max 3 shifts reached
+        if mine_count >= 3:
+            await update.message.reply_text("⛏️ You’ve already completed 3 mining shifts today. Try again tomorrow!")
+            return
+
+        # Cooldown check
+        if last_mine_str:
+            last_mine = datetime.fromisoformat(last_mine_str)
+            if now - last_mine < cooldown:
+                next_time = last_mine + cooldown
+                minutes = int((next_time - now).total_seconds() // 60)
+                await update.message.reply_text(f"⏳ You’re tired! Try mining again in {minutes} min.")
+                return
+
+        # Successful mining
+        earned = random.randint(40, 100)
+        user["duskar"] = user.get("duskar", 0) + earned
+        user["last_mine"] = now.isoformat()
+        user["mine_count"] = mine_count + 1
+        save_json("users.json", users)
+
+        await update.message.reply_text(
+            f"⛏️ You mined some rare crystals and earned <b>{earned} Duskar</b>!\n"
+            f"💰 Total Duskar: <b>{user['duskar']}</b>\n"
+            f"📦 Mining shifts used today: <b>{user['mine_count']}/3</b>",
+            parse_mode="HTML"
+        )
+
+
+from datetime import datetime
+
+from datetime import datetime
+
+CHANNEL_USERNAME = "@Nexxxxxo_bots"  # 🔁 Replace with your actual channel username
+
+async def daily(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    user_id = str(update.effective_user.id)
+    users = load_json("users.json")
+    user = users.setdefault(user_id, {})
+
+    # Check channel membership
+    try:
+        member = await context.bot.get_chat_member(CHANNEL_USERNAME, user_id)
+        if member.status not in ("member", "creator", "administrator"):
+            raise ValueError("Not a member")
+    except:
+        await update.message.reply_text(
+            f"🔒 To claim your daily reward, join our official channel: {CHANNEL_USERNAME}\n"
+            f"Then try again with /daily.",
+            parse_mode="HTML"
+        )
+        return
+
+    # Check daily cooldown
+    last_daily = user.get("last_daily")
+    today = datetime.now().date()
+
+    if last_daily and datetime.fromisoformat(last_daily).date() == today:
+        await update.message.reply_text("📅 You've already claimed your daily reward today. Come back tomorrow!")
+        return
+
+    # Reward
+    user["duskar"] = user.get("duskar", 0) + 50
+    user["gems"] = user.get("gems", 0) + 2
+    user["last_daily"] = datetime.now().isoformat()
+    save_json("users.json", users)
+
+    await update.message.reply_text(
+        f"🎁 You received your daily reward!\n\n"
+        f"💰 <b>+50 Duskar</b>\n💎 <b>+2 Gems</b>\n\n"
+        f"Thanks for being part of our community!",
+        parse_mode="HTML"
+    )
+
+from datetime import datetime
 
 # === Cooldown check ===
 def check_cooldown(last_time: str, cooldown_minutes: int):
@@ -761,16 +1236,117 @@ async def dailyegg(update: Update, context: ContextTypes.DEFAULT_TYPE):
     else:
         await update.message.reply_text("😔 No egg found... check again later.")
 
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup
+
+from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
+from telegram.ext import ContextTypes, CallbackQueryHandler, CommandHandler
+
+# === MARKET COMMAND ===
 async def market(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    text = """
+╔═══🛒 <b>Dragon Market</b> ═══╗
+
+✨ <i>Welcome, brave tamer! Stock up for your next battle.</i>
+
+🧪 <b>Potions – Restore Dragon HP</b>
+━━━━━━━━━━━━━━━━━━━━━━━
+1️⃣ <b>Small Potion</b> – 🩸 Heals 20 HP  
+💰 <i>Cost:</i> 300 Duskar  |  <code>ID: 1</code>
+
+2️⃣ <b>Medium Potion</b> – 🩸 Heals 50 HP  
+💰 <i>Cost:</i> 800 Duskar  |  <code>ID: 2</code>
+
+3️⃣ <b>Large Potion</b> – 🩸 Heals 100 HP  
+💰 <i>Cost:</i> 1200 Duskar  |  <code>ID: 3</code>
+━━━━━━━━━━━━━━━━━━━━━━━
+
+🛍️ <b>To purchase:</b> <code>/buy &lt;item_id&gt;</code>  
+<i>Example:</i> <code>/buy 2</code>
+
+🔮 <i>More magical items arriving soon...</i>
+╚═══════════════════════════╝
+"""
+
+    keyboard = InlineKeyboardMarkup([
+        [
+            InlineKeyboardButton("1️⃣ Buy Small Potion", callback_data="buy_1"),
+            InlineKeyboardButton("2️⃣ Buy Medium Potion", callback_data="buy_2"),
+        ],
+        [
+            InlineKeyboardButton("3️⃣ Buy Large Potion", callback_data="buy_3"),
+        ]
+    ])
+
     await update.message.reply_text(
-        "🏪 <b>Dragon Market</b>\n\n"
-        "🚧 Market is under construction!\nSoon you’ll be able to:\n"
-        "• Buy rare eggs\n"
-        "• Purchase boosts\n"
-        "• Trade dragon gear\n\n"
-        "Stay tuned 👀",
+        text,
+        reply_markup=keyboard,
         parse_mode="HTML"
     )
+
+# === CALLBACK HANDLER FOR BUTTONS ===
+async def buy_button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    query = update.callback_query
+    await query.answer()
+
+    item_id = int(query.data.split("_")[1])
+    user_id = str(query.from_user.id)
+
+    await query.message.reply_text(
+        f"🛒 You selected to buy item ID: <b>{item_id}</b>\n"
+        f"💡 Use <code>/buy {item_id}</code> to confirm your purchase.",
+        parse_mode="HTML"
+    )
+
+ITEMS = {
+    1: {"name": "Small Potion", "heal": 20, "price": 300},
+    2: {"name": "Medium Potion", "heal": 50, "price": 800},
+    3: {"name": "Large Potion", "heal": 100, "price": 1200},
+}
+
+async def buy(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    user_id = str(update.effective_user.id)
+    users = load_json("users.json")
+    user = users.get(user_id)
+
+    if not user:
+        await update.message.reply_text("❌ You are not registered yet. Use /start to begin.")
+        return
+
+    if len(context.args) != 1 or context.args[0] not in ["1", "2", "3"]:
+        await update.message.reply_text("❌ Usage: /buy <item_id>\nAvailable: 1 (Small), 2 (Medium), 3 (Large)")
+        return
+
+    item_id = context.args[0]
+    prices = {"1": 300, "2": 800, "3": 1200}
+    names = {"1": "Small Potion", "2": "Medium Potion", "3": "Large Potion"}
+    cost = prices[item_id]
+
+    if user.get("duskar", 0) < cost:
+        await update.message.reply_text("❌ Not enough Duskar.")
+        return
+
+    user["duskar"] -= cost
+
+    # ✅ Ensure potions field exists
+    if "potions" not in user:
+        user["potions"] = {"1": 0, "2": 0, "3": 0}
+
+    user["potions"][item_id] += 1
+    users[user_id] = user
+    save_json("users.json", users)
+
+    await update.message.reply_text(
+        f"✅ Purchased <b>{names[item_id]}</b> for {cost} Duskar.",
+        parse_mode="HTML"
+    )
+users = load_json("users.json")
+
+for uid, user in users.items():
+    if "potions" not in user:
+        user["potions"] = {"1": 0, "2": 0, "3": 0}
+
+save_json("users.json", users)
+
 
 async def rename(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_id = str(update.effective_user.id)
@@ -925,27 +1501,37 @@ def load_json(file):
         return json.load(f)
 
 async def leaderboard(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    users = load_json("users.json")
+        users = load_json("users.json")
 
-    top_duskar = sorted(users.items(), key=lambda x: x[1].get("duskar", 0), reverse=True)[:5]
-    top_gems = sorted(users.items(), key=lambda x: x[1].get("gems", 0), reverse=True)[:5]
-    top_wins = sorted(users.items(), key=lambda x: x[1].get("wins", 0), reverse=True)[:5]
+        top_duskar = sorted(users.items(), key=lambda x: x[1].get("duskar", 0), reverse=True)[:3]
+        top_gems = sorted(users.items(), key=lambda x: x[1].get("gems", 0), reverse=True)[:3]
+        top_wins = sorted(users.items(), key=lambda x: x[1].get("wins", 0), reverse=True)[:3]
+        top_tames = sorted(users.items(), key=lambda x: len(x[1].get("dragons", [])), reverse=True)[:3]
+        top_explores = sorted(users.items(), key=lambda x: x[1].get("explore_count", 0), reverse=True)[:3]
 
-    def format_list(title, emoji, data, key):
-        lines = [f"<b>{emoji} {title}</b>"]
-        for i, (uid, user) in enumerate(data, 1):
-            name = user.get("name", "Unknown")
-            value = user.get(key, 0)
-            lines.append(f"{i}. {name} — <b>{value}</b>")
-        return "\n".join(lines)
+        def format_list(title, emoji, data, key_fn):
+            lines = [f"<b>{emoji} {title}</b>\n"]
+            for i, (uid, user) in enumerate(data, 1):
+                name = user.get("name", "Unknown")
+                value = key_fn(user)
+                medal = ["🥇", "🥈", "🥉"][i - 1]
+                lines.append(f"{medal} <b>{name}</b> — {value}")
+            return "\n".join(lines)
 
-    msg = "\n\n".join([
-        format_list("Top Duskar Holders", "💰", top_duskar, "duskar"),
-        format_list("Top Gem Collectors", "💎", top_gems, "gems"),
-        format_list("Top Battle Winners", "⚔️", top_wins, "wins")
-    ])
+        msg = (
+            "<u><b>🏆 DragonDusk Leaderboard</b></u>\n"
+            "🔥 Only the strongest make it to the top!\n\n" +
 
-    await update.message.reply_text(msg, parse_mode="HTML")
+            format_list("Top Duskar Holders", "💰", top_duskar, lambda u: u.get("duskar", 0)) + "\n\n" +
+            format_list("Top Gem Collectors", "💎", top_gems, lambda u: u.get("gems", 0)) + "\n\n" +
+            format_list("Top Battle Winners", "⚔️", top_wins, lambda u: u.get("wins", 0)) + "\n\n" +
+            format_list("Most Dragons Tamed", "🐉", top_tames, lambda u: len(u.get("dragons", []))) + "\n\n" +
+            format_list("Most Explores", "🧭", top_explores, lambda u: u.get("explore_count", 0))
+        )
+
+        await update.message.reply_text(msg, parse_mode="HTML")
+
+
 
 from telegram import Update
 from telegram.ext import CommandHandler, ContextTypes
@@ -1007,75 +1593,655 @@ async def sendduskar(update: Update, context: ContextTypes.DEFAULT_TYPE):
         f"🎉 To: {mention}",
         parse_mode="Markdown"
     )
-PORT = int(os.environ.get("PORT", 8080))
-# === Run Bot ===
-WEBHOOK_URL = "https://zeroth-zelma-tsrovee-4a3e90ef.koyeb.app/webhook"
+
+async def sendgems(update: Update, context: ContextTypes.DEFAULT_TYPE):
+        sender_id = update.effective_user.id
+        if sender_id != BOT_OWNER_ID:
+            await update.message.reply_text("❌ You are not authorized to use this command.")
+            return
+
+        # Check if command is reply-based
+        if update.message.reply_to_message:
+            target_user = update.message.reply_to_message.from_user
+            user_id = str(target_user.id)
+            mention = f"[{target_user.first_name}](tg://user?id={user_id})"
+        elif len(context.args) >= 2:
+            user_id = str(context.args[0])
+            amount_text = context.args[1]
+            mention = f"`{user_id}`"  # fallback if no username
+        else:
+            await update.message.reply_text("Usage:\n➡️ /sendgems <user_id> <amount>\nOr reply to a user with: `/sendgems <amount>`", parse_mode="Markdown")
+            return
+
+        # Parse amount
+        try:
+            amount = int(context.args[1]) if not update.message.reply_to_message else int(context.args[0])
+            if amount <= 0:
+                raise ValueError
+        except:
+            await update.message.reply_text("❌ Invalid Gems amount.", parse_mode="Markdown")
+            return
+
+        # Load and update users
+        users = load_users()
+        if user_id not in users:
+            users[user_id] = {"duskar": 0, "gems": 0, "wins": 0, "losses": 0}
+        users[user_id]["gems"] += amount
+        save_users(users)
+
+        # Aesthetic confirmation
+        await update.message.reply_text(
+            f"💸 *gems Transfer Successful!*\n\n"
+            f"👑 Sent: *{amount} gems*\n"
+            f"🎉 To: {mention}",
+            parse_mode="Markdown"
+        )
 
 
-app = Flask(__name__)
-bot_app = ApplicationBuilder().token(TOKEN).build()
 
-# === Register all your handlers ===
-bot_app.add_handler(CommandHandler("start", start))
-bot_app.add_handler(CommandHandler("status", status))
-bot_app.add_handler(CommandHandler("profile", profile))
-bot_app.add_handler(CommandHandler("inventory", inventory))
-bot_app.add_handler(CommandHandler("balance", balance))
-bot_app.add_handler(CommandHandler("hatch", hatch))
-bot_app.add_handler(CommandHandler("id", myid))
-bot_app.add_handler(CommandHandler("cooldowns", cooldowns))
-bot_app.add_handler(CommandHandler("fortune", fortune))
-bot_app.add_handler(CommandHandler("dailyegg", dailyegg))
-bot_app.add_handler(CommandHandler("userstats", userstats))
-bot_app.add_handler(CommandHandler("broadcast", broadcast))
-bot_app.add_handler(CommandHandler("challenge", challenge))
-bot_app.add_handler(CommandHandler("work", work))
-bot_app.add_handler(CommandHandler("mine", mine))
-bot_app.add_handler(CommandHandler("daily", daily))
-bot_app.add_handler(CommandHandler("leaderboard", leaderboard))
-bot_app.add_handler(CommandHandler("dragons", dragons))
-bot_app.add_handler(CommandHandler("feed", feed))
-bot_app.add_handler(CommandHandler("train", train))
-bot_app.add_handler(CommandHandler("release", release))
-bot_app.add_handler(CommandHandler("market", market))
-bot_app.add_handler(CommandHandler("getegg", getegg))
-bot_app.add_handler(CommandHandler("eggs", eggs))
-bot_app.add_handler(CommandHandler("eghatch", eghatch))
-bot_app.add_handler(CallbackQueryHandler(select_dragon_callback, pattern="^selectdragon_"))
-bot_app.add_handler(CallbackQueryHandler(handle_move, pattern="^move_"))
-bot_app.add_handler(CallbackQueryHandler(lambda u, c: u.callback_query.answer(), pattern="^ignore$"))
-bot_app.add_handler(MessageHandler(filters.Sticker.ALL, get_sticker_id))
-bot_app.add_handler(CommandHandler("rgroup", registergroup))
-bot_app.add_handler(CommandHandler("addmod", addmod))
-bot_app.add_handler(CommandHandler("mods", mods))
-bot_app.add_handler(CommandHandler("rmmod", rmmod))
-bot_app.add_handler(CommandHandler("cancel", cancel_battle))
-bot_app.add_handler(CommandHandler("createclan", createclan))
-bot_app.add_handler(CommandHandler("joinclan", joinclan))
-bot_app.add_handler(CommandHandler("myclan", myclan))
-bot_app.add_handler(CommandHandler("leaveclan", leaveclan))
-bot_app.add_handler(CommandHandler("disband", disbandclan))
-bot_app.add_handler(CommandHandler("clanchallenge", clanchallenge))
-bot_app.add_handler(CallbackQueryHandler(accept_clanwar, pattern=r"^accept_clanwar\|"))
-bot_app.add_handler(CommandHandler("sendusks", sendduskar))
-bot_app.add_handler(ChatMemberHandler(bot_added_or_promoted, ChatMemberHandler.MY_CHAT_MEMBER))
 
-# === Webhook Endpoint ===
-@flask_app.route("/webhook", methods=["POST"])
-async def webhook():
-    """Receives updates from Telegram via webhook and sends them to bot_app."""
-    update = Update.de_json(request.get_json(force=True), bot_app.bot)
-    await bot_app.process_update(update)
-    return "ok"
 
-# === Webhook Setup ===
-async def set_webhook():
-    await bot_app.bot.set_webhook(WEBHOOK_URL)
-    print(f"✅ Webhook set to {WEBHOOK_URL}")
+from datetime import datetime
+import json
+from telegram import Update
+from telegram.ext import ContextTypes
 
-# === Start Everything ===
+# === CONFIG ===
+LOG_GROUP_ID = -1002834714399  # Your actual log group ID
+GROUP_LINK = "https://t.me/Dragon_Realm"
+TASK_FILE = "tasks.json"
+
+def load_tasks():
+    try:
+        with open(TASK_FILE, "r") as f:
+            return json.load(f)
+    except:
+        return {}
+
+def save_tasks(data):
+    with open(TASK_FILE, "w") as f:
+        json.dump(data, f, indent=2)
+
+async def task(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    user = update.effective_user
+    chat = update.effective_chat
+    user_id = str(user.id)
+    week = datetime.utcnow().strftime("%Y-%U")
+    data = load_tasks()
+    count = data.get(user_id, {}).get(week, 0)
+
+    await update.message.reply_text(
+        f"📊 *Weekly Message Challenge*\n"
+        f"━━━━━━━━━━━━━━━━━━━━━━━\n"
+        f"👤 Name: `{user.first_name}`\n"
+        f"🗓️ Week: `{week}`\n"
+        f"💬 Tracked Messages: `{count}/2500`\n"
+        f"🏆 Reward on 2500:\n"
+        f"  ├ 💰 *500 Duskar*\n"
+        f"  ├ 💎 *Gems* (chance)\n"
+        f"  └ 🥚 *Rare Egg* (low chance)\n\n"
+        f"📝 Only messages in [Log Group]({GROUP_LINK}) are counted!",
+        parse_mode="Markdown",
+        disable_web_page_preview=True
+    )
+
+async def track_messages(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if update.effective_chat.id != LOG_GROUP_ID:
+        return
+
+    user_id = str(update.effective_user.id)
+    week = datetime.utcnow().strftime("%Y-%U")
+    data = load_tasks()
+
+    if user_id not in data:
+        data[user_id] = {}
+    if week not in data[user_id]:
+        data[user_id][week] = 0
+
+    data[user_id][week] += 1
+    save_tasks(data)
+
+async def get_file_id(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if update.message.photo:
+        await update.message.reply_text(f"File ID: {update.message.photo[-1].file_id}")
+
+
+from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
+from telegram.ext import ContextTypes
+
+
+WELCOME_IMAGE = "AgACAgUAAxkBAAIJbGhOMnHkJWB3ON9pycZ49SBnRUDXAAL8yjEbZEN5VrSoxWjQ5f5oAQADAgADeQADNgQ"  # 🔁 Replace with your custom image
+
+async def welcome_new_member(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    chat = update.effective_chat
+    if not update.message or not update.message.new_chat_members:
+        return
+
+    if chat.id != LOG_GROUP_ID:
+        return
+
+    bot_username = (await context.bot.get_me()).username
+    guide_url = "https://t.me/Nexxxxxo_bots"
+
+    for member in update.message.new_chat_members:
+        if member.is_bot:
+            continue
+
+        welcome_msg = f"""
+╭━━━━━━━◆༻🐉༺◆━━━━━━━╮
+🔥 Welcome, [{member.full_name}](tg://user?id={member.id})! 🔥
+╰━━━━━━━◆༻🌑༺◆━━━━━━━╯
+
+🌟 *The world of DragonDusk awaits...*
+🛡️ Train mighty dragons  
+🥚 Hatch legendary eggs  
+⚔️ Battle for glory
+
+💎 Type /start and let your legacy begin  
+🔮 May the dusk guide your path...
+"""
+
+        keyboard = InlineKeyboardMarkup([
+            [InlineKeyboardButton("🌱 Begin Journey", callback_data="help_main")],
+            [InlineKeyboardButton("📘 View Guide", url=guide_url)],
+            [InlineKeyboardButton("🆘 Support", url="https://t.me/Nexxxxxo_bots")]
+        ])
+
+        try:
+            await context.bot.send_photo(
+                chat_id=chat.id,
+                photo=WELCOME_IMAGE,
+                caption=welcome_msg,
+                parse_mode="Markdown",
+                reply_markup=keyboard
+            )
+        except Exception as e:
+            print(f"[WELCOME ERROR] {e}")
+
+async def debug(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    print("📥 Message received:", update.message.text)
+    await update.message.reply_text("✅ Bot received your message.")
+
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
+from telegram.ext import ContextTypes
+from html import escape
+
+DRAGONS_PER_PAGE = 10
+DRAGONS_JSON_PATH = "dragons.json"
+
+def load_json(path):
+    import json
+    with open(path, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+def rarity_stars(rarity):
+    stars_map = {
+        "Common": "★☆☆☆☆",
+        "Uncommon": "★★☆☆☆",
+        "Rare": "★★★☆☆",
+        "Epic": "★★★★☆",
+        "Legendary": "★★★★★"
+    }
+    return stars_map.get(rarity, escape(rarity))
+
+def build_dragons_page(dragons, page):
+    start = page * DRAGONS_PER_PAGE
+    end = start + DRAGONS_PER_PAGE
+    page_dragons = dragons[start:end]
+
+    lines = []
+    for i, (name, data) in enumerate(page_dragons, start=start + 1):
+        element = escape(data.get("element", "Unknown"))
+        rarity = data.get("rarity", "Common")
+        stars = rarity_stars(rarity)
+
+        lines.append(
+            f"<b>{i}.</b> 🐲 <b>{escape(name)}</b>\n"
+            f" • Element: <i>{element}</i>\n"
+            f" • Rarity: {stars}\n"
+        )
+
+    total_pages = (len(dragons) - 1) // DRAGONS_PER_PAGE + 1
+    header = (
+        "╔════════════════════════════╗\n"
+        f"     🐉 <b>Dragon List — Page {page + 1}/{total_pages}</b> 🐉\n"
+        "╚════════════════════════════╝\n\n"
+    )
+
+    footer = f"\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+
+    text = header + "\n".join(lines) + footer
+
+    buttons = []
+    if page > 0:
+        buttons.append(InlineKeyboardButton("⬅️ Back", callback_data=f"dragons_page_{page - 1}"))
+    if end < len(dragons):
+        buttons.append(InlineKeyboardButton("Next ➡️", callback_data=f"dragons_page_{page + 1}"))
+
+    reply_markup = InlineKeyboardMarkup([buttons]) if buttons else None
+    return text, reply_markup
+
+async def dragonslist(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    dragons = list(load_json(DRAGONS_JSON_PATH).items())
+    page = 0  # First page
+    text, keyboard = build_dragons_page(dragons, page)
+    await update.message.reply_text(text, parse_mode="HTML", reply_markup=keyboard)
+
+async def dragonslist_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    query = update.callback_query
+    await query.answer()
+
+    data = query.data
+    if not data.startswith("dragons_page_"):
+        return
+
+    page = int(data.split("_")[-1])
+    dragons = list(load_json(DRAGONS_JSON_PATH).items())
+    text, keyboard = build_dragons_page(dragons, page)
+
+    await query.edit_message_text(text=text, parse_mode="HTML", reply_markup=keyboard)
+
+async def dragonsinfo(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if not context.args or not context.args[0].isdigit():
+        await update.message.reply_text(
+            "❌ Usage: /dragonsinfo <dragon_id>\nGet full stats of a dragon by its ID from the list."
+        )
+        return
+
+    dragon_id = int(context.args[0]) - 1
+    dragons = list(load_json(DRAGONS_JSON_PATH).items())
+
+    if dragon_id < 0 or dragon_id >= len(dragons):
+        await update.message.reply_text("❌ Invalid dragon ID.")
+        return
+
+    name, data = dragons[dragon_id]
+
+    element = escape(data.get("element", "Unknown"))
+    base_hp = data.get("base_hp", "?")
+    rarity = data.get("rarity", "Common")
+    moves = data.get("moves", [])
+
+    # Build moveset text with styling
+    move_lines = []
+    for move in moves:
+        emoji = "💥" if move["type"] == "physical" else "🌪️"
+        move_lines.append(
+            f"┊ {emoji} <b>{escape(move['name'])}</b>\n"
+            f"┊    🌀 <i>{escape(move['type'].capitalize())}</i> | 🔋 <b>{move['power']}</b>"
+        )
+
+    msg = (
+        "╔════════════════════╗\n"
+        f"    🐲 <b>Dragon #{dragon_id + 1} — Full Stats</b>\n"
+        "╚════════════════════╝\n\n"
+        f"🏷️ <b>Name:</b> {escape(name)}\n"
+        f"🌈 <b>Element:</b> {element}\n"
+        f"⭐ <b>Rarity:</b> {rarity_stars(rarity)}\n"
+        f"❤️ <b>Base HP:</b> {base_hp}\n\n"
+        "📜 <b>Moveset:</b>\n" + "\n".join(move_lines)
+    )
+
+    await update.message.reply_text(msg, parse_mode="HTML")
+
+# Add handlers in your bot setup:
+# app.add_handler(CommandHandler("dragonslist", dragonslist))
+# app.add_handler(CallbackQueryHandler(dragonslist_callback, pattern=r"^dragons_page_\d+$"))
+# app.add_handler(CommandHandler("dragonsinfo", dragonsinfo))
+
+
+import json
+from collections import defaultdict
+from datetime import datetime, timedelta
+from telegram import Update
+from telegram.ext import (
+    ApplicationBuilder, CommandHandler, CallbackQueryHandler,
+    MessageHandler, ChatMemberHandler, ContextTypes, CallbackContext, filters
+)
+from keep_alive import keep_alive  # For Replit Uptime
+
+
+SECOND_LOG_GROUP_ID = -1002689253330  # Replace with your log group ID
+
+# === Globals for Tracking ===
+COMMAND_USAGE = defaultdict(int)
+BOT_START_TIME = datetime.now()
+
+# === Helper: Get Mod IDs ===
+def get_mod_ids():
+    try:
+        with open("mod.json", "r") as f:
+            mod_data = json.load(f)
+        return [mod["id"] for mod in mod_data]
+    except Exception:
+        return []
+
+# === Command Logger ===
+async def command_logger(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if update.message and update.message.text:
+        command = update.message.text.strip().split()[0]
+        if command.startswith("/"):
+            COMMAND_USAGE[command] += 1
+
+            # Log to group
+            user = update.effective_user
+            chat_type = update.message.chat.type
+            timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            log_text = (
+                f"📥 <b>Command Used</b>\n"
+                f"👤 <b>User:</b> {user.full_name} (ID: <code>{user.id}</code>)\n"
+                f"💬 <b>Command:</b> <code>{command}</code>\n"
+                f"🗂 <b>Chat Type:</b> {chat_type}\n"
+                f"🕒 <b>Time:</b> {timestamp}"
+            )
+            try:
+                await context.bot.send_message(
+                    chat_id=SECOND_LOG_GROUP_ID,
+                    text=log_text,
+                    parse_mode="HTML"
+                )
+            except Exception as e:
+                print(f"Logging failed: {e}")
+
+# === Command Usage Stats ===
+async def command_stats(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    user_id = update.effective_user.id
+    if user_id not in get_mod_ids():
+        return  # silently ignore if not mod
+
+    now = datetime.now()
+    uptime = now - BOT_START_TIME
+    total_seconds = uptime.total_seconds()
+    total_minutes = total_seconds / 60
+
+    total_commands = sum(COMMAND_USAGE.values())
+    per_min = round(total_commands / total_minutes, 2) if total_minutes > 0 else 0
+    per_sec = round(total_commands / total_seconds, 2) if total_seconds > 0 else 0
+
+    top_commands = sorted(COMMAND_USAGE.items(), key=lambda x: x[1], reverse=True)[:5]
+    top_text = "\n".join([f"🔹 <b>{cmd}</b>: <code>{count}</code>" for cmd, count in top_commands]) or "None used yet."
+
+    msg = (
+        "📊 <b>Bot Command Analytics</b>\n"
+        "━━━━━━━━━━━━━━━━━━━━━━\n"
+        f"⏱️ <b>Uptime:</b> <code>{str(uptime).split('.')[0]}</code>\n"
+        f"📨 <b>Total Commands:</b> <code>{total_commands}</code>\n"
+        f"📈 <b>Rate:</b> <code>{per_min}</code>/min | <code>{per_sec}</code>/sec\n"
+        "━━━━━━━━━━━━━━━━━━━━━━\n"
+        "🏆 <b>Top Commands:</b>\n" + top_text
+    )
+
+    await update.message.reply_text(msg, parse_mode="HTML")
+
+ # Make sure only you can use it
+# Replace with your actual Telegram user ID
+OWNER_ID = 6020886539
+
+import json
+
+def load_dragons():
+    with open("dragons.json", "r") as f:
+        return json.load(f)
+
+
+async def giftdrack(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    sender = update.effective_user
+
+    # ✅ Owner check
+    if sender.id != OWNER_ID:
+        return await update.message.reply_text("❌ You are not authorized to use this command.")
+
+    # ✅ Reply check
+    if not update.message.reply_to_message:
+        return await update.message.reply_text("⚠️ Please reply to the user you want to gift the dragon to.")
+
+    # ✅ Dragon name check
+    if len(context.args) == 0:
+        return await update.message.reply_text("🐉 Please provide a dragon name.\nUsage: /giftdrack <DragonName>")
+
+    dragon_name = " ".join(context.args).strip()
+    receiver = update.message.reply_to_message.from_user
+    receiver_id = str(receiver.id)
+
+    # ✅ Load user data
+    users = load_users()
+    dragons_data = load_dragons()  # This should return your dragons.json content as a dict
+
+    # ✅ Check if dragon exists
+    dragon = dragons_data.get(dragon_name)
+    if not dragon:
+        return await update.message.reply_text(f"❌ Dragon named '{dragon_name}' not found in database.")
+
+    # ✅ Format new dragon object
+    new_dragon = {
+        "name": dragon_name,
+        "element": dragon["element"],
+        "level": 1,
+        "xp": 0,
+        "power": max(move["power"] for move in dragon["moves"]),
+        "base_hp": dragon["base_hp"]
+    }
+
+    users.setdefault(receiver_id, {}).setdefault("dragons", []).append(new_dragon)
+    save_users(users)
+
+    # ✅ Special message if it’s Elementis Infinitum
+    if dragon_name.lower() == "elementis infinitum":
+        return await update.message.reply_html(
+            f"""
+🌌✨ <b>𝐋𝐄𝐆𝐄𝐍𝐃 𝐁𝐎𝐑𝐍</b> ✨🌌
+
+⚡ The skies shatter. The cosmos trembles.
+
+🧝‍♂️ <b>{receiver.first_name}</b> now wields the Ultimate Dragon —  
+🐉 <b>Elementis Infinitum</b> — The Cosmic Sovereign!
+
+🔥 <b>250 HP</b> • 💥 <b>Over 120 Power</b> • 🌠 <i>Legend Awakened.</i>
+"""
+        )
+
+    # ✅ Default gift message
+    await update.message.reply_html(
+        f"""
+🎁✨ <b>𝐃𝐑𝐀𝐂𝐎𝐍𝐈𝐂 𝐆𝐈𝐅𝐓 𝐔𝐍𝐋𝐎𝐂𝐊𝐄𝐃!</b> ✨🎁
+
+🌌 <i>A ripple trembles through the skies...</i>
+
+👑 <b>{sender.first_name}</b> has gifted a dragon —  
+🐉 <b>{dragon_name}</b>  
+to 🧝‍♂️ <b>{receiver.first_name}</b>!
+
+💫 The stars align as destiny unfolds...
+"""
+    )
+
+from telegram.constants import ParseMode
+from telegram.ext import ContextTypes
+from telegram import Update
+
+BOT_OWNER_ID = 6020886539  # Replace with your Telegram user ID
+
+
+
+async def dragon_master_joined(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    try:
+        member = update.chat_member
+        user = member.new_chat_member.user
+
+        if user.id != BOT_OWNER_ID:
+            return  # Ignore non-owner joins
+
+        chat = update.effective_chat
+        caption = f"""
+🔥🐉 <b>⟪ DRAGON MASTER HAS ARRIVED ⟫</b> 🐉🔥
+
+🌪️ The skies roar… the flames rise...
+⚡ <b>The one who commands dragons has entered the realm.</b>
+
+👑 <b>{user.full_name}</b> has joined this battlefield!
+━━━━━━━━━━━━━━━━━━━━━━━
+⚔️ <i>Let the legend continue...</i>
+"""
+
+        photos = await context.bot.get_user_profile_photos(user.id, limit=1)
+        if photos.total_count > 0:
+            await context.bot.send_photo(
+                chat_id=chat.id,
+                photo=photos.photos[0][-1].file_id,
+                caption=caption,
+                parse_mode=ParseMode.HTML
+            )
+        else:
+            await context.bot.send_message(
+                chat_id=chat.id,
+                text=caption,
+                parse_mode=ParseMode.HTML
+            )
+    except Exception as e:
+        print(f"[ERROR] dragon_master_joined: {e}")
+        
+import asyncio
+import nest_asyncio
+from telegram.error import NetworkError
+from telegram.ext import (
+    ApplicationBuilder, CommandHandler, MessageHandler, CallbackQueryHandler,
+    filters, ChatMemberHandler
+)
+from keep_alive import keep_alive
+
+# === Enable nested event loop for Replit ===
+nest_asyncio.apply()
+
+# === Bot Token ===
+TOKEN = "8040202761:AAF_HEGJxbZjKsgJANNQQRP4ahXftlMsqCQ"
+
+# === Keep Replit Alive ===
+keep_alive()
+
+# === Build Bot Application ===
+app = ApplicationBuilder().token(TOKEN).build()
+
+# === Register Handlers ===
+
+# 🧠 Command Logger
+app.add_handler(MessageHandler(filters.COMMAND, command_logger), group=1)
+
+# 📜 Core Commands
+app.add_handler(CommandHandler("start", start))
+app.add_handler(CommandHandler("status", status))
+app.add_handler(CommandHandler("profile", profile))
+app.add_handler(CommandHandler("inventory", inventory))
+app.add_handler(CommandHandler("buy", buy))
+app.add_handler(CommandHandler("balance", balance))
+app.add_handler(CommandHandler("hatch", hatch))
+app.add_handler(CommandHandler("id", myid))
+app.add_handler(CommandHandler("gift", gift))
+app.add_handler(CommandHandler("send", send))
+app.add_handler(CommandHandler("debug", debug))
+app.add_handler(CommandHandler("drackstats", drackstats))
+app.add_handler(CommandHandler("cooldowns", cooldowns))
+app.add_handler(CommandHandler("fortune", fortune))
+app.add_handler(CommandHandler("dailyegg", dailyegg))
+app.add_handler(CommandHandler("userstats", userstats))
+app.add_handler(CommandHandler("broadcast", broadcast))
+app.add_handler(CommandHandler("challenge", challenge))
+app.add_handler(CommandHandler("work", work))
+app.add_handler(CommandHandler("mine", mine))
+app.add_handler(CommandHandler("daily", daily))
+app.add_handler(CommandHandler("leaderboard", leaderboard))
+app.add_handler(CommandHandler("region", region))
+app.add_handler(CommandHandler("travel", travel))
+app.add_handler(CommandHandler("dracklist", dragonslist))
+app.add_handler(CallbackQueryHandler(dragonslist_callback, pattern=r"^dragons_page_\d+$")) 
+app.add_handler(CommandHandler("drackinfo", dragonsinfo))
+
+
+# 🗺️ Region UI
+app.add_handler(CallbackQueryHandler(show_region_details, pattern=r"^region_"))
+app.add_handler(CallbackQueryHandler(region_back, pattern="^region_back$"))
+
+# 🐉 Dragon System
+app.add_handler(CommandHandler("dragons", dragons))
+app.add_handler(CommandHandler("feed", feed))
+app.add_handler(CommandHandler("train", train))
+app.add_handler(CommandHandler("release", release))
+app.add_handler(CommandHandler("market", market))
+app.add_handler(CommandHandler("Wheremi", whereami))
+
+# 🥚 Egg System
+app.add_handler(CommandHandler("getegg", getegg))
+app.add_handler(CommandHandler("eggs", eggs))
+app.add_handler(CommandHandler("eghatch", eghatch))
+
+# 📚 Guides
+app.add_handler(CommandHandler("guide", guide))
+app.add_handler(CommandHandler("stats", command_stats))
+app.add_handler(CommandHandler("giftdrack", giftdrack))
+
+# 🔘 Inline Button Handlers
+app.add_handler(CallbackQueryHandler(select_dragon_callback, pattern=r"^selectdragon_"))
+app.add_handler(CallbackQueryHandler(handle_move, pattern=r"^move_"))
+app.add_handler(CallbackQueryHandler(help_callback, pattern=r"^help_"))
+app.add_handler(CallbackQueryHandler(lambda u, c: u.callback_query.answer(), pattern=r"^ignore$"))
+app.add_handler(CallbackQueryHandler(buy_button_handler, pattern=r"^buy_\d+$"))
+app.add_handler(ChatMemberHandler(dragon_master_joined, ChatMemberHandler.CHAT_MEMBER))
+
+# 👥 Group Features
+app.add_handler(CommandHandler("rgroup", registergroup))
+app.add_handler(CommandHandler("addmod", addmod))
+app.add_handler(CommandHandler("mods", mods))
+app.add_handler(CommandHandler("rmmod", rmmod))
+app.add_handler(CommandHandler("cancel", cancel_battle))
+app.add_handler(CommandHandler("task", task))
+app.add_handler(CommandHandler("missions", missions))
+
+
+# 🛡️ Clan System
+app.add_handler(CommandHandler("createclan", createclan))
+app.add_handler(CommandHandler("joinclan", joinclan))
+app.add_handler(CommandHandler("myclan", myclan))
+app.add_handler(CommandHandler("leaveclan", leaveclan))
+app.add_handler(CommandHandler("disband", disbandclan))
+app.add_handler(CommandHandler("clanchallenge", clanchallenge))
+app.add_handler(CallbackQueryHandler(accept_clanwar, pattern=r"^accept_clanwar\|"))
+app.add_handler(CallbackQueryHandler(select_pve_dragon, pattern=r"^select_pve_dragon\|"))
+app.add_handler(CallbackQueryHandler(pve_move_handler, pattern=r"^pve_move\|"))
+app.add_handler(CallbackQueryHandler(pve_flee, pattern="^pve_flee$"))
+app.add_handler(CallbackQueryHandler(pve_tame, pattern="^pve_tame$"))
+app.add_handler(CommandHandler("minigames", minigames))
+app.add_handler(CallbackQueryHandler(handle_game_choice))
+
+
+# 💰 Currency Transfers
+app.add_handler(CommandHandler("sendusks", sendduskar))
+app.add_handler(CommandHandler("sendgems", sendgems))
+
+# 🆘 Help
+app.add_handler(CommandHandler("help", help_command))
+
+# 🛠 Background Tasks
+app.add_handler(MessageHandler(filters.TEXT & filters.ChatType.GROUPS, track_messages))
+app.add_handler(MessageHandler(filters.StatusUpdate.NEW_CHAT_MEMBERS, welcome_new_member))
+app.add_handler(MessageHandler(filters.PHOTO, get_file_id))
+
+# 🔄 Bot Lifecycle Events
+app.add_handler(ChatMemberHandler(bot_added_or_promoted, ChatMemberHandler.MY_CHAT_MEMBER))
+
+# === Run Bot Safely ===
+async def main():
+    print("🐉 DragonDusk is starting...")
+    try:
+        await app.run_polling()
+    except NetworkError:
+        print("⚠️ Network error. Retrying in 10 seconds...")
+        await asyncio.sleep(10)
+    except Exception as e:
+        print(f"❌ Unexpected error: {e}")
+        await asyncio.sleep(10)
+
+# === Entry Point ===
 if __name__ == "__main__":
-    print("🐉 DragonDusk Bot is launching...")
+    asyncio.run(main())
 
     # Start webhook setup before Flask runs
     asyncio.get_event_loop().run_until_complete(set_webhook())
