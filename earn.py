@@ -5,18 +5,11 @@ from telegram.ext import ContextTypes
 import json
 import os
 from main import LOG_GROUP_ID
+from db import load_json, save_json
 
 USER_FILE = "users.json"
 
-def load_json(file):
-    if os.path.exists(file):
-        with open(file, "r", encoding="utf-8") as f:
-            return json.load(f)
-    return {}
 
-def save_json(file, data):
-    with open(file, "w", encoding="utf-8") as f:
-        json.dump(data, f, indent=2)
 
 def can_earn(last_time, cooldown_minutes):
     if not last_time:
