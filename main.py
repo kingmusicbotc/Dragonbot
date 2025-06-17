@@ -2220,17 +2220,15 @@ async def main():
     # 🔄 Bot Lifecycle Events
     app.add_handler(ChatMemberHandler(bot_added_or_promoted, ChatMemberHandler.MY_CHAT_MEMBER))
 
-    # === Polling + Safe Shutdown ===
+    # === Polling + Safe Manual Startup + Shutdown ===
     try:
+        await app.initialize()
+        await app.start()
         await app.run_polling()
-    except NetworkError:
-        print("⚠️ Network error. Retrying soon...")
     except Exception as e:
         print(f"❌ Unexpected error: {e}")
-    finally:
         try:
-            if app.running:
-                await app.shutdown()
+            await app.shutdown()
         except Exception as shutdown_error:
             print(f"⚠️ Shutdown failed: {shutdown_error}")
 
