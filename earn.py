@@ -4,6 +4,7 @@ from telegram import Update
 from telegram.ext import ContextTypes
 import json
 import os
+from main import LOG_GROUP_ID
 
 USER_FILE = "users.json"
 
@@ -97,3 +98,72 @@ async def daily(update: Update, context: ContextTypes.DEFAULT_TYPE):
         f"💰 Total Duskar: <b>{user['duskar']}</b>",
         parse_mode="HTML"
     )
+
+import json
+from datetime import datetime
+
+TASK_FILE = "tasks.json"
+
+def load_tasks():
+    try:
+        with open(TASK_FILE, "r") as f:
+            return json.load(f)
+    except:
+        return {}
+
+def save_tasks(data):
+    with open(TASK_FILE, "w") as f:
+        json.dump(data, f, indent=2)
+
+async def track_messages(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if update.effective_chat.id != LOG_GROUP_ID:
+        return
+    user_id = str(update.effective_user.id)
+    data = load_tasks()
+    week = datetime.utcnow().strftime("%Y-%U")
+
+    if user_id not in data:
+        data[user_id] = {}
+    if week not in data[user_id]:
+        data[user_id][week] = 0
+
+    data[user_id][week] += 1
+    save_tasks(data)
+
+async def task(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    user_id = str(update.effective_user.id)
+    data = load_tasks()
+    week = datetime.utcnow().strftime("%Y-%U")
+    count = data.get(user_id, {}).get(week, 0)
+    in_log_group = update.effective_chat.id == LOG_GROUP_ID
+
+    def generate_progress_bar(count, total=2500, parts=10):
+        filled = int((count / total) * parts)
+        return "✅ " * parts if filled >= parts else "🔸" * filled + "⚪" * (parts - filled)
+
+    bar = generate_progress_bar(count)
+
+    base = (
+        f"🎯 *Weekly Task Challenge*\n\n"
+        f"👤 User: `{update.effective_user.first_name}`\n"
+        f"💬 Messages Sent: *{count}/2500*\n"
+        f"📈 Progress:\n{bar}\n"
+    )
+
+    if in_log_group:
+        extra = (
+            f"\n🏆 *Complete your task to earn:*\n"
+            f"  • 💰 300 Duskar\n"
+            f"  • 💎 Bonus Gems (Chance)\n"
+            f"  • 🥚 Rare Egg (Low Chance)\n\n"
+            f"🔁 Keep chatting in this group to progress!"
+        )
+    else:
+        extra = (
+            f"\n⚠️ *Progress is only tracked in the official log group.*\n"
+            f"🛑 You currently have no progress.\n\n"
+            f"👉 [Join the Dragons Realm Log Group](https://t.me/YourLogGroupLink) to begin your journey!"
+        )
+
+    await update.message.reply_text(base + extra, parse_mode="Markdown", disable_web_page_preview=True)
+
