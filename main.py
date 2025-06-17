@@ -2100,27 +2100,26 @@ async def dragon_master_joined(update: Update, context: ContextTypes.DEFAULT_TYP
     except Exception as e:
         print(f"[ERROR] dragon_master_joined: {e}")
 import asyncio
-import asyncio
-from telegram.error import NetworkError
 from telegram.ext import (
     ApplicationBuilder, CommandHandler, MessageHandler, CallbackQueryHandler,
     ChatMemberHandler, filters
 )
+from telegram.error import NetworkError
 from keep_alive import keep_alive
 
 # === Bot Token ===
 TOKEN = "8040202761:AAF_HEGJxbZjKsgJANNQQRP4ahXftlMsqCQ"
 
-# === Keep Alive ===
+# === Keep the bot alive on Render ===
 keep_alive()
 
-# === Main Bot Logic ===
-async def main():
+# === Bot Core ===
+async def run_bot():
     print("🐉 DragonDusk is starting...")
 
     app = ApplicationBuilder().token(TOKEN).build()
 
-    # === Register Handlers ===
+    # === Handlers ===
     app.add_handler(MessageHandler(filters.COMMAND, command_logger), group=1)
 
     # 📜 Core Commands
@@ -2174,7 +2173,7 @@ async def main():
     app.add_handler(CommandHandler("stats", command_stats))
     app.add_handler(CommandHandler("giftdrack", giftdrack))
 
-    # 🔘 Inline Button Handlers
+    # 🔘 Inline Buttons
     app.add_handler(CallbackQueryHandler(select_dragon_callback, pattern=r"^selectdragon_"))
     app.add_handler(CallbackQueryHandler(handle_move, pattern=r"^move_"))
     app.add_handler(CallbackQueryHandler(help_callback, pattern=r"^help_"))
@@ -2221,13 +2220,12 @@ async def main():
     # 🔄 Bot Lifecycle Events
     app.add_handler(ChatMemberHandler(bot_added_or_promoted, ChatMemberHandler.MY_CHAT_MEMBER))
 
-    # === Polling + Safe Startup/Shutdown ===
     try:
         await app.initialize()
         await app.start()
         await app.run_polling()
     except NetworkError:
-        print("⚠️ Network error. Trying again later...")
+        print("⚠️ Network error. Trying again...")
     except Exception as e:
         print(f"❌ Unexpected error: {e}")
     finally:
@@ -2236,12 +2234,14 @@ async def main():
                 await app.stop()
                 await app.shutdown()
         except Exception as shutdown_error:
-            print(f"⚠️ Shutdown issue: {shutdown_error}")
+            print(f"⚠️ Shutdown failed: {shutdown_error}")
 
-# === Safe Loop for Render (no RuntimeWarning) ===
+# === Safe Render-Friendly Event Loop ===
 if __name__ == "__main__":
     try:
-        asyncio.run(main())
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        loop.run_until_complete(run_bot())
     except KeyboardInterrupt:
         print("⛔ Bot stopped by user")
     except Exception as e:
