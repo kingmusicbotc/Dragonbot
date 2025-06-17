@@ -16,6 +16,19 @@ from datetime import date
 from telegram.ext import ChatMemberHandler
 from telegram.constants import ParseMode
 from minigames import minigames, handle_game_choice
+import asyncio
+import traceback
+import nest_asyncio
+nest_asyncio.apply()
+
+from telegram.ext import (
+    ApplicationBuilder, CommandHandler, MessageHandler, CallbackQueryHandler,
+    ChatMemberHandler, filters
+)
+from telegram.error import NetworkError
+from keep_alive import keep_alive
+
+
 
 # === CONFIG ===
 TOKEN = "8040202761:AAF_HEGJxbZjKsgJANNQQRP4ahXftlMsqCQ"
