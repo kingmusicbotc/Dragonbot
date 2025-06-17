@@ -451,12 +451,15 @@ IMAGE_URL = "https://graph.org/file/a2b0ac48d16bd00589b8f-2da15263ad3f26ab8e.jpg
 START_TIME = datetime.utcnow()
 
 # === Utilities ===
+from datetime import datetime, timezone
+
 def get_uptime():
-    now = datetime.utcnow()
+    now = datetime.now(timezone.utc)
     delta = now - START_TIME
     hours, remainder = divmod(int(delta.total_seconds()), 3600)
     minutes, _ = divmod(remainder, 60)
     return f"{hours}h {minutes}m"
+
 
 def load_mods():
     try:
