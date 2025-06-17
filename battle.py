@@ -1,10 +1,8 @@
-import os
+ort os
 import json
 import random
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import ContextTypes
-from db import load_json, save_json
-
 
 BATTLE_FILE = "battle.json"
 USER_FILE = "users.json"
@@ -29,6 +27,15 @@ ELEMENT_EMOJI = {
     "Ice": "❄️", "Cosmic": "🌌", "Light": "🌟", "Dark": "🌑"
 }
 
+def load_json(file):
+    if os.path.exists(file):
+        with open(file, "r", encoding="utf-8") as f:
+            return json.load(f)
+    return {}
+
+def save_json(file, data):
+    with open(file, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2)
 
 def make_battle_id(user1, user2):
     return f"battle_{min(user1, user2)}_{max(user1, user2)}"
@@ -502,3 +509,4 @@ async def cancel_battle(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     if not found:
         await update.message.reply_text("❌ No pending battle found for you to cancel.")
+
