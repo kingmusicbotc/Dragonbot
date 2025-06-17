@@ -1,12 +1,20 @@
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import ContextTypes, CallbackQueryHandler, CommandHandler
 import random, os, json
-from db import load_json, save_json
 from datetime import datetime
 
 USER_FILE = "users.json"
 GAME_COST = 100  # Cost to play a minigame
 
+def load_users():
+    if os.path.exists(USER_FILE):
+        with open(USER_FILE, "r", encoding="utf-8") as f:
+            return json.load(f)
+    return {}
+
+def save_users(data):
+    with open(USER_FILE, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2)
 
 def reward_user(user):
     user.setdefault("duskar", 0)
